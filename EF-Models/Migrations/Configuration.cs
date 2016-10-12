@@ -1,5 +1,6 @@
 namespace EF_Models.Migrations
 {
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -19,12 +20,12 @@ namespace EF_Models.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
+            context.TheLoai.AddOrUpdate(
+              p => p.Ten,
+              new TheLoai { Ten = "Kinh dị" },
+              new TheLoai { Ten = "Tình cảm" },
+              new TheLoai { Ten = "Khoa học" }
+            );
             //
         }
     }

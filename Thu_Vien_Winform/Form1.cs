@@ -24,6 +24,7 @@ namespace Thu_Vien_Winform
         {
             _context = new ThuVienDbContext();
             _context.TheLoai.Load();
+            _context.DauSach.Load();
             this.theLoaiBindingSource.DataSource = this._context.TheLoai.Local.ToBindingList();
             this.dauSachBindingSource.DataSource = this._context.DauSach.Local.ToBindingList();
         }

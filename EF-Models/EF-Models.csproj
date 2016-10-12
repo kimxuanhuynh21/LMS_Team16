@@ -60,10 +60,29 @@
     <Compile Include="Migrations\201610091057524_add_forgein_key_the_loai.Designer.cs">
       <DependentUpon>201610091057524_add_forgein_key_the_loai.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610111245020_update_forgein_key_the_loai.cs" />
+    <Compile Include="Migrations\201610111245020_update_forgein_key_the_loai.Designer.cs">
+      <DependentUpon>201610111245020_update_forgein_key_the_loai.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610121523035_update12Oct2016.cs" />
+    <Compile Include="Migrations\201610121523035_update12Oct2016.Designer.cs">
+      <DependentUpon>201610121523035_update12Oct2016.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ChiTietMuon.cs" />
+    <Compile Include="Models\ChiTietTra.cs" />
+    <Compile Include="Models\CuonSach.cs" />
+    <Compile Include="Models\DangKy.cs" />
     <Compile Include="Models\DauSach.cs" />
+    <Compile Include="Models\DocGia.cs" />
+    <Compile Include="Models\NhanVien.cs" />
+    <Compile Include="Models\NhaSanXuat.cs" />
+    <Compile Include="Models\PhieuMuon.cs" />
+    <Compile Include="Models\PhieuTra.cs" />
+    <Compile Include="Models\TacGia.cs" />
     <Compile Include="Models\TheLoai.cs" />
     <Compile Include="Models\ThuVienDbContext.cs" />
+    <Compile Include="Models\TinhTrang.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +95,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610091057524_add_forgein_key_the_loai.resx">
       <DependentUpon>201610091057524_add_forgein_key_the_loai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610111245020_update_forgein_key_the_loai.resx">
+      <DependentUpon>201610111245020_update_forgein_key_the_loai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610121523035_update12Oct2016.resx">
+      <DependentUpon>201610121523035_update12Oct2016.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

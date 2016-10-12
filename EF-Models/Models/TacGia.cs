@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace EF_Models.Models
 {
-    public class TheLoai
+    public class TacGia
     {
-        public int ID { get; set; }
+        public int ID{ get; set; }
         [Required]
         [StringLength(255)]
         public string Ten { get; set; }

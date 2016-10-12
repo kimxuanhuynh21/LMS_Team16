@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace EF_Models.Models
 {
-    public class TheLoai
+    public class TinhTrang
     {
-        public int ID { get; set; }
+        public byte ID { get; set; }
         [Required]
         [StringLength(255)]
         public string Ten { get; set; }
+        [Required]
+        [StringLength(255)]
+        public string BangLienQuan { get; set; }
     }
 }

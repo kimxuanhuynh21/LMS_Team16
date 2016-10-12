@@ -7,11 +7,17 @@ using System.Threading.Tasks;
 
 namespace EF_Models.Models
 {
-    public class TheLoai
+    public class NhaSanXuat
     {
         public int ID { get; set; }
         [Required]
         [StringLength(255)]
-        public string Ten { get; set; }
+        public string Ten{ get; set; }
+        [Required]
+        [StringLength(11)]
+        public string DienThoai { get; set; }
+        [Required]
+        [StringLength(255)]
+        public string DiaChi { get; set; }
     }
 }

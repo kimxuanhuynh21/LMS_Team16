@@ -30,9 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.Label idLabel;
+            System.Windows.Forms.Label ten_the_loaiLabel;
+            System.Windows.Forms.Label idLabel1;
+            System.Windows.Forms.Label ten_tac_giaLabel;
             this.dauSachBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.dauSachBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -44,20 +47,36 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.dauSachBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
-            this.theLoaiBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.theLoaiDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dauSachDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idTextBox = new System.Windows.Forms.TextBox();
+            this.ten_the_loaiTextBox = new System.Windows.Forms.TextBox();
+            this.dauSachBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tentheloaiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.theLoaiBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.idTextBox1 = new System.Windows.Forms.TextBox();
+            this.ten_tac_giaTextBox = new System.Windows.Forms.TextBox();
+            idLabel = new System.Windows.Forms.Label();
+            ten_the_loaiLabel = new System.Windows.Forms.Label();
+            idLabel1 = new System.Windows.Forms.Label();
+            ten_tac_giaLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dauSachBindingNavigator)).BeginInit();
             this.dauSachBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dauSachBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.theLoaiBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.theLoaiDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dauSachDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dauSachBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.theLoaiBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dauSachBindingNavigator
@@ -86,7 +105,7 @@
             this.dauSachBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.dauSachBindingNavigator.Name = "dauSachBindingNavigator";
             this.dauSachBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.dauSachBindingNavigator.Size = new System.Drawing.Size(778, 25);
+            this.dauSachBindingNavigator.Size = new System.Drawing.Size(1040, 25);
             this.dauSachBindingNavigator.TabIndex = 0;
             this.dauSachBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -98,10 +117,6 @@
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
-            // dauSachBindingSource
-            // 
-            this.dauSachBindingSource.DataSource = typeof(EF_Models.Models.DauSach);
             // 
             // bindingNavigatorCountItem
             // 
@@ -188,73 +203,202 @@
             this.dauSachBindingNavigatorSaveItem.Text = "Save Data";
             this.dauSachBindingNavigatorSaveItem.Click += new System.EventHandler(this.dauSachBindingNavigatorSaveItem_Click);
             // 
-            // theLoaiBindingSource
-            // 
-            this.theLoaiBindingSource.DataSource = typeof(EF_Models.Models.TheLoai);
-            // 
             // theLoaiDataGridView
             // 
             this.theLoaiDataGridView.AutoGenerateColumns = false;
             this.theLoaiDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.theLoaiDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5});
+            this.idDataGridViewTextBoxColumn,
+            this.tentheloaiDataGridViewTextBoxColumn});
             this.theLoaiDataGridView.DataSource = this.theLoaiBindingSource;
             this.theLoaiDataGridView.Location = new System.Drawing.Point(0, 28);
             this.theLoaiDataGridView.Name = "theLoaiDataGridView";
-            this.theLoaiDataGridView.Size = new System.Drawing.Size(300, 220);
+            this.theLoaiDataGridView.Size = new System.Drawing.Size(408, 143);
             this.theLoaiDataGridView.TabIndex = 2;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "ID";
-            this.dataGridViewTextBoxColumn4.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Ten";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Ten";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
             // dauSachDataGridView
             // 
             this.dauSachDataGridView.AutoGenerateColumns = false;
             this.dauSachDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dauSachDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3});
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn14,
+            this.dataGridViewTextBoxColumn15,
+            this.dataGridViewTextBoxColumn16});
             this.dauSachDataGridView.DataSource = this.dauSachBindingSource;
-            this.dauSachDataGridView.Location = new System.Drawing.Point(337, 28);
+            this.dauSachDataGridView.Location = new System.Drawing.Point(0, 177);
             this.dauSachDataGridView.Name = "dauSachDataGridView";
-            this.dauSachDataGridView.Size = new System.Drawing.Size(445, 220);
+            this.dauSachDataGridView.Size = new System.Drawing.Size(1020, 118);
             this.dauSachDataGridView.TabIndex = 2;
             // 
-            // dataGridViewTextBoxColumn1
+            // idLabel
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            idLabel.AutoSize = true;
+            idLabel.Location = new System.Drawing.Point(538, 51);
+            idLabel.Name = "idLabel";
+            idLabel.Size = new System.Drawing.Size(18, 13);
+            idLabel.TabIndex = 3;
+            idLabel.Text = "id:";
             // 
-            // dataGridViewTextBoxColumn2
+            // idTextBox
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Ten";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Ten";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.idTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dauSachBindingSource, "TheLoai.id", true));
+            this.idTextBox.Location = new System.Drawing.Point(606, 48);
+            this.idTextBox.Name = "idTextBox";
+            this.idTextBox.Size = new System.Drawing.Size(353, 20);
+            this.idTextBox.TabIndex = 4;
+            // 
+            // ten_the_loaiLabel
+            // 
+            ten_the_loaiLabel.AutoSize = true;
+            ten_the_loaiLabel.Location = new System.Drawing.Point(538, 77);
+            ten_the_loaiLabel.Name = "ten_the_loaiLabel";
+            ten_the_loaiLabel.Size = new System.Drawing.Size(62, 13);
+            ten_the_loaiLabel.TabIndex = 5;
+            ten_the_loaiLabel.Text = "ten the loai:";
+            // 
+            // ten_the_loaiTextBox
+            // 
+            this.ten_the_loaiTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dauSachBindingSource, "TheLoai.ten_the_loai", true));
+            this.ten_the_loaiTextBox.Location = new System.Drawing.Point(606, 74);
+            this.ten_the_loaiTextBox.Name = "ten_the_loaiTextBox";
+            this.ten_the_loaiTextBox.Size = new System.Drawing.Size(353, 20);
+            this.ten_the_loaiTextBox.TabIndex = 6;
+            // 
+            // dauSachBindingSource
+            // 
+            this.dauSachBindingSource.DataSource = typeof(EF_Models.Models.DauSach);
             // 
             // dataGridViewTextBoxColumn3
             // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "TheLoaiId";
-            this.dataGridViewTextBoxColumn3.HeaderText = "TheLoaiId";
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "id";
+            this.dataGridViewTextBoxColumn3.HeaderText = "id";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "ten_dau_sach";
+            this.dataGridViewTextBoxColumn6.HeaderText = "ten_dau_sach";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "TheLoaiId";
+            this.dataGridViewTextBoxColumn7.HeaderText = "TheLoaiId";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "TacGiaId";
+            this.dataGridViewTextBoxColumn9.HeaderText = "TacGiaId";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "tom_tat";
+            this.dataGridViewTextBoxColumn11.HeaderText = "tom_tat";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "tai_ban";
+            this.dataGridViewTextBoxColumn12.HeaderText = "tai_ban";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "id_nha_san_xuat";
+            this.dataGridViewTextBoxColumn13.HeaderText = "id_nha_san_xuat";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "so_luong_tong";
+            this.dataGridViewTextBoxColumn14.HeaderText = "so_luong_tong";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "so_luong_ton";
+            this.dataGridViewTextBoxColumn15.HeaderText = "so_luong_ton";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "trang_thai";
+            this.dataGridViewTextBoxColumn16.HeaderText = "trang_thai";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            // 
+            // tentheloaiDataGridViewTextBoxColumn
+            // 
+            this.tentheloaiDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.tentheloaiDataGridViewTextBoxColumn.DataPropertyName = "ten_the_loai";
+            this.tentheloaiDataGridViewTextBoxColumn.HeaderText = "ten_the_loai";
+            this.tentheloaiDataGridViewTextBoxColumn.Name = "tentheloaiDataGridViewTextBoxColumn";
+            // 
+            // theLoaiBindingSource
+            // 
+            this.theLoaiBindingSource.DataSource = typeof(EF_Models.Models.TheLoai);
+            // 
+            // idLabel1
+            // 
+            idLabel1.AutoSize = true;
+            idLabel1.Location = new System.Drawing.Point(540, 116);
+            idLabel1.Name = "idLabel1";
+            idLabel1.Size = new System.Drawing.Size(18, 13);
+            idLabel1.TabIndex = 7;
+            idLabel1.Text = "id:";
+            // 
+            // idTextBox1
+            // 
+            this.idTextBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dauSachBindingSource, "TacGia.id", true));
+            this.idTextBox1.Location = new System.Drawing.Point(606, 113);
+            this.idTextBox1.Name = "idTextBox1";
+            this.idTextBox1.Size = new System.Drawing.Size(353, 20);
+            this.idTextBox1.TabIndex = 8;
+            // 
+            // ten_tac_giaLabel
+            // 
+            ten_tac_giaLabel.AutoSize = true;
+            ten_tac_giaLabel.Location = new System.Drawing.Point(540, 142);
+            ten_tac_giaLabel.Name = "ten_tac_giaLabel";
+            ten_tac_giaLabel.Size = new System.Drawing.Size(60, 13);
+            ten_tac_giaLabel.TabIndex = 9;
+            ten_tac_giaLabel.Text = "ten tac gia:";
+            // 
+            // ten_tac_giaTextBox
+            // 
+            this.ten_tac_giaTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dauSachBindingSource, "TacGia.ten_tac_gia", true));
+            this.ten_tac_giaTextBox.Location = new System.Drawing.Point(606, 139);
+            this.ten_tac_giaTextBox.Name = "ten_tac_giaTextBox";
+            this.ten_tac_giaTextBox.Size = new System.Drawing.Size(353, 20);
+            this.ten_tac_giaTextBox.TabIndex = 10;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(778, 395);
+            this.ClientSize = new System.Drawing.Size(1040, 601);
+            this.Controls.Add(idLabel1);
+            this.Controls.Add(this.idTextBox1);
+            this.Controls.Add(ten_tac_giaLabel);
+            this.Controls.Add(this.ten_tac_giaTextBox);
+            this.Controls.Add(idLabel);
+            this.Controls.Add(this.idTextBox);
+            this.Controls.Add(ten_the_loaiLabel);
+            this.Controls.Add(this.ten_the_loaiTextBox);
             this.Controls.Add(this.dauSachDataGridView);
             this.Controls.Add(this.theLoaiDataGridView);
             this.Controls.Add(this.dauSachBindingNavigator);
@@ -264,10 +408,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dauSachBindingNavigator)).EndInit();
             this.dauSachBindingNavigator.ResumeLayout(false);
             this.dauSachBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dauSachBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.theLoaiBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.theLoaiDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dauSachDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dauSachBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.theLoaiBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,10 +437,25 @@
         private System.Windows.Forms.DataGridView theLoaiDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridView dauSachDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridView dauSachDataGridView;
+        private System.Windows.Forms.TextBox idTextBox;
+        private System.Windows.Forms.TextBox ten_the_loaiTextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tentheloaiDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TextBox idTextBox1;
+        private System.Windows.Forms.TextBox ten_tac_giaTextBox;
     }
 }
 
