@@ -18,8 +18,8 @@ namespace EF_Models.Models
         public int CuonSachID { get; set; }
         [ForeignKey("CuonSachID")]
         public virtual CuonSach CuonSach { get; set; }
-        public byte TinhTrangID { get; set; }
-        [ForeignKey("TinhTrangID")]
-        public virtual TinhTrang TinhTrang { get; set; }
+        [Required]
+        [Range(0,1)]
+        public byte TinhTrang { get; set; }
     }
 }

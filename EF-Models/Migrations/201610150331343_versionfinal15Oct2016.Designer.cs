@@ -7,13 +7,13 @@ namespace EF_Models.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class update_forgein_key_the_loai : IMigrationMetadata
+    public sealed partial class versionfinal15Oct2016 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(update_forgein_key_the_loai));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(versionfinal15Oct2016));
         
         string IMigrationMetadata.Id
         {
-            get { return "201610111245020_update_forgein_key_the_loai"; }
+            get { return "201610150331343_versionfinal15Oct2016"; }
         }
         
         string IMigrationMetadata.Source

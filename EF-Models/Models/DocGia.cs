@@ -35,11 +35,11 @@ namespace EF_Models.Models
         public DateTime NgayHetHan { get; set; }
         public int NamTotNghiep { get; set; }
         [Required]
+        [Range(0,1)]
         public byte Loai { get; set; }
         public int SoSachConLai { get; set; }
         [Required]
-        public byte TinhTrangID { get; set; }
-        [ForeignKey("TinhTrangID")]
-        public virtual TinhTrang TinhTrang { get; set; } 
+        [Range(0,2)]
+        public byte TinhTrang { get; set; }
     }
 }

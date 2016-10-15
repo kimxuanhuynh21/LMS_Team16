@@ -28,8 +28,7 @@ namespace EF_Models.Models
         [StringLength(11)]
         public string DienThoai { get; set; }
         [Required]
-        public byte TinhTrangID { get; set; }
-        [ForeignKey("TinhTrangID")]
-        public virtual TinhTrang TinhTrang { get; set; }
+        [Range(0,1)]
+        public byte TinhTrang { get; set; }
     }
 }

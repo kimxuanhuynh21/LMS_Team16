@@ -18,8 +18,5 @@ namespace EF_Models.Models
         public int CuonSachID { get; set; }
         [ForeignKey("CuonSachID")]
         public virtual CuonSach CuonSach { get; set; }
-        public byte TinhTrangID { get; set; }
-        [ForeignKey("TinhTrangID")]
-        public virtual TinhTrang TinhTrang { get; set; }
     }
 }

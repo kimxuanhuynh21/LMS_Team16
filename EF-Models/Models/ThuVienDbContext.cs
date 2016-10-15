@@ -26,7 +26,6 @@ namespace EF_Models.Models
         public DbSet<NhaSanXuat> NhaSanXuat { get; set; }
         public DbSet<PhieuMuon> PhieuMuon { get; set; }
         public DbSet<PhieuTra> PhieuTra { get; set; }
-        public DbSet<TinhTrang> TinhTrang { get; set; }
 
 
 
@@ -57,8 +56,6 @@ namespace EF_Models.Models
             modelBuilder.Entity<PhieuMuon>().ToTable("PhieuMuon", "dbo");
             // Set the table name
             modelBuilder.Entity<PhieuTra>().ToTable("PhieuTra", "dbo");
-            // Set the table name
-            modelBuilder.Entity<TinhTrang>().ToTable("TinhTrang", "dbo");
             base.OnModelCreating(modelBuilder);
 
         }

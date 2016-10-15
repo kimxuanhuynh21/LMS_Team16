@@ -25,7 +25,6 @@ namespace EF_Models.Models
         [StringLength(2000)]
         public string TomTat { get; set; }
         [Required]
-        [Range(1, 50)]
         public int TaiBan { get; set; }
         [Required]
         public int NhaSanXuatID { get; set; }
@@ -35,8 +34,7 @@ namespace EF_Models.Models
         public int SoLuongTong { get; set; }
         public int SoLuongTon { get; set; }
         [Required]
-        public byte TinhTrangID { get; set; }
-        [ForeignKey("TinhTrangID")]
-        public virtual TinhTrang TinhTrang { get; set; } 
+        [Range(0,2)]
+        public byte TinhTrang { get; set; }
     }
 }

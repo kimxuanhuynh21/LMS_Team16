@@ -20,8 +20,7 @@ namespace EF_Models.Models
         [ForeignKey("DauSachID")]
         public virtual DauSach DauSach { get; set; }
         [Required]
-        public byte TinhTrangID { get; set; }
-        [ForeignKey("TinhTrangID")]
-        public virtual TinhTrang TinhTrang { get; set; }
+        [Range(0,3)]
+        public byte TinhTrang { get; set; }
     }
 }

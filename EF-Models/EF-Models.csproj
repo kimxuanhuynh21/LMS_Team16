@@ -52,21 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Migrations\201610091027429_initial.cs" />
-    <Compile Include="Migrations\201610091027429_initial.Designer.cs">
-      <DependentUpon>201610091027429_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610091057524_add_forgein_key_the_loai.cs" />
-    <Compile Include="Migrations\201610091057524_add_forgein_key_the_loai.Designer.cs">
-      <DependentUpon>201610091057524_add_forgein_key_the_loai.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610111245020_update_forgein_key_the_loai.cs" />
-    <Compile Include="Migrations\201610111245020_update_forgein_key_the_loai.Designer.cs">
-      <DependentUpon>201610111245020_update_forgein_key_the_loai.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610121523035_update12Oct2016.cs" />
-    <Compile Include="Migrations\201610121523035_update12Oct2016.Designer.cs">
-      <DependentUpon>201610121523035_update12Oct2016.cs</DependentUpon>
+    <Compile Include="Migrations\201610150331343_versionfinal15Oct2016.cs" />
+    <Compile Include="Migrations\201610150331343_versionfinal15Oct2016.Designer.cs">
+      <DependentUpon>201610150331343_versionfinal15Oct2016.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietMuon.cs" />
@@ -82,7 +70,6 @@
     <Compile Include="Models\TacGia.cs" />
     <Compile Include="Models\TheLoai.cs" />
     <Compile Include="Models\ThuVienDbContext.cs" />
-    <Compile Include="Models\TinhTrang.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -90,17 +77,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610091027429_initial.resx">
-      <DependentUpon>201610091027429_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610091057524_add_forgein_key_the_loai.resx">
-      <DependentUpon>201610091057524_add_forgein_key_the_loai.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610111245020_update_forgein_key_the_loai.resx">
-      <DependentUpon>201610111245020_update_forgein_key_the_loai.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610121523035_update12Oct2016.resx">
-      <DependentUpon>201610121523035_update12Oct2016.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201610150331343_versionfinal15Oct2016.resx">
+      <DependentUpon>201610150331343_versionfinal15Oct2016.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

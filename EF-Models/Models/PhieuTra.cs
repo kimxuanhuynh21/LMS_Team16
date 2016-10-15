@@ -26,9 +26,5 @@ namespace EF_Models.Models
         public int DocGiaID { get; set; }
         [ForeignKey("DocGiaID")]
         public virtual DocGia DocGia { get; set; }
-        [Required]
-        public byte TinhTrangID { get; set; }
-        [ForeignKey("TinhTrangID")]
-        public virtual TinhTrang TinhTrang { get; set; }
     }
 }
