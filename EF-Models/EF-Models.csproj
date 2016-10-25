@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Handlers\ConstantHandler.cs" />
     <Compile Include="Migrations\201610150331343_versionfinal15Oct2016.cs" />
     <Compile Include="Migrations\201610150331343_versionfinal15Oct2016.Designer.cs">
       <DependentUpon>201610150331343_versionfinal15Oct2016.cs</DependentUpon>
