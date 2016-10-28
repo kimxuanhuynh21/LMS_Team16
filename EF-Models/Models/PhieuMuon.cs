@@ -19,9 +19,6 @@ namespace EF_Models.Models
         [DataType(DataType.Date)]
         public DateTime NgayMuon { get; set; }
         [Required]
-        [DataType(DataType.Date)]
-        public DateTime NgayTra { get; set; }
-        [Required]
         public int DocGiaID { get; set; }
         [ForeignKey("DocGiaID")]
         public virtual DocGia DocGia { get; set; }

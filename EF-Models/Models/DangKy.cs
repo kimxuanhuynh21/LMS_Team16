@@ -12,6 +12,7 @@ namespace EF_Models.Models
     {
         public int ID { get; set; }
         [Required]
+        [Index(IsUnique =true)]
         public int DocGiaID { get; set; }
         [ForeignKey("DocGiaID")]
         public virtual DocGia DocGia { get; set; }

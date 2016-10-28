@@ -10,6 +10,7 @@ namespace EF_Models.Models
 {
     public class ChiTietMuon
     {
+        [Display(Name = "Basic Name")]
         public int ID { get; set; }
         [Required]
         public int PhieuMuonID { get; set; }

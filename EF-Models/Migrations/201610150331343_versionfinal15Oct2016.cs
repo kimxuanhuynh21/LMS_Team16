@@ -84,9 +84,11 @@ namespace EF_Models.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
+                        MaTheLoai = c.String(nullable: false, maxLength: 100),
                         Ten = c.String(nullable: false, maxLength: 255),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.ID)
+                .Index(t => t.MaTheLoai, unique: true);
             
             CreateTable(
                 "dbo.PhieuMuon",
@@ -95,7 +97,6 @@ namespace EF_Models.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         MaPhieuMuon = c.String(nullable: false, maxLength: 100),
                         NgayMuon = c.DateTime(nullable: false),
-                        NgayTra = c.DateTime(nullable: false),
                         DocGiaID = c.Int(nullable: false),
                         NhanVienID = c.Int(nullable: false),
                         NgayHetHan = c.DateTime(nullable: false),
@@ -189,7 +190,7 @@ namespace EF_Models.Migrations
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.DauSach", t => t.DauSachID)
                 .ForeignKey("dbo.DocGia", t => t.DocGiaID)
-                .Index(t => t.DocGiaID)
+                .Index(t => t.DocGiaID, unique: true)
                 .Index(t => t.DauSachID);
             
         }
@@ -222,6 +223,7 @@ namespace EF_Models.Migrations
             DropIndex("dbo.PhieuMuon", new[] { "NhanVienID" });
             DropIndex("dbo.PhieuMuon", new[] { "DocGiaID" });
             DropIndex("dbo.PhieuMuon", new[] { "MaPhieuMuon" });
+            DropIndex("dbo.TheLoai", new[] { "MaTheLoai" });
             DropIndex("dbo.DauSach", new[] { "NhaSanXuatID" });
             DropIndex("dbo.DauSach", new[] { "TacGiaID" });
             DropIndex("dbo.DauSach", new[] { "TheLoaiID" });
