@@ -12,6 +12,8 @@ namespace Thu_Vien_MVC
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("Content/SCSS/{*pathInfo}");
+            routes.IgnoreRoute("Content/Image/{*pathInfo}");
 
             routes.MapRoute(
                 name: "Default",
