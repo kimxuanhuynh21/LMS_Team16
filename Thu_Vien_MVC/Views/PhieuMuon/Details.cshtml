@@ -1,0 +1,82 @@
+﻿@model EF_Models.Models.PhieuMuon
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PhieuMuon</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DocGia.MaThe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocGia.MaThe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NhanVien.MaNhanVien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhanVien.MaNhanVien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaPhieuMuon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaPhieuMuon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayMuon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayMuon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayHetHan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayHetHan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TongSoLuongMuon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TongSoLuongMuon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuongTra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongTra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TinhTrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrang)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
