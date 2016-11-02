@@ -30,7 +30,6 @@ namespace EF_Models.Models
         [DataType(DataType.Date)]
         public DateTime NgayHetHan { get; set; }
         public int TongSoLuongMuon { get; set; }
-        public int SoLuongTra{ get; set; }
         [Required]
         [Range(0,1)]
         public byte TinhTrang { get; set; }
