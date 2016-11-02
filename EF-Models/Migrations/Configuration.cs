@@ -71,7 +71,7 @@ namespace EF_Models.Migrations
            );
 
             context.PhieuMuon.AddOrUpdate(
-                new PhieuMuon { ID = 1, MaPhieuMuon = "PM1", NgayMuon = DateTime.ParseExact("20/10/2016","dd/MM/yyyy",CultureInfo.InvariantCulture), DocGiaID = 1, NhanVienID = 1, NgayHetHan = DateTime.ParseExact("19/11/2016","dd/MM/yyyy",CultureInfo.InvariantCulture),TongSoLuongMuon = 2, SoLuongTra = 1, TinhTrang = 0 }
+                new PhieuMuon { ID = 1, MaPhieuMuon = "PM1", NgayMuon = DateTime.ParseExact("20/10/2016","dd/MM/yyyy",CultureInfo.InvariantCulture), DocGiaID = 1, NhanVienID = 1, NgayHetHan = DateTime.ParseExact("19/11/2016","dd/MM/yyyy",CultureInfo.InvariantCulture),TongSoLuongMuon = 2, TinhTrang = 0 }
            );
 
             context.ChiTietMuon.AddOrUpdate(

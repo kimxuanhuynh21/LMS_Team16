@@ -53,9 +53,9 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Handlers\ConstantHandler.cs" />
-    <Compile Include="Migrations\201610150331343_versionfinal15Oct2016.cs" />
-    <Compile Include="Migrations\201610150331343_versionfinal15Oct2016.Designer.cs">
-      <DependentUpon>201610150331343_versionfinal15Oct2016.cs</DependentUpon>
+    <Compile Include="Migrations\201611021709144_version_03Nov2016.cs" />
+    <Compile Include="Migrations\201611021709144_version_03Nov2016.Designer.cs">
+      <DependentUpon>201611021709144_version_03Nov2016.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietMuon.cs" />
@@ -78,8 +78,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610150331343_versionfinal15Oct2016.resx">
-      <DependentUpon>201610150331343_versionfinal15Oct2016.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611021709144_version_03Nov2016.resx">
+      <DependentUpon>201611021709144_version_03Nov2016.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

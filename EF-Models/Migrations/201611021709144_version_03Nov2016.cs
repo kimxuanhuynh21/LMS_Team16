@@ -3,7 +3,7 @@ namespace EF_Models.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class versionfinal15Oct2016 : DbMigration
+    public partial class version_03Nov2016 : DbMigration
     {
         public override void Up()
         {
@@ -101,7 +101,6 @@ namespace EF_Models.Migrations
                         NhanVienID = c.Int(nullable: false),
                         NgayHetHan = c.DateTime(nullable: false),
                         TongSoLuongMuon = c.Int(nullable: false),
-                        SoLuongTra = c.Int(nullable: false),
                         TinhTrang = c.Byte(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
