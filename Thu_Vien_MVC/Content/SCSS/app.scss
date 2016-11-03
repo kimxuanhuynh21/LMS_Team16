@@ -18,11 +18,13 @@
             .img-docgia {
                 width: 50%;
                 margin: auto;
+
                 img {
                     width: 100%;
                 }
             }
         }
+
         .form-input {
             padding: 15px 0;
         }
@@ -34,9 +36,13 @@
         .info-docgia {
             .img-docgia {
                 width: 25%;
-                margin: 0;
-                float:left;
+                float: left;
+                margin-bottom: 15px;
             }
+        }
+
+        .btn-inphieumuon {
+            margin-bottom: 15px;
         }
     }
 }

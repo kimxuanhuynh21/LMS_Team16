@@ -199,6 +199,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PhieuMuonController.cs" />
+    <Compile Include="Controllers\PhieuTraController.cs" />
     <Compile Include="Controllers\TheLoaiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -310,6 +311,11 @@
     <Content Include="Views\PhieuMuon\Details.cshtml" />
     <Content Include="Views\PhieuMuon\Edit.cshtml" />
     <Content Include="Views\PhieuMuon\Index.cshtml" />
+    <Content Include="Views\PhieuTra\Create.cshtml" />
+    <Content Include="Views\PhieuTra\Delete.cshtml" />
+    <Content Include="Views\PhieuTra\Details.cshtml" />
+    <Content Include="Views\PhieuTra\Edit.cshtml" />
+    <Content Include="Views\PhieuTra\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

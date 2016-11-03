@@ -4,79 +4,47 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>PhieuMuon</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DocGia.MaThe)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DocGia.MaThe)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NhanVien.MaNhanVien)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NhanVien.MaNhanVien)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MaPhieuMuon)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MaPhieuMuon)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayMuon)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayMuon)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayHetHan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayHetHan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TongSoLuongMuon)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TongSoLuongMuon)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SoLuongTra)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SoLuongTra)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TinhTrang)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TinhTrang)
-        </dd>
-
-    </dl>
+<center><h2>Quản lý mượn sách</h2></center>
+<div class="text-right btn-inphieumuon">
+    <button class="btn btn-default"><i class="fa fa-print" aria-hidden="true"></i>  In phiếu mượn</button>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="info-docgia">
+            <div class="detail-docgia col-md-4">
+                <h4>Mã thẻ: DG1</h4>
+                <h4>Chức vụ: Sinh viên</h4>
+                <h4>Ngày mượn sách: 15/10/2016</h4>
+                <h4>Địa chỉ: <br /> Phan Văn Khỏe, P5, Q6, TP.HCM</h4>
+            </div>
+            <div class="detail-docgia col-md-5">
+                <h4>Tên độc giả: Huỳnh Kim Xuân</h4>
+                <h4>Số điện thoại: 01212186931</h4>
+                <h4>Ngày trả sách: 15/10/2017</h4>
+                <h4>Email: kimxuanhuynh21@gmail.com</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="borrowed-books">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã vạch</th>
+                <th>Tên đầu sách</th>
+                <th>Tên thể loại</th>
+                <th>Tên tác giả</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

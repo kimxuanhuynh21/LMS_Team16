@@ -43,9 +43,13 @@ namespace Thu_Vien_MVC.Controllers
         // GET: PhieuMuon/Create
         public ActionResult Create()
         {
-            ViewBag.DocGiaID = new SelectList(db.DocGia, "ID", "MaThe");
-            ViewBag.NhanVienID = new SelectList(db.NhanVien, "ID", "MaNhanVien");
-            return View();
+            //ViewBag.DocGiaID = new SelectList(db.DocGia, "ID", "MaThe");
+            //ViewBag.NhanVienID = new SelectList(db.NhanVien, "ID", "MaNhanVien");
+            PhieuMuon phieuMuon = db.PhieuMuon.Find(1);
+            var dsChiTietMuon = db.ChiTietMuon
+                .Where(ctm => ctm.PhieuMuonID == phieuMuon.ID)
+                .Include(p => p.CuonSach);
+            return View(dsChiTietMuon.ToList());
         }
 
         // POST: PhieuMuon/Create

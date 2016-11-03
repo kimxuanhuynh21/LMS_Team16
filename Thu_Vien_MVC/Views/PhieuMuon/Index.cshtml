@@ -26,58 +26,80 @@
             <div class="img-docgia">
                 <img src="~/Content/Image/no-avatar.png" alt="no-avatar" class="img-thumbnail">
             </div>
-            <div class="detail-docgia col-md-offset-1 col-md-5">
+            <div class="detail-docgia col-md-4">
                 <h4>Mã thẻ: DG1</h4>
-                <h4>Tên độc giả: Huỳnh Kim Xuân</h4>
                 <h4>Chức vụ: Sinh viên</h4>
+                <h4>Ngày cấp thẻ: 15/10/2016</h4>
+                <h4>Địa chỉ: <br /> Phan Văn Khỏe, P5, Q6, TP.HCM</h4>
+                @Html.ActionLink("Cho mượn sách", "Create", "PhieuMuon", new {  }, new { @class = "btn btn-primary" })
+            </div>
+            <div class="detail-docgia col-md-5">
+                <h4>Tên độc giả: Huỳnh Kim Xuân</h4>
                 <h4>Số điện thoại: 01212186931</h4>
                 <h4>Ngày hết hạn: 15/10/2017</h4>
-                <button type="button" class="btn btn-primary">Cho mượn sách</button>
+                <h4>Email: kimxuanhuynh21@gmail.com</h4>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Đầu sách</th>
+                        <th>Ngày trả</th>
+                        <th>Ngày hết hạn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Harry Porter 2</td>
+                        <td>11/10/2016</td>
+                        <td>21/10/2016</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Harry Porter 3</td>
+                        <td>-</td>
+                        <td>21/10/2016</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Harry Porter 4</td>
+                        <td>11/08/2016</td>
+                        <td>21/07/2016</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Harry Porter 2</td>
+                        <td>11/10/2016</td>
+                        <td>21/10/2016</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Harry Porter 3</td>
+                        <td>-</td>
+                        <td>21/10/2016</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Harry Porter 4</td>
+                        <td>11/08/2016</td>
+                        <td>21/07/2016</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <ul class="pagination">
+                        <li><a href="#">&laquo;</a></li>
+                        <li><a href="#">&lsaquo;</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">&rsaquo;</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<form class="form-horizontal form-input">
-    <div class="form-group">
-        <label for="inputmavach" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã vạch cuốn sách</label>
-        <div class="col-xs-9 col-md-4">
-            <div class="input-group">
-                <input class="form-control" id="inputmavach" type="text" placeholder="Nhập mã vạch cuốn sách" />
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-                </span>
-            </div>
-        </div>
-    </div>
-</form>
-
-<table class="table table-striped">
-    <tr>
-        <th>STT</th>
-        <th>Mã vạch</th>
-        <th>Tên đầu sách</th>
-        <th>Tên thể loại</th>
-        <th>Chọn</th>
-        <th>Xóa</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CuonSach.MaVach)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CuonSach.DauSach.Ten)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CuonSach.DauSach.TheLoai.Ten)
-            </td>
-            <td><input type="checkbox" id="inlineCheckbox1" value="option1"></td>
-            <td><button class="btn btn-default btn-xs" type="button"><i class="fa fa-times" aria-hidden="true"></i></button></td>
-        </tr>
-    }
-</table>
