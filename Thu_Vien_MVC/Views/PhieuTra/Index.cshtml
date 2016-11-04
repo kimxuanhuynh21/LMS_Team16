@@ -1,0 +1,70 @@
+﻿@model IEnumerable<EF_Models.Models.ChiTietTra>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<center><h2>Quản lý trả sách</h2></center>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="info-docgia">
+            <div class="detail-docgia col-md-4">
+                <h4>Mã thẻ: DG1</h4>
+                <h4>Chức vụ: Sinh viên</h4>
+                <h4>Ngày mượn sách: 15/10/2016</h4>
+                <h4>Địa chỉ: <br /> Phan Văn Khỏe, P5, Q6, TP.HCM</h4>
+            </div>
+            <div class="detail-docgia col-md-5">
+                <h4>Tên độc giả: Huỳnh Kim Xuân</h4>
+                <h4>Số điện thoại: 01212186931</h4>
+                <h4>Ngày trả sách: 15/10/2017</h4>
+                <h4>Email: kimxuanhuynh21@gmail.com</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="btn btn-success">Trả sách</button>
+<div class="borrowed-books">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã vạch</th>
+                <th>Tên đầu sách</th>
+                <th>Tên thể loại</th>
+                <th>Tên tác giả</th>
+                <th>Chọn</th>
+                <th>Tình Trạng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CuonSach.MaVach)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CuonSach.DauSach.Ten)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CuonSach.DauSach.TheLoai.Ten)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CuonSach.DauSach.TheLoai.Ten)
+                    </td>
+                    <td>
+                        <input type="checkbox" id="inlineCheckbox1" value="option1">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CuonSach.DauSach.TheLoai.Ten)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
