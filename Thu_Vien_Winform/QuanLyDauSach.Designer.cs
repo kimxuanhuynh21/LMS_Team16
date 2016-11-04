@@ -1,6 +1,6 @@
 ﻿namespace Thu_Vien_Winform
 {
-    partial class Form1
+    partial class QuanLyDauSach
     {
         /// <summary>
         /// Required designer variable.
@@ -31,6 +31,9 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
+            this.btn_add = new System.Windows.Forms.Button();
+            this.btn_update = new System.Windows.Forms.Button();
+            this.btn_showbooks = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,34 +47,67 @@
             // 
             // btn_delete
             // 
-            this.btn_delete.Location = new System.Drawing.Point(606, 352);
+            this.btn_delete.Location = new System.Drawing.Point(607, 352);
             this.btn_delete.Name = "btn_delete";
-            this.btn_delete.Size = new System.Drawing.Size(75, 23);
+            this.btn_delete.Size = new System.Drawing.Size(79, 28);
             this.btn_delete.TabIndex = 1;
-            this.btn_delete.Text = "Delete";
+            this.btn_delete.Text = "Xóa";
             this.btn_delete.UseVisualStyleBackColor = true;
             this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // btn_refresh
             // 
-            this.btn_refresh.Location = new System.Drawing.Point(147, 352);
+            this.btn_refresh.Location = new System.Drawing.Point(96, 352);
             this.btn_refresh.Name = "btn_refresh";
-            this.btn_refresh.Size = new System.Drawing.Size(75, 23);
+            this.btn_refresh.Size = new System.Drawing.Size(77, 28);
             this.btn_refresh.TabIndex = 2;
-            this.btn_refresh.Text = "Refresh";
+            this.btn_refresh.Text = "Tải lại";
             this.btn_refresh.UseVisualStyleBackColor = true;
             this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
             // 
-            // Form1
+            // btn_add
+            // 
+            this.btn_add.Location = new System.Drawing.Point(235, 352);
+            this.btn_add.Name = "btn_add";
+            this.btn_add.Size = new System.Drawing.Size(112, 28);
+            this.btn_add.TabIndex = 3;
+            this.btn_add.Text = "Thêm";
+            this.btn_add.UseVisualStyleBackColor = true;
+            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
+            // 
+            // btn_update
+            // 
+            this.btn_update.Location = new System.Drawing.Point(441, 352);
+            this.btn_update.Name = "btn_update";
+            this.btn_update.Size = new System.Drawing.Size(80, 28);
+            this.btn_update.TabIndex = 4;
+            this.btn_update.Text = "Sửa";
+            this.btn_update.UseVisualStyleBackColor = true;
+            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
+            // 
+            // btn_showbooks
+            // 
+            this.btn_showbooks.Location = new System.Drawing.Point(780, 352);
+            this.btn_showbooks.Name = "btn_showbooks";
+            this.btn_showbooks.Size = new System.Drawing.Size(102, 28);
+            this.btn_showbooks.TabIndex = 6;
+            this.btn_showbooks.Text = "Xem sách";
+            this.btn_showbooks.UseVisualStyleBackColor = true;
+            this.btn_showbooks.Click += new System.EventHandler(this.btn_showbooks_Click);
+            // 
+            // QuanLyDauSach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(935, 484);
+            this.Controls.Add(this.btn_showbooks);
+            this.Controls.Add(this.btn_update);
+            this.Controls.Add(this.btn_add);
             this.Controls.Add(this.btn_refresh);
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "QuanLyDauSach";
+            this.Text = "Quản lý đầu sách";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -95,6 +131,9 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Button btn_refresh;
+        private System.Windows.Forms.Button btn_add;
+        private System.Windows.Forms.Button btn_update;
+        private System.Windows.Forms.Button btn_showbooks;
     }
 }
 

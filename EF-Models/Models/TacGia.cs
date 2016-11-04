@@ -9,6 +9,12 @@ namespace EF_Models.Models
 {
     public class TacGia
     {
+        public TacGia() { }
+        public TacGia(TacGia obj)
+        {
+            ID = obj.ID;
+            Ten = obj.Ten;
+        }
         public int ID{ get; set; }
         [Required]
         [StringLength(255)]

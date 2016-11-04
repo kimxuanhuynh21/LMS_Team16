@@ -1,9 +1,8 @@
-﻿
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace EF_Models.Handlers
 {
-    class ConstantHandler
+    public class ConstantHandler
     {
         public enum TinhTrang_DauSach
         {

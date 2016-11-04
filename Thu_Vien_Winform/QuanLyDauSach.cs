@@ -12,10 +12,10 @@ using System.Data.Entity;
 
 namespace Thu_Vien_Winform
 {
-    public partial class Form1 : Form
+    public partial class QuanLyDauSach : Form
     {
         ThuVienDbContext _context;
-        public Form1()
+        public QuanLyDauSach()
         {
             InitializeComponent();
         }
@@ -40,8 +40,7 @@ namespace Thu_Vien_Winform
         private void InitializeDataGridView(List<DauSach> list)
         {
             // Create an unbound DataGridView by declaring a column count.
-            //dataGridView1.ColumnCount = 9;
-            //dataGridView1.ColumnHeadersVisible = true;
+            dataGridView1.ColumnHeadersVisible = true;
 
             // Set the column header style.
             DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
@@ -94,8 +93,6 @@ namespace Thu_Vien_Winform
         dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0)
             {
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
                 for (int i = 0; i < selectedRowCount; i++)
                 {
                     //sb.Append("Row: ");
@@ -121,6 +118,41 @@ namespace Thu_Vien_Winform
         {
             var list = _context.DauSach.ToList().Select(i => new DauSach(i)).ToList();
             Refresh_DataGridView(list);
+        }
+
+        private void btn_add_Click(object sender, EventArgs e)
+        {
+            ThemDauSach formadd = new ThemDauSach();
+            formadd.Show();
+        }
+
+        private void btn_update_Click(object sender, EventArgs e)
+        {
+            Int32 selectedRowCount =
+        dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount == 1)
+            {
+                var index_row = dataGridView1.SelectedRows[0].Index;
+                DauSach dausach = (DauSach)dataGridView1.Rows[index_row].DataBoundItem;
+                //var obj = dataGridView1.Rows[index_row];
+                SuaDauSach formupdate = new SuaDauSach(dausach);
+                formupdate.Show();
+            }
+        }
+
+        private void btn_showbooks_Click(object sender, EventArgs e)
+        {
+            Int32 selectedRowCount =
+        dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount == 1)
+            {
+                var index_row = dataGridView1.SelectedRows[0].Index;
+                int dausach_id = Convert.ToInt32(dataGridView1.Rows[index_row].Cells[0].Value);
+                DauSach dausach = (DauSach)dataGridView1.Rows[index_row].DataBoundItem;
+                //var obj = dataGridView1.Rows[index_row];
+                QuanLySach quanlysach = new QuanLySach(dausach_id,dausach);
+                quanlysach.Show();
+            }
         }
 
 

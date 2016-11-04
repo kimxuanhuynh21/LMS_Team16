@@ -9,6 +9,15 @@ namespace EF_Models.Models
 {
     public class NhaSanXuat
     {
+        public NhaSanXuat() { }
+        public NhaSanXuat(NhaSanXuat obj)
+        {
+            ID = obj.ID;
+            Ten = obj.Ten;
+            DienThoai = obj.DienThoai;
+            DiaChi = obj.DiaChi;
+        }
+
         public int ID { get; set; }
         [Required]
         [StringLength(255)]

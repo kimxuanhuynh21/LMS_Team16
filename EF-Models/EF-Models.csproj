@@ -60,6 +60,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietMuon.cs" />
     <Compile Include="Models\ChiTietTra.cs" />
+    <Compile Include="Models\ComboboxItem.cs" />
     <Compile Include="Models\CuonSach.cs" />
     <Compile Include="Models\DangKy.cs" />
     <Compile Include="Models\DauSach.cs" />

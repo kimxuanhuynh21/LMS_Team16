@@ -10,6 +10,12 @@ namespace EF_Models.Models
 {
     public class TheLoai
     {
+        public TheLoai() { }
+        public TheLoai(TheLoai obj) {
+
+            ID = obj.ID;
+            Ten = obj.Ten;
+        }
         public int ID { get; set; }
         [Required]
         [Index(IsUnique = true)]
