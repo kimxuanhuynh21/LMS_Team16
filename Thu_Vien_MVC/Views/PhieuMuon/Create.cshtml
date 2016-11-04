@@ -1,24 +1,26 @@
-﻿@model EF_Models.Models.PhieuMuon
+﻿
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Tạo phiếu mượn";
 }
 <center><h2>Quản lý mượn sách</h2></center>
 
-<div class="borrowed-books">
+<div class="borrow-book">
     <form class="form-horizontal form-input">
         <div class="form-group">
 
-            <div class="col-xs-9 col-md-4">
+            <label for="inputmavach" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã vạch cuốn sách</label>
+            <div class="col-xs-8 col-md-4">
                 <div class="input-group">
-                    <input class="form-control" id="inputmavach" type="text" placeholder="Nhập mã vạch cuốn sách">
+                    <input class="form-control" id="inputmavach" type="text" placeholder="Nhập mã vạch cuốn sách" />
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
                     </span>
                 </div>
             </div>
-            <div class="col-xs-3 col-md-8 text-right">
-                <a class="btn btn-success" href="/PhieuMuon/Details/1"><i class="fa fa-check" aria-hidden="true"></i>Hoàn tất</a>
+
+            <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
+                <a class="btn btn-primary" href="/PhieuMuon/Details/1"><i class="fa fa-check" aria-hidden="true"></i>Hoàn tất</a>
             </div>
         </div>
     </form>
@@ -26,11 +28,11 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>STT</th>
-                <th>Mã vạch</th>
-                <th>Tên đầu sách</th>
-                <th>Tên thể loại</th>
-                <th>Tên tác giả</th>
+                <th class="col-md-1">STT</th>
+                <th class="col-md-2">Mã vạch</th>
+                <th class="col-md-3">Tên đầu sách</th>
+                <th class="col-md-3">Tên tác giả</th>
+                <th class="col-md-2">Tên thể loại</th>
                 <th class="col-md-1">Xóa</th>
             </tr>
         </thead>

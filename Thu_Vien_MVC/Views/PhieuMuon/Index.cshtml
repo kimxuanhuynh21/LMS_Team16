@@ -9,13 +9,17 @@
 <form class="form-horizontal form-input">
     <div class="form-group">
         <label for="inputmathe" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã thẻ độc giả</label>
-        <div class="col-xs-9 col-md-4">
+        <div class="col-xs-8 col-md-4">
             <div class="input-group">
                 <input class="form-control" id="inputmathe" type="text" placeholder="Nhập mã thẻ độc giả" />
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    <button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</button>
                 </span>
             </div>
+        </div>
+
+        <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
+            @Html.ActionLink("Cho mượn sách", "Create", "PhieuMuon", new { }, new { @class = "btn btn-primary" })
         </div>
     </div>
 </form>
@@ -31,7 +35,6 @@
                 <h4>Chức vụ: Sinh viên</h4>
                 <h4>Ngày cấp thẻ: 15/10/2016</h4>
                 <h4>Địa chỉ: <br /> Phan Văn Khỏe, P5, Q6, TP.HCM</h4>
-                @Html.ActionLink("Cho mượn sách", "Create", "PhieuMuon", new {  }, new { @class = "btn btn-primary" })
             </div>
             <div class="detail-docgia col-md-5">
                 <h4>Tên độc giả: Huỳnh Kim Xuân</h4>
@@ -42,15 +45,15 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>STT</th>
-                        <th>Đầu sách</th>
-                        <th>Ngày trả</th>
-                        <th>Ngày hết hạn</th>
+                        <th class="col-md-1">STT</th>
+                        <th class="col-md-3">Đầu sách</th>
+                        <th class="col-md-3">Ngày trả</th>
+                        <th class="col-md-3">Ngày hết hạn</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
+                        <td class="col-md-1">1</td>
                         <td>Harry Porter 2</td>
                         <td>11/10/2016</td>
                         <td>21/10/2016</td>
