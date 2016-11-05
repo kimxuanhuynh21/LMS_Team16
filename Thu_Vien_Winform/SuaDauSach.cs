@@ -1,4 +1,5 @@
 ﻿using EF_Models.Models;
+using EF_Models.ViewModels;
 using EF_Models.Handlers;
 using System;
 using System.Collections.Generic;
@@ -18,13 +19,16 @@ namespace Thu_Vien_Winform
     {
         ThuVienDbContext _context;
         ComboboxItem item;
-        public SuaDauSach(DauSach dausach)
+        int id = -1;
+        QuanLyDauSach form_qlds;
+        public SuaDauSach(DauSachViewModel dausach)
         {
             InitializeComponent();
             _context = new ThuVienDbContext();
 
             // TODO: Complete member initialization
             //textbox
+            id = dausach.ID;
             txt_name.Text = dausach.Ten;
             txt_republish.Text = dausach.TaiBan.ToString();
             txt_summary.Text = dausach.TomTat;
@@ -71,7 +75,7 @@ namespace Thu_Vien_Winform
             cbb_state.DataSource = list_states;
             cbb_state.DisplayMember = "Text";
             cbb_state.ValueMember = "Value";
-            cbb_state.SelectedValue = dausach.TinhTrang;
+            cbb_state.SelectedValue = dausach.TinhTrangID;
 
         }
 
@@ -83,7 +87,33 @@ namespace Thu_Vien_Winform
 
         private void btn_add_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (id != -1)
+                {
+                    var dausach = _context.DauSach.Where(i => i.ID.Equals(id)).FirstOrDefault();
+                    dausach.Ten = txt_name.Text;
+                    dausach.TheLoaiID = Convert.ToInt32(cbb_category.SelectedValue);
+                    dausach.TacGiaID = Convert.ToInt32(cbb_author.SelectedValue);
+                    dausach.TomTat = txt_summary.Text;
+                    dausach.TaiBan = Convert.ToInt32(txt_republish.Text);
+                    dausach.NhaSanXuatID = Convert.ToInt32(cbb_producer.SelectedValue);
+                    dausach.SoLuongTong = Convert.ToInt32(txt_sumnumber.Text);
+                    dausach.TinhTrang = Convert.ToByte(cbb_state.SelectedValue);
 
+                    _context.SaveChanges();
+
+                    
+                    this.Close();
+                    form_qlds = new QuanLyDauSach();
+                    form_qlds.Refresh();
+                    form_qlds.Refresh_DataGridView();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

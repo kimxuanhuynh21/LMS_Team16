@@ -10,15 +10,6 @@ namespace EF_Models.Models
 {
     public class CuonSach
     {
-        public CuonSach() { }
-        public CuonSach(CuonSach obj) 
-        {
-            ID = obj.ID;
-            MaVach = obj.MaVach;
-            DauSachID = obj.DauSachID;
-            DauSach = obj.DauSach;
-            TinhTrang = obj.TinhTrang;
-        }
         public int ID { get; set; }
         [Required]
         [Index(IsUnique = true)]
