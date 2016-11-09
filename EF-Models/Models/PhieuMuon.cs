@@ -10,6 +10,10 @@ namespace EF_Models.Models
 {
     public class PhieuMuon
     {
+        public PhieuMuon()
+        {
+            this.dsChiTietMuon = new List<ChiTietMuon>();
+        }
         public int ID { get; set; }
         [Required]
         [Index(IsUnique = true)]
@@ -33,5 +37,7 @@ namespace EF_Models.Models
         [Required]
         [Range(0,1)]
         public byte TinhTrang { get; set; }
+        public virtual ICollection<ChiTietMuon> dsChiTietMuon { get; set; }
+        
     }
 }
