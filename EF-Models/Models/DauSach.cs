@@ -10,26 +10,6 @@ namespace EF_Models.Models
 {
     public class DauSach
     {
-
-        public DauSach() { }
-
-        public DauSach( DauSach obj)
-        {
-            ID = obj.ID;
-            Ten = obj.Ten;
-            TheLoaiID = obj.TheLoaiID;
-            TheLoai = obj.TheLoai;
-            TacGiaID = obj.TacGiaID;
-            TacGia = obj.TacGia;
-            TomTat = obj.TomTat;
-            TaiBan = obj.TaiBan;
-            NhaSanXuatID = obj.NhaSanXuatID;
-            NhaSanXuat = obj.NhaSanXuat;
-            SoLuongTong = obj.SoLuongTong;
-            SoLuongTon = obj.SoLuongTon;
-            TinhTrang = obj.TinhTrang;
-        }
-
         public int ID { get; set; }
         [Required]
         [StringLength(255)]

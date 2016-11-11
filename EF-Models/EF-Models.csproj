@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Handlers\CommonHandler.cs" />
     <Compile Include="Handlers\ConstantHandler.cs" />
     <Compile Include="Migrations\201611021709144_version_03Nov2016.cs" />
     <Compile Include="Migrations\201611021709144_version_03Nov2016.Designer.cs">
@@ -73,6 +74,8 @@
     <Compile Include="Models\TheLoai.cs" />
     <Compile Include="Models\ThuVienDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CuonSachViewModel.cs" />
+    <Compile Include="ViewModels\DauSachViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

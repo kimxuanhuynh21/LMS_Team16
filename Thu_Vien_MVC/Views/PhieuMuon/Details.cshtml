@@ -2,27 +2,28 @@
 
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Xuất phiếu mượn";
 }
 
 <center><h2>Quản lý mượn sách</h2></center>
-<div class="text-right btn-inphieumuon">
-    <button class="btn btn-success"><i class="fa fa-print" aria-hidden="true"></i>  In phiếu mượn</button>
+<div class="text-right btn-inphieu">
+    <button class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i>  In phiếu mượn</button>
 </div>
 <div class="panel panel-default">
     <div class="panel-body">
         <div class="info-docgia">
             <div class="detail-docgia col-md-4">
-                <h4>Mã thẻ: @Html.DisplayFor(Model => Model.DocGia.MaThe)</h4>
-                <h4>Chức vụ: @Html.DisplayFor(Model => Model.DocGia.Loai)</h4>
-                <h4>Ngày mượn sách: @Html.DisplayFor(Model => Model.NgayMuon)</h4>
-                <h4>Địa chỉ: <br /> @Html.DisplayFor(Model => Model.DocGia.DiaChi)</h4>
+                <h4>Mã phiếu mượn: @Html.DisplayFor(ModelItem => Model.MaPhieuMuon)</h4>
+                <h4>Mã thẻ: @Html.DisplayFor(ModelItem => Model.DocGia.MaThe)</h4>
+                <h4>Tên độc giả: @Html.DisplayFor(ModelItem => Model.DocGia.Ten)</h4>
+                <h4>Số điện thoại: @Html.DisplayFor(ModelItem => Model.DocGia.DienThoai)</h4>
+                <h4>Chức vụ: @Html.DisplayFor(ModelItem => Model.DocGia.Loai)</h4>
             </div>
             <div class="detail-docgia col-md-5">
-                <h4>Tên độc giả: @Html.DisplayFor(Model => Model.DocGia.Ten)</h4>
-                <h4>Số điện thoại: @Html.DisplayFor(Model => Model.DocGia.DienThoai)</h4>
-                <h4>Ngày trả sách: @Html.DisplayFor(Model => Model.NgayHetHan)</h4>
-                <h4>Email: @Html.DisplayFor(Model => Model.DocGia.Email)</h4>
+                <h4>Email: @Html.DisplayFor(ModelItem => Model.DocGia.Email)</h4>
+                <h4>Ngày mượn sách: @Html.DisplayFor(ModelItem => Model.NgayMuon)</h4>
+                <h4>Ngày hết hạn: @Html.DisplayFor(ModelItem => Model.NgayHetHan)</h4>
+                <h4>Địa chỉ: <br /> @Html.DisplayFor(ModelItem => Model.DocGia.DiaChi)</h4>
             </div>
         </div>
     </div>
@@ -42,11 +43,11 @@
             @foreach (var item in Model.dsChiTietMuon)
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.ID)</td>
-                    <td>@Html.DisplayFor(modelItem => item.CuonSach.MaVach)</td>
-                    <td>@Html.DisplayFor(modelItem => item.CuonSach.DauSach.Ten)</td>
-                    <td>@Html.DisplayFor(modelItem => item.CuonSach.DauSach.TheLoai.Ten)</td>
-                    <td>@Html.DisplayFor(modelItem => item.CuonSach.DauSach.TacGia.Ten)</td>
+                    <td></td>
+                    <td>@Html.DisplayFor(ModelItem => item.CuonSach.MaVach)</td>
+                    <td>@Html.DisplayFor(ModelItem => item.CuonSach.DauSach.Ten)</td>
+                    <td>@Html.DisplayFor(ModelItem => item.CuonSach.DauSach.TacGia.Ten)</td>
+                    <td>@Html.DisplayFor(ModelItem => item.CuonSach.DauSach.TheLoai.Ten)</td>
                 </tr>
             }
         </tbody>

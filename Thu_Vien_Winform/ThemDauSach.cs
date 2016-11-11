@@ -15,6 +15,7 @@ namespace Thu_Vien_Winform
     public partial class ThemDauSach : Form
     {
         ThuVienDbContext _context;
+        QuanLyDauSach form_qlds;
         public ThemDauSach()
         {
             InitializeComponent();
@@ -40,7 +41,7 @@ namespace Thu_Vien_Winform
             cbb_producer.DisplayMember = "Ten";
             cbb_producer.ValueMember = "ID";
 
-
+            //must to fix
             cbb_state.DisplayMember = "Text";
             cbb_state.ValueMember = "Value";
             cbb_state.Items.Add(new { Text = "Đăng kí Photo", Value = ConstantHandler.TinhTrang_DauSach.DangKiPhoto });
@@ -51,7 +52,34 @@ namespace Thu_Vien_Winform
 
         private void btn_add_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var dausach = new DauSach();
+                dausach.Ten = txt_name.Text;
+                dausach.TheLoaiID = Convert.ToInt32(cbb_category.SelectedValue);
+                dausach.TacGiaID = Convert.ToInt32(cbb_author.SelectedValue);
+                dausach.TomTat = txt_summary.Text;
+                dausach.TaiBan = Convert.ToInt32(txt_republish.Text);
+                dausach.NhaSanXuatID = Convert.ToInt32(cbb_producer.SelectedValue);
+                dausach.SoLuongTong = Convert.ToInt32(txt_sumnumber.Text);
+                dausach.TinhTrang = Convert.ToByte(cbb_state.SelectedValue);
 
+                _context.DauSach.Add(dausach);
+                _context.SaveChanges();
+
+                form_qlds = new QuanLyDauSach();
+                form_qlds.Refresh();
+                form_qlds.Refresh_DataGridView();
+
+                txt_name.Text = null;
+                txt_republish.Text = null;
+                txt_summary.Text = null;
+                txt_sumnumber.Text = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

@@ -1,64 +1,55 @@
 ﻿@model EF_Models.Models.PhieuTra
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Tạo phiếu trả";
 }
 
-<h2>Create</h2>
+<center><h2>Quản lý trả sách</h2></center>
 
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>PhieuTra</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="borrow-book">
+    <form class="form-horizontal form-input">
         <div class="form-group">
-            @Html.LabelFor(model => model.MaPhieuTra, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MaPhieuTra, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MaPhieuTra, "", new { @class = "text-danger" })
+
+            <label for="inputmavach" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã vạch cuốn sách</label>
+            <div class="col-xs-8 col-md-4">
+                <div class="input-group">
+                    <input class="form-control" id="inputmavach" type="text" placeholder="Nhập mã vạch cuốn sách" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
+                <a class="btn btn-primary" href="/PhieuTra/Details/1"><i class="fa fa-check" aria-hidden="true"></i>Hoàn tất</a>
             </div>
         </div>
+    </form>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PhieuMuonID, "PhieuMuonID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PhieuMuonID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PhieuMuonID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.NgayTra, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NgayTra, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NgayTra, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DocGiaID, "DocGiaID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("DocGiaID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DocGiaID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="col-md-1">STT</th>
+                <th class="col-md-1">Mã vạch</th>
+                <th class="col-md-2">Tên đầu sách</th>
+                <th class="col-md-2">Tên tác giả</th>
+                <th class="col-md-1">Mã độc giả</th>
+                <th class="col-md-2">Tên độc giả</th>
+                <th class="col-md-2">Ngày hết hạn</th>
+                <th class="col-md-1">Xóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><button class="btn btn-default btn-xs" type="button"><i class="fa fa-times" aria-hidden="true"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

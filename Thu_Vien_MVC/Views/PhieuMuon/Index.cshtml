@@ -6,98 +6,104 @@
 
 <center><h2>Quản lý mượn sách</h2></center>
 
-<form class="form-horizontal form-input">
-    <div class="form-group">
-        <label for="inputmathe" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã thẻ độc giả</label>
-        <div class="col-xs-9 col-md-4">
-            <div class="input-group">
-                <input class="form-control" id="inputmathe" type="text" placeholder="Nhập mã thẻ độc giả" />
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-                </span>
+<div class="QL-Muon-Sach" ng-controller="ThongTinNguoiMuonCtrl">
+    <form class="form-horizontal form-input">
+        <div class="form-group">
+            <label for="inputmathe" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã thẻ độc giả</label>
+            <div class="col-xs-8 col-md-4">
+                <div class="input-group">
+                    <input class="form-control" id="inputmathe" type="text" placeholder="Nhập mã thẻ độc giả" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</button>
+                    </span>
+                </div>
+            </div>
+            {{test}}
+
+            <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
+                @Html.ActionLink("Cho mượn sách", "Create", "PhieuMuon", new { }, new { @class = "btn btn-primary" })
             </div>
         </div>
-    </div>
-</form>
+    </form>
 
-<div class="panel panel-default">
-    <div class="panel-body">
-        <div class="info-docgia">
-            <div class="img-docgia">
-                <img src="~/Content/Image/no-avatar.png" alt="no-avatar" class="img-thumbnail">
-            </div>
-            <div class="detail-docgia col-md-4">
-                <h4>Mã thẻ: DG1</h4>
-                <h4>Chức vụ: Sinh viên</h4>
-                <h4>Ngày cấp thẻ: 15/10/2016</h4>
-                <h4>Địa chỉ: <br /> Phan Văn Khỏe, P5, Q6, TP.HCM</h4>
-                @Html.ActionLink("Cho mượn sách", "Create", "PhieuMuon", new {  }, new { @class = "btn btn-primary" })
-            </div>
-            <div class="detail-docgia col-md-5">
-                <h4>Tên độc giả: Huỳnh Kim Xuân</h4>
-                <h4>Số điện thoại: 01212186931</h4>
-                <h4>Ngày hết hạn: 15/10/2017</h4>
-                <h4>Email: kimxuanhuynh21@gmail.com</h4>
-            </div>
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>Đầu sách</th>
-                        <th>Ngày trả</th>
-                        <th>Ngày hết hạn</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Harry Porter 2</td>
-                        <td>11/10/2016</td>
-                        <td>21/10/2016</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Harry Porter 3</td>
-                        <td>-</td>
-                        <td>21/10/2016</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Harry Porter 4</td>
-                        <td>11/08/2016</td>
-                        <td>21/07/2016</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Harry Porter 2</td>
-                        <td>11/10/2016</td>
-                        <td>21/10/2016</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Harry Porter 3</td>
-                        <td>-</td>
-                        <td>21/10/2016</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Harry Porter 4</td>
-                        <td>11/08/2016</td>
-                        <td>21/07/2016</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="row">
-                <div class="col-md-12 text-right">
-                    <ul class="pagination">
-                        <li><a href="#">&laquo;</a></li>
-                        <li><a href="#">&lsaquo;</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">&rsaquo;</a></li>
-                        <li><a href="#">&raquo;</a></li>
-                    </ul>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="info-docgia">
+                <div class="img-docgia">
+                    <img src="~/Content/Image/no-avatar.png" alt="no-avatar" class="img-thumbnail">
+                </div>
+                <div class="detail-docgia col-md-4">
+                    <h4>Mã thẻ: DG1</h4>
+                    <h4>Chức vụ: Sinh viên</h4>
+                    <h4>Ngày cấp thẻ: 15/10/2016</h4>
+                    <h4>Địa chỉ: <br /> Phan Văn Khỏe, P5, Q6, TP.HCM</h4>
+                </div>
+                <div class="detail-docgia col-md-5">
+                    <h4>Tên độc giả: Huỳnh Kim Xuân</h4>
+                    <h4>Số điện thoại: 01212186931</h4>
+                    <h4>Ngày hết hạn: 15/10/2017</h4>
+                    <h4>Email: kimxuanhuynh21@gmail.com</h4>
+                </div>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1">STT</th>
+                            <th class="col-md-3">Đầu sách</th>
+                            <th class="col-md-3">Ngày trả</th>
+                            <th class="col-md-3">Ngày hết hạn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-md-1">1</td>
+                            <td>Harry Porter 2</td>
+                            <td>11/10/2016</td>
+                            <td>21/10/2016</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Harry Porter 3</td>
+                            <td>-</td>
+                            <td>21/10/2016</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Harry Porter 4</td>
+                            <td>11/08/2016</td>
+                            <td>21/07/2016</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Harry Porter 2</td>
+                            <td>11/10/2016</td>
+                            <td>21/10/2016</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Harry Porter 3</td>
+                            <td>-</td>
+                            <td>21/10/2016</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Harry Porter 4</td>
+                            <td>11/08/2016</td>
+                            <td>21/07/2016</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <ul class="pagination">
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#">&lsaquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">&rsaquo;</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
