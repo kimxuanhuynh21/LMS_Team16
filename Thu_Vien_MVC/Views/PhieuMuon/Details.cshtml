@@ -1,5 +1,6 @@
 ﻿@model EF_Models.Models.PhieuMuon
 
+
 @{
     ViewBag.Title = "Details";
 }
@@ -12,16 +13,16 @@
     <div class="panel-body">
         <div class="info-docgia">
             <div class="detail-docgia col-md-4">
-                <h4>Mã thẻ: DG1</h4>
-                <h4>Chức vụ: Sinh viên</h4>
-                <h4>Ngày mượn sách: 15/10/2016</h4>
-                <h4>Địa chỉ: <br /> Phan Văn Khỏe, P5, Q6, TP.HCM</h4>
+                <h4>Mã thẻ: @Html.DisplayFor(Model => Model.DocGia.MaThe)</h4>
+                <h4>Chức vụ: @Html.DisplayFor(Model => Model.DocGia.Loai)</h4>
+                <h4>Ngày mượn sách: @Html.DisplayFor(Model => Model.NgayMuon)</h4>
+                <h4>Địa chỉ: <br /> @Html.DisplayFor(Model => Model.DocGia.DiaChi)</h4>
             </div>
             <div class="detail-docgia col-md-5">
-                <h4>Tên độc giả: Huỳnh Kim Xuân</h4>
-                <h4>Số điện thoại: 01212186931</h4>
-                <h4>Ngày trả sách: 15/10/2017</h4>
-                <h4>Email: kimxuanhuynh21@gmail.com</h4>
+                <h4>Tên độc giả: @Html.DisplayFor(Model => Model.DocGia.Ten)</h4>
+                <h4>Số điện thoại: @Html.DisplayFor(Model => Model.DocGia.DienThoai)</h4>
+                <h4>Ngày trả sách: @Html.DisplayFor(Model => Model.NgayHetHan)</h4>
+                <h4>Email: @Html.DisplayFor(Model => Model.DocGia.Email)</h4>
             </div>
         </div>
     </div>
@@ -38,13 +39,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            @foreach (var item in Model.dsChiTietMuon)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CuonSach.MaVach)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CuonSach.DauSach.Ten)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CuonSach.DauSach.TheLoai.Ten)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CuonSach.DauSach.TacGia.Ten)</td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
