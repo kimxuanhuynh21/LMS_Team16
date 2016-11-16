@@ -132,6 +132,13 @@ namespace Thu_Vien_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        //GET: PhieuMuon/DocGia/1
+        public JsonResult DocGia(string maThe)
+        {
+            DocGia docGia = db.DocGia.Where(c => c.MaThe.Contains(maThe)).FirstOrDefault();
+            return new JsonResult() { Data = docGia, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

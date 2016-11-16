@@ -12,13 +12,12 @@
             <label for="inputmathe" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã thẻ độc giả</label>
             <div class="col-xs-8 col-md-4">
                 <div class="input-group">
-                    <input class="form-control" id="inputmathe" type="text" placeholder="Nhập mã thẻ độc giả" />
+                    <input ng-model="maTheDocGia" class="form-control" id="inputmathe" type="text" placeholder="Nhập mã thẻ độc giả" />
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</button>
+                        <button class="btn btn-default" type="button" ng-click="togglePanelDocGia()"><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</button>
                     </span>
                 </div>
             </div>
-            {{test}}
 
             <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
                 @Html.ActionLink("Cho mượn sách", "Create", "PhieuMuon", new { }, new { @class = "btn btn-primary" })
@@ -26,23 +25,23 @@
         </div>
     </form>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-show="panelDocGiaShow">
         <div class="panel-body">
             <div class="info-docgia">
                 <div class="img-docgia">
                     <img src="~/Content/Image/no-avatar.png" alt="no-avatar" class="img-thumbnail">
                 </div>
                 <div class="detail-docgia col-md-4">
-                    <h4>Mã thẻ: DG1</h4>
-                    <h4>Chức vụ: Sinh viên</h4>
-                    <h4>Ngày cấp thẻ: 15/10/2016</h4>
-                    <h4>Địa chỉ: <br /> Phan Văn Khỏe, P5, Q6, TP.HCM</h4>
+                    <h4>Mã thẻ: {{docGiaInfo.MaThe}}</h4>
+                    <h4>Chức vụ: {{docGiaInfo.Loai}}</h4>
+                    <h4>Ngày cấp thẻ: {{displayDate(docGiaInfo.NgayCapThe)}}</h4>
+                    <h4>Địa chỉ: <br /> {{docGiaInfo.DiaChi}}</h4>
                 </div>
                 <div class="detail-docgia col-md-5">
-                    <h4>Tên độc giả: Huỳnh Kim Xuân</h4>
-                    <h4>Số điện thoại: 01212186931</h4>
-                    <h4>Ngày hết hạn: 15/10/2017</h4>
-                    <h4>Email: kimxuanhuynh21@gmail.com</h4>
+                    <h4>Tên độc giả: {{docGiaInfo.Ten}}</h4>
+                    <h4>Số điện thoại: {{docGiaInfo.DienThoai}}</h4>
+                    <h4>Ngày hết hạn: {{displayDate(docGiaInfo.NgayHetHan)}}</h4>
+                    <h4>Email: {{docGiaInfo.Email}}</h4>
                 </div>
                 <table class="table table-bordered table-striped">
                     <thead>
