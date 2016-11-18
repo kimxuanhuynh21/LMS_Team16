@@ -132,11 +132,34 @@ namespace Thu_Vien_MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        //GET: PhieuMuon/DocGia/1
+        //GET: PhieuMuon/DocGia/?maThe=dg1
         public JsonResult DocGia(string maThe)
         {
-            DocGia docGia = db.DocGia.Where(c => c.MaThe.Contains(maThe)).FirstOrDefault();
+            DocGia docGia = db.DocGia.Where(c => c.MaThe == maThe).FirstOrDefault();    //lấy 1 record và gán vào model độc giả
             return new JsonResult() { Data = docGia, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        //GET: PhieuMuon/LichSuMuon/?maThe=dg1
+        public JsonResult LichSuMuon(string maThe)
+        {
+            var dsChiTietMuon = db.ChiTietMuon.Select(
+                c => new
+                {
+                    ID = c.ID,
+                    DauSach = c.CuonSach.DauSach.Ten,
+                    NgayHetHan = c.PhieuMuon.NgayHetHan,
+                    MaThe = c.PhieuMuon.DocGia.MaThe,
+                    PhieuTra = db.ChiTietTra.Select(
+                      ctt => new {
+                          ID = ctt.ID,
+                          PhieuMuonID = ctt.PhieuTra.PhieuMuonID,
+                          CuonSachID = ctt.CuonSachID,
+                          NgayTra = ctt.PhieuTra.NgayTra
+                      })
+                      .Where(d => c.CuonSachID == d.CuonSachID && c.PhieuMuonID == d.PhieuMuonID)
+                      .FirstOrDefault()        //lấy danh sách chi tiết mượn
+                }).Where(dg => dg.MaThe == maThe);    
+            return new JsonResult() { Data = dsChiTietMuon, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         protected override void Dispose(bool disposing)

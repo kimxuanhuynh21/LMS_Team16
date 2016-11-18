@@ -10,6 +10,7 @@
     function ThongTinNguoiMuonCtrl($scope, $http) {
         $scope.maTheDocGia;
         $scope.docGiaInfo;
+        $scope.lichSuMuon = [];
         $scope.panelDocGiaShow = false;
 
         $scope.togglePanelDocGia = togglePanelDocGia;
@@ -30,6 +31,16 @@
                 }, function errorCallback(error) {
                     console.log(error);
                 });
+
+            $http
+                .get('/PhieuMuon/LichSuMuon/?maThe=' + $scope.maTheDocGia)
+                .then(function successCallback(response) {
+                    if (response.data != "") {
+                        $scope.lichSuMuon = response.data;
+                    }
+                }, function errorCallback(error) {
+                    console.log(error);
+                });
         }
 
         function displayDate(date) {
@@ -37,10 +48,14 @@
                 var dateInMilisecond = parseInt(date.replace("/Date(", "").replace(")/", ""));
                 var convertedDate = new Date(dateInMilisecond);
                 var month = convertedDate.getMonth();
+                var date = convertedDate.getDate();
                 if (month < 10) {
                     month = '0' + month;
                 }
-                return convertedDate.getDate() + "-" + month + "-" + convertedDate.getFullYear();
+                if (date < 10) {
+                    date = '0' + date;
+                }
+                return date + "-" + month + "-" + convertedDate.getFullYear();
             }
         }
     }
