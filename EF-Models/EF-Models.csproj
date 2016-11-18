@@ -58,6 +58,14 @@
     <Compile Include="Migrations\201611021709144_version_03Nov2016.Designer.cs">
       <DependentUpon>201611021709144_version_03Nov2016.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611161531400_version_16Nov2016.cs" />
+    <Compile Include="Migrations\201611161531400_version_16Nov2016.Designer.cs">
+      <DependentUpon>201611161531400_version_16Nov2016.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611161537347_version_16Nov20161.cs" />
+    <Compile Include="Migrations\201611161537347_version_16Nov20161.Designer.cs">
+      <DependentUpon>201611161537347_version_16Nov20161.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietMuon.cs" />
     <Compile Include="Models\ChiTietTra.cs" />
@@ -72,6 +80,7 @@
     <Compile Include="Models\PhieuTra.cs" />
     <Compile Include="Models\TacGia.cs" />
     <Compile Include="Models\TheLoai.cs" />
+    <Compile Include="Models\ThongKeDauSach.cs" />
     <Compile Include="Models\ThuVienDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CuonSachViewModel.cs" />
@@ -84,6 +93,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611021709144_version_03Nov2016.resx">
       <DependentUpon>201611021709144_version_03Nov2016.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611161531400_version_16Nov2016.resx">
+      <DependentUpon>201611161531400_version_16Nov2016.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611161537347_version_16Nov20161.resx">
+      <DependentUpon>201611161537347_version_16Nov20161.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
