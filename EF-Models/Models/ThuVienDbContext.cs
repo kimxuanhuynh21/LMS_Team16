@@ -57,6 +57,7 @@ namespace EF_Models.Models
             modelBuilder.Entity<PhieuMuon>().ToTable("PhieuMuon", "dbo");
             // Set the table name
             modelBuilder.Entity<PhieuTra>().ToTable("PhieuTra", "dbo");
+            // Set the table name
             modelBuilder.Entity<ThongKeDauSach>().ToTable("ThongKeDauSach", "dbo");
             base.OnModelCreating(modelBuilder);
 

@@ -12,7 +12,7 @@ namespace EF_Models.Models
         public int ID { get; set; }
         public int DauSachID { get; set; }
         [ForeignKey("DauSachID")]
-        public virtual PhieuTra DauSach { get; set; }
+        public virtual DauSach DauSach { get; set; }
         public DateTime Ngay { get; set; }
         public int SoLuongHienTai { get; set; }
     }

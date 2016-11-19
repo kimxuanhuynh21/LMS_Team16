@@ -17,14 +17,14 @@ namespace EF_Models.Migrations
                         SoLuongHienTai = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.PhieuTra", t => t.DauSachID)
+                .ForeignKey("dbo.DauSach", t => t.DauSachID)
                 .Index(t => t.DauSachID);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.ThongKeDauSach", "DauSachID", "dbo.PhieuTra");
+            DropForeignKey("dbo.ThongKeDauSach", "DauSachID", "dbo.DauSach");
             DropIndex("dbo.ThongKeDauSach", new[] { "DauSachID" });
             DropTable("dbo.ThongKeDauSach");
         }
