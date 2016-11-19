@@ -120,5 +120,11 @@ namespace Thu_Vien_Winform
                 quanlysach.Show();
             }
         }
+
+        private void btn_statistical_Click(object sender, EventArgs e)
+        {
+            ThongkeDauSach thongkedausach = new ThongkeDauSach();
+            thongkedausach.Show();
+        }
     }
 }

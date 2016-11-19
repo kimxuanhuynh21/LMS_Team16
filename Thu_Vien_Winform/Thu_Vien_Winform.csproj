@@ -81,6 +81,12 @@
     <Compile Include="ThemDauSach.Designer.cs">
       <DependentUpon>ThemDauSach.cs</DependentUpon>
     </Compile>
+    <Compile Include="ThongkeDauSach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThongkeDauSach.Designer.cs">
+      <DependentUpon>ThongkeDauSach.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="QuanLyDauSach.resx">
       <DependentUpon>QuanLyDauSach.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ThemDauSach.resx">
       <DependentUpon>ThemDauSach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThongkeDauSach.resx">
+      <DependentUpon>ThongkeDauSach.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\EF_Models.Models.DauSach.datasource" />

@@ -7,12 +7,24 @@ namespace EF_Models.Handlers
     {
         public enum TinhTrang_DauSach
         {
-            [Description("Cho Muon Ve Nha")]
+            [Description("Mượn về nhà")]
             MuonVeNha = 0,
-            [Description("Muon Doc Tai Cho")]
+            [Description("Đọc tại chổ")]
             DocTaiCho = 1,
-            [Description("Dang Ki Photo")]
+            [Description("Đăng kí Photo")]
             DangKiPhoto = 2,
+        }
+
+        public enum TinhTrang_CuonSach
+        {
+            [Description("Sách đã thanh lý ")]
+            SachThanhLy = 0,
+            [Description("Sách đã được mượn")]
+            SachDaMuon = 1,
+            [Description("Sách còn trong kho")]
+            SachTrongKho = 2,
+            [Description("Sách đang chờ bảo dưỡng")]
+            SachBaoDuong = 3,
         }
     }
 }

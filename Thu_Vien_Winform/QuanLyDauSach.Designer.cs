@@ -34,6 +34,7 @@
             this.btn_add = new System.Windows.Forms.Button();
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_showbooks = new System.Windows.Forms.Button();
+            this.btn_statistical = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             // 
             // btn_delete
             // 
-            this.btn_delete.Location = new System.Drawing.Point(607, 352);
+            this.btn_delete.Location = new System.Drawing.Point(773, 352);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(79, 28);
             this.btn_delete.TabIndex = 1;
@@ -57,7 +58,7 @@
             // 
             // btn_refresh
             // 
-            this.btn_refresh.Location = new System.Drawing.Point(96, 352);
+            this.btn_refresh.Location = new System.Drawing.Point(70, 352);
             this.btn_refresh.Name = "btn_refresh";
             this.btn_refresh.Size = new System.Drawing.Size(77, 28);
             this.btn_refresh.TabIndex = 2;
@@ -67,7 +68,7 @@
             // 
             // btn_add
             // 
-            this.btn_add.Location = new System.Drawing.Point(235, 352);
+            this.btn_add.Location = new System.Drawing.Point(404, 352);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(112, 28);
             this.btn_add.TabIndex = 3;
@@ -77,7 +78,7 @@
             // 
             // btn_update
             // 
-            this.btn_update.Location = new System.Drawing.Point(441, 352);
+            this.btn_update.Location = new System.Drawing.Point(599, 352);
             this.btn_update.Name = "btn_update";
             this.btn_update.Size = new System.Drawing.Size(80, 28);
             this.btn_update.TabIndex = 4;
@@ -87,7 +88,7 @@
             // 
             // btn_showbooks
             // 
-            this.btn_showbooks.Location = new System.Drawing.Point(780, 352);
+            this.btn_showbooks.Location = new System.Drawing.Point(224, 352);
             this.btn_showbooks.Name = "btn_showbooks";
             this.btn_showbooks.Size = new System.Drawing.Size(102, 28);
             this.btn_showbooks.TabIndex = 6;
@@ -95,11 +96,22 @@
             this.btn_showbooks.UseVisualStyleBackColor = true;
             this.btn_showbooks.Click += new System.EventHandler(this.btn_showbooks_Click);
             // 
+            // btn_statistical
+            // 
+            this.btn_statistical.Location = new System.Drawing.Point(184, 431);
+            this.btn_statistical.Name = "btn_statistical";
+            this.btn_statistical.Size = new System.Drawing.Size(91, 28);
+            this.btn_statistical.TabIndex = 7;
+            this.btn_statistical.Text = "Thống kê";
+            this.btn_statistical.UseVisualStyleBackColor = true;
+            this.btn_statistical.Click += new System.EventHandler(this.btn_statistical_Click);
+            // 
             // QuanLyDauSach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(935, 484);
+            this.Controls.Add(this.btn_statistical);
             this.Controls.Add(this.btn_showbooks);
             this.Controls.Add(this.btn_update);
             this.Controls.Add(this.btn_add);
@@ -134,6 +146,7 @@
         private System.Windows.Forms.Button btn_add;
         private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Button btn_showbooks;
+        private System.Windows.Forms.Button btn_statistical;
     }
 }
 

@@ -39,6 +39,32 @@ namespace Thu_Vien_Winform
             cbb_books.DataSource = list_books;
             cbb_books.DisplayMember = "Ten";
             cbb_books.ValueMember = "ID";
+
+            //combobox tinh trang
+            List<ComboboxItem> list_states = new List<ComboboxItem> { };
+            item = new ComboboxItem();
+            item.Text = "Sách đã thanh lý";
+            item.Value = (byte)ConstantHandler.TinhTrang_CuonSach.SachThanhLy;
+            list_states.Add(item);
+
+            item = new ComboboxItem();
+            item.Text = "Sách đã được mượn";
+            item.Value = (byte)ConstantHandler.TinhTrang_CuonSach.SachDaMuon;
+            list_states.Add(item);
+
+            item = new ComboboxItem();
+            item.Text = "Sách còn trong kho";
+            item.Value = (byte)ConstantHandler.TinhTrang_CuonSach.SachTrongKho;
+            list_states.Add(item);
+
+            item = new ComboboxItem();
+            item.Text = "Sách đang chờ bảo dưỡng";
+            item.Value = (byte)ConstantHandler.TinhTrang_CuonSach.SachBaoDuong;
+            list_states.Add(item);
+
+            cbb_state.DataSource = list_states;
+            cbb_state.DisplayMember = "Text";
+            cbb_state.ValueMember = "Value";
         }
 
         private void InitializeDataGridView(List<CuonSachViewModel> list)
@@ -61,7 +87,7 @@ namespace Thu_Vien_Winform
             dataGridView1.Columns[3].Visible = false;
         }
 
-        public void Refresh_DataGridView(List<CuonSachViewModel> list)
+        public void Refresh_DataGridView()
         {
             QuanLySach_Load(null, null);
         }
@@ -75,10 +101,39 @@ namespace Thu_Vien_Winform
 
         private void btn_save_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var cuonsach_id = label_id.Text;
+                if (cuonsach_id != "mới")
+                {
+                    int id = Convert.ToInt32(cuonsach_id);
+                    var cuonsach = _context.CuonSach.Where(i => i.ID.Equals(id)).FirstOrDefault();
+                    cuonsach.MaVach = txt_key.Text;
+                    cuonsach.DauSachID = Convert.ToInt32(cbb_books.SelectedValue);
+                    cuonsach.TinhTrang = Convert.ToByte(cbb_state.SelectedValue);
+                }
+                else
+                {
+                    var cuonsach = new CuonSach();
+                    cuonsach.MaVach = txt_key.Text;
+                    cuonsach.DauSachID = Convert.ToInt32(cbb_books.SelectedValue);
+                    cuonsach.TinhTrang = Convert.ToByte(cbb_state.SelectedValue);
 
+                    _context.CuonSach.Add(cuonsach);
+
+                }
+                _context.SaveChanges();
+
+                Refresh_DataGridView();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_Click(object sender, EventArgs e)
         {
             Int32 selectedRowCount =
         dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
@@ -87,11 +142,44 @@ namespace Thu_Vien_Winform
                 var index_row = dataGridView1.SelectedRows[0].Index;
                 CuonSachViewModel cuonsach = (CuonSachViewModel)dataGridView1.Rows[index_row].DataBoundItem;
                 //var obj = dataGridView1.Rows[index_row];
+                label_id.Text = cuonsach.ID.ToString();
                 txt_key.Text = cuonsach.MaVach;
                 cbb_books.SelectedValue = cuonsach.DauSachID;
-                
+                cbb_state.SelectedValue = cuonsach.TinhTrangID;
             }
         }
-        
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            Int32 selectedRowCount =
+        dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0)
+            {
+                for (int i = 0; i < selectedRowCount; i++)
+                {
+                    //sb.Append("Row: ");
+                    //sb.Append(dataGridView1.SelectedRows[i].Index.ToString());
+                    //sb.Append(Environment.NewLine);
+
+                    var index_row = dataGridView1.SelectedRows[i].Index;
+                    int cuonsach_id = Convert.ToInt32(dataGridView1.Rows[index_row].Cells[0].Value);
+
+                    _context.CuonSach.RemoveRange(_context.CuonSach.Where(o => o.ID == cuonsach_id));
+
+                }
+
+                _context.SaveChanges();
+                MessageBox.Show("Success...!!!");
+                //reload
+                Refresh_DataGridView();
+            }
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            label_id.Text = "mới";
+            txt_key.Text = null;
+        }
+
     }
 }
