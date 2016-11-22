@@ -16,8 +16,6 @@ namespace EF_Models.Models
         }
         public virtual ICollection<ChiTietMuon> dsChiTietMuon { get; set; }
         public int ID { get; set; }
-        [Required]
-        [Index(IsUnique = true)]
         [StringLength(100)]
         public string MaPhieuMuon { get; set; }
         [Required]

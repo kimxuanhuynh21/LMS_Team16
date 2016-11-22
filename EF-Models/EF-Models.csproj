@@ -66,6 +66,14 @@
     <Compile Include="Migrations\201611161537347_version_16Nov20161.Designer.cs">
       <DependentUpon>201611161537347_version_16Nov20161.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611200744243_version_20Nov2016.cs" />
+    <Compile Include="Migrations\201611200744243_version_20Nov2016.Designer.cs">
+      <DependentUpon>201611200744243_version_20Nov2016.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611200750350_version_20Nov20161.cs" />
+    <Compile Include="Migrations\201611200750350_version_20Nov20161.Designer.cs">
+      <DependentUpon>201611200750350_version_20Nov20161.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietMuon.cs" />
     <Compile Include="Models\ChiTietTra.cs" />
@@ -100,6 +108,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611161537347_version_16Nov20161.resx">
       <DependentUpon>201611161537347_version_16Nov20161.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611200744243_version_20Nov2016.resx">
+      <DependentUpon>201611200744243_version_20Nov2016.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611200750350_version_20Nov20161.resx">
+      <DependentUpon>201611200750350_version_20Nov20161.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

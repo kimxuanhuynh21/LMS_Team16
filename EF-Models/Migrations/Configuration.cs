@@ -53,8 +53,8 @@ namespace EF_Models.Migrations
 
             context.CuonSach.AddOrUpdate(
                 new CuonSach { ID = 1, MaVach = "VH1", DauSachID = 1, TinhTrang = 2},
-                new CuonSach { ID = 2, MaVach = "VH2", DauSachID = 1, TinhTrang = 2 },
-                new CuonSach { ID = 3, MaVach = "VH3", DauSachID = 1, TinhTrang = 1 }
+                new CuonSach { ID = 2, MaVach = "VH2", DauSachID = 2, TinhTrang = 2 },
+                new CuonSach { ID = 3, MaVach = "VH3", DauSachID = 3, TinhTrang = 1 }
            );
 
             context.DocGia.AddOrUpdate(

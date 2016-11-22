@@ -132,6 +132,8 @@ namespace Thu_Vien_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        //Kiểm tra maThe nhận được từ browser có bằng với MaThe trong db ko? 
+        //Sau đó gán vào đối tượng docGia sử dụng model DocGia
         //GET: PhieuMuon/DocGia/?maThe=dg1
         public JsonResult DocGia(string maThe)
         {
@@ -139,10 +141,11 @@ namespace Thu_Vien_MVC.Controllers
             return new JsonResult() { Data = docGia, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+        //Trả về các thuộc tính mà browser cần 
         //GET: PhieuMuon/LichSuMuon/?maThe=dg1
         public JsonResult LichSuMuon(string maThe)
         {
-            var dsChiTietMuon = db.ChiTietMuon.Select(
+            var dsChiTietMuon = db.ChiTietMuon.Select(          //Lọc các thuộc tính trong ChiTietMuon (DauSach, NgayMuon)
                 c => new
                 {
                     ID = c.ID,
@@ -150,7 +153,7 @@ namespace Thu_Vien_MVC.Controllers
                     NgayHetHan = c.PhieuMuon.NgayHetHan,
                     MaThe = c.PhieuMuon.DocGia.MaThe,
                     PhieuTra = db.ChiTietTra.Select(
-                      ctt => new {
+                      ctt => new {                   //Lọc các thuộc tính trong ChiTietTra (NgayTra)
                           ID = ctt.ID,
                           PhieuMuonID = ctt.PhieuTra.PhieuMuonID,
                           CuonSachID = ctt.CuonSachID,
@@ -162,6 +165,41 @@ namespace Thu_Vien_MVC.Controllers
             return new JsonResult() { Data = dsChiTietMuon, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+        //GET: PhieuMuon/CuonSach/?maVach=VH1
+        public JsonResult CuonSach (string maVach)
+        {
+            CuonSach cuonSach = db.CuonSach.Where(c => c.MaVach == maVach).FirstOrDefault();
+            return new JsonResult() { Data = cuonSach, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        //Thêm 1 phiếu mượn vào csdl
+        // POST: PhieuMuon/ChiTietPhieuMuon
+        [HttpPost]
+        public JsonResult ChiTietPhieuMuon(PhieuMuonModel phieuMuonJSON)
+        {
+            DocGia docGiaMuon = phieuMuonJSON.DocGia;
+            ICollection<CuonSach> dsCuonSachMuon = phieuMuonJSON.dsCuonSach;
+            PhieuMuon PhieuMuon = new PhieuMuon();
+            PhieuMuon.DocGiaID = docGiaMuon.ID;
+            PhieuMuon.NgayMuon = DateTime.Now;
+            if (docGiaMuon.Loai == 0)
+            {
+                PhieuMuon.NgayHetHan = PhieuMuon.NgayMuon.AddDays(20);
+            }
+            else
+            {
+                PhieuMuon.NgayHetHan = PhieuMuon.NgayMuon.AddDays(30);
+            }
+            PhieuMuon.NhanVienID = 1;
+            PhieuMuon.TinhTrang = 0;
+            db.PhieuMuon.Add(PhieuMuon);
+            db.SaveChanges();
+            PhieuMuon.MaPhieuMuon = "PM" + PhieuMuon.ID;
+            db.SaveChanges();
+            return new JsonResult() { Data = PhieuMuon, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -170,5 +208,12 @@ namespace Thu_Vien_MVC.Controllers
             }
             base.Dispose(disposing);
         }
+    }
+
+    //Tạo 1 model PhieuMuonModel với 2 đối tượng DocGia và dsCuonSach
+    public class PhieuMuonModel
+    {
+        public DocGia DocGia { get; set; }
+        public ICollection<CuonSach> dsCuonSach { get; set; }
     }
 }

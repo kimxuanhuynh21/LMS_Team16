@@ -5,76 +5,122 @@
 }
 
 <center><h2>Quản lý mượn sách</h2></center>
+<div ng-controller="ThongTinNguoiMuonCtrl">
+    <div class="QL-Muon-Sach" ng-show="docGiaInfoShow">
+        <form class="form-horizontal form-input">
+            <div class="form-group">
+                <label for="inputmathe" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã thẻ độc giả</label>
+                <div class="col-xs-8 col-md-4">
+                    <div class="input-group">
+                        <input ng-model="maTheDocGia" class="form-control" id="inputmathe" type="text" placeholder="Nhập mã thẻ độc giả" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="togglePanelDocGia()"><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</button>
+                        </span>
+                    </div>
+                </div>
 
-<div class="QL-Muon-Sach" ng-controller="ThongTinNguoiMuonCtrl">
-    <form class="form-horizontal form-input">
-        <div class="form-group">
-            <label for="inputmathe" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã thẻ độc giả</label>
-            <div class="col-xs-8 col-md-4">
-                <div class="input-group">
-                    <input ng-model="maTheDocGia" class="form-control" id="inputmathe" type="text" placeholder="Nhập mã thẻ độc giả" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-click="togglePanelDocGia()"><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</button>
-                    </span>
+                <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
+                    <button class="btn btn-primary" ng-click="submitDocGiaInfo()"><i class="fa fa-check" aria-hidden="true"></i>Cho mượn sách</button>
                 </div>
             </div>
+        </form>
 
-            <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
-                @Html.ActionLink("Cho mượn sách", "Create", "PhieuMuon", new { }, new { @class = "btn btn-primary" })
-            </div>
-        </div>
-    </form>
-
-    <div class="panel panel-default" ng-show="panelDocGiaShow">
-        <div class="panel-body">
-            <div class="info-docgia">
-                <div class="img-docgia">
-                    <img src="~/Content/Image/no-avatar.png" alt="no-avatar" class="img-thumbnail">
-                </div>
-                <div class="detail-docgia col-md-4">
-                    <h4>Mã thẻ: {{docGiaInfo.MaThe}}</h4>
-                    <h4>Chức vụ: {{docGiaInfo.Loai}}</h4>
-                    <h4>Ngày cấp thẻ: {{displayDate(docGiaInfo.NgayCapThe)}}</h4>
-                    <h4>Địa chỉ: <br /> {{docGiaInfo.DiaChi}}</h4>
-                </div>
-                <div class="detail-docgia col-md-5">
-                    <h4>Tên độc giả: {{docGiaInfo.Ten}}</h4>
-                    <h4>Số điện thoại: {{docGiaInfo.DienThoai}}</h4>
-                    <h4>Ngày hết hạn: {{displayDate(docGiaInfo.NgayHetHan)}}</h4>
-                    <h4>Email: {{docGiaInfo.Email}}</h4>
-                </div>
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th class="col-md-1">STT</th>
-                            <th class="col-md-3">Đầu sách</th>
-                            <th class="col-md-3">Ngày trả</th>
-                            <th class="col-md-3">Ngày hết hạn</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="item in lichSuMuon">
-                            <td class="col-md-1">1</td>
-                            <td>{{item.DauSach}}</td>
-                            <td>{{ item.PhieuTra.NgayTra ? displayDate(item.PhieuTra.NgayTra) : 'Chưa trả'}}</td>
-                            <td>{{displayDate(item.NgayHetHan)}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="row">
-                    <div class="col-md-12 text-right">
-                        <ul class="pagination">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">&lsaquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">&rsaquo;</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
+        <div class="panel panel-default" ng-show="panelDocGiaShow">
+            <div class="panel-body">
+                <div class="info-docgia">
+                    <div class="img-docgia">
+                        <img src="~/Content/Image/no-avatar.png" alt="no-avatar" class="img-thumbnail">
+                    </div>
+                    <div class="detail-docgia col-md-4">
+                        <h4>Mã thẻ: {{docGiaInfo.MaThe}}</h4>
+                        <h4>Chức vụ: {{docGiaInfo.Loai}}</h4>
+                        <h4>Ngày cấp thẻ: {{displayDate(docGiaInfo.NgayCapThe)}}</h4>
+                        <h4>Địa chỉ: <br /> {{docGiaInfo.DiaChi}}</h4>
+                    </div>
+                    <div class="detail-docgia col-md-5">
+                        <h4>Tên độc giả: {{docGiaInfo.Ten}}</h4>
+                        <h4>Số điện thoại: {{docGiaInfo.DienThoai}}</h4>
+                        <h4>Ngày hết hạn: {{displayDate(docGiaInfo.NgayHetHan)}}</h4>
+                        <h4>Email: {{docGiaInfo.Email}}</h4>
+                    </div>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col-md-1">STT</th>
+                                <th class="col-md-3">Đầu sách</th>
+                                <th class="col-md-3">Ngày trả</th>
+                                <th class="col-md-3">Ngày hết hạn</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in lichSuMuon">
+                                <td>{{$index + 1}}</td>submitDocGiaInfo
+                                <td>{{item.DauSach}}</td>
+                                <td>{{ item.PhieuTra.NgayTra ? displayDate(item.PhieuTra.NgayTra) : 'Chưa trả'}}</td>
+                                <td>{{displayDate(item.NgayHetHan)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <ul class="pagination">
+                                <li><a href="#">&laquo;</a></li>
+                                <li><a href="#">&lsaquo;</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">&rsaquo;</a></li>
+                                <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="borrow-book" ng-show="dsSachMuonShow">
+        <form class="form-horizontal form-input">
+            <div class="form-group">
+
+                <label for="inputmavach" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã vạch cuốn sách</label>
+                <div class="col-xs-8 col-md-4">
+                    <div class="input-group">
+                        <input class="form-control" id="inputmavach" ng-model="maVachCuonSach" type="text" placeholder="Nhập mã vạch cuốn sách" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="togglePanelCuonSach()"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
+                    <button class="btn btn-primary" ng-click="detailPhieuMuon()"><i class="fa fa-check" aria-hidden="true"></i>Hoàn tất</button>
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="col-md-1">STT</th>
+                    <th class="col-md-2">Mã vạch</th>
+                    <th class="col-md-3">Tên đầu sách</th>
+                    <th class="col-md-3">Tên tác giả</th>
+                    <th class="col-md-2">Tên thể loại</th>
+                    <th class="col-md-1">Xóa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in dsCuonSachInfo | orderBy : 'MaVach'">
+                    <td>{{$index + 1}}</td>
+                    <td>{{item.MaVach}}</td>
+                    <td>{{item.DauSach.Ten}}</td>
+                    <td>{{item.DauSach.TacGia.Ten}}</td>
+                    <td>{{item.DauSach.TheLoai.Ten}}</td>
+                    <td><button class="btn btn-default btn-xs" type="button" ng-click="removeCuonSach(item.MaVach)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>
