@@ -10,13 +10,23 @@
     function ThongTinNguoiMuonCtrl($scope, $http) {
         $scope.docGiaInfoShow = true;
         $scope.dsSachMuonShow = false;
+        $scope.phieuMuonShow = false;
 
         //Khai báo những scope mà mình sử dụng để hiển thị lên view
         $scope.maTheDocGia;
         $scope.docGiaInfo;
         $scope.lichSuMuon = [];
         $scope.panelDocGiaShow = false;
+        var docGiaFlag = false;
 
+        $scope.maVachCuonSach;
+        $scope.dsCuonSachInfo = [];
+        $scope.phieuMuon = {};
+
+        //Functions
+        $scope.togglePanelCuonSach = togglePanelCuonSach;
+        $scope.removeCuonSach = removeCuonSach;
+        $scope.detailPhieuMuon = detailPhieuMuon;
         $scope.togglePanelDocGia = togglePanelDocGia;
         $scope.displayDate = displayDate;
         $scope.submitDocGiaInfo = submitDocGiaInfo;
@@ -31,10 +41,12 @@
                         $scope.panelDocGiaShow = true;
                         //Lấy dữ liệu mà server trả về gán vào một thuộc tính scope để thuộc tính này mới hiển thị lên view.
                         $scope.docGiaInfo = response.data;
+                        docGiaFlag = true;
                     }
                     else {
                         $scope.panelDocGiaShow = false;
                         alert('Không tìm thấy mã thẻ độc giả');
+                        docGiaFlag = false;
                     }
                 }, function errorCallback(error) {
                     console.log(error);
@@ -73,20 +85,17 @@
         //Khi click vào nút "Cho mượn sách" thì ng-show = "docGiaInfoShow" sẽ ẩn, ng-show = "dsSachMuonShow" sẽ hiện
         //Load cùng 1 trang
         function submitDocGiaInfo() {
+            if (docGiaFlag == false) {
+                alert('Bạn chưa chọn độc giả');
+                return;
+            }
             $scope.docGiaInfoShow = false;
             $scope.dsSachMuonShow = true;
         }
 
-        $scope.maVachCuonSach;
-        $scope.dsCuonSachInfo = [];
-
-        $scope.togglePanelCuonSach = togglePanelCuonSach;
-        $scope.removeCuonSach = removeCuonSach;
-        $scope.detailPhieuMuon = detailPhieuMuon;
-
         //Thêm cuốn sách vào phiếu mượn
         //Khi click vào button có ng-click là togglePanelCuonSach()
-        function togglePanelCuonSach() {
+        function togglePanelCuonSach(e) {
             var flag = false;
             $scope.dsCuonSachInfo.forEach(function (item) {              //Chạy vòng lập đối với javascript    
                 if (item.MaVach.toLowerCase() == $scope.maVachCuonSach.toLowerCase()) {
@@ -100,7 +109,7 @@
                 .then(function successCallback(response) {
                     if (response.data != "") {
                         $scope.dsCuonSachInfo.push(response.data);           //push để thêm dữ liệu vào mảng
-
+                        
                     }
                     else {
                         alert('Không tìm thấy mã vạch cuốn sách');
@@ -112,7 +121,7 @@
             else {
                 alert('Cuốn sách bạn chọn bị trùng');
             }
-
+            e.preventDefault();
         }
 
         //Xóa sách được chọn
@@ -135,16 +144,17 @@
                 .then(function successCallback(response) {
                     console.log(response);
                     if (response.data != "") {
-                        console.log(response.data);
-                    }
-                    else {
-                        alert('Không tìm thấy mã vạch cuốn sách');
+                        $scope.phieuMuon = response.data;
+                        $scope.dsSachMuonShow = false;
+                        $scope.phieuMuonShow = true;
+                        console.log($scope.phieuMuon);
                     }
                 }, function errorCallback(error) {
                     console.log(error);
                 });
         }
 
+        //Alert when user attempt to leave or reload this page
         window.onbeforeunload = function () {
             return "Data will be lost if you leave the page, are you sure?";
         };

@@ -153,7 +153,8 @@ namespace Thu_Vien_MVC.Controllers
                     NgayHetHan = c.PhieuMuon.NgayHetHan,
                     MaThe = c.PhieuMuon.DocGia.MaThe,
                     PhieuTra = db.ChiTietTra.Select(
-                      ctt => new {                   //Lọc các thuộc tính trong ChiTietTra (NgayTra)
+                      ctt => new
+                      {                   //Lọc các thuộc tính trong ChiTietTra (NgayTra)
                           ID = ctt.ID,
                           PhieuMuonID = ctt.PhieuTra.PhieuMuonID,
                           CuonSachID = ctt.CuonSachID,
@@ -161,12 +162,12 @@ namespace Thu_Vien_MVC.Controllers
                       })
                       .Where(d => c.CuonSachID == d.CuonSachID && c.PhieuMuonID == d.PhieuMuonID)
                       .FirstOrDefault()        //lấy danh sách chi tiết mượn
-                }).Where(dg => dg.MaThe == maThe);    
+                }).Where(dg => dg.MaThe == maThe);
             return new JsonResult() { Data = dsChiTietMuon, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         //GET: PhieuMuon/CuonSach/?maVach=VH1
-        public JsonResult CuonSach (string maVach)
+        public JsonResult CuonSach(string maVach)
         {
             CuonSach cuonSach = db.CuonSach.Where(c => c.MaVach == maVach).FirstOrDefault();
             return new JsonResult() { Data = cuonSach, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -196,7 +197,37 @@ namespace Thu_Vien_MVC.Controllers
             db.SaveChanges();
             PhieuMuon.MaPhieuMuon = "PM" + PhieuMuon.ID;
             db.SaveChanges();
-            return new JsonResult() { Data = PhieuMuon, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            foreach (CuonSach cuonSachMuon in dsCuonSachMuon)
+            {
+                ChiTietMuon chiTietMuon = new ChiTietMuon();
+                chiTietMuon.CuonSachID = cuonSachMuon.ID;
+                chiTietMuon.PhieuMuonID = PhieuMuon.ID;
+                chiTietMuon.TinhTrang = 0;
+                db.ChiTietMuon.Add(chiTietMuon);
+            }
+            db.SaveChanges();
+            var responsePhieuMuon = db.PhieuMuon.Select(c =>
+              new
+              {
+                  ID = c.ID,
+                  MaPhieuMuon = c.MaPhieuMuon,
+                  NgayHetHan = c.NgayHetHan,
+                  NgayMuon = c.NgayMuon,
+                  NhanVienID = c.NhanVienID,
+                  TongSoLuongMuon = c.TongSoLuongMuon,
+                  TinhTrang = c.TinhTrang,
+                  DocGia = c.DocGia,
+                  DocGiaID = c.DocGiaID,
+                  dsChiTietMuon = db.ChiTietMuon.Select(ctm =>
+                   new
+                   {
+                       CuonSach = ctm.CuonSach,
+                       PhieuMuonID = ctm.PhieuMuonID,
+                       TinhTrang = ctm.TinhTrang
+                   })
+                  .Where(d => d.PhieuMuonID == c.ID)
+              }).Where(e => e.ID == PhieuMuon.ID).FirstOrDefault();
+            return new JsonResult() { Data = responsePhieuMuon, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
 

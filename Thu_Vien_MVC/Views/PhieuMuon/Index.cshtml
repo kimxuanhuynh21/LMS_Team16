@@ -54,7 +54,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="item in lichSuMuon">
-                                <td>{{$index + 1}}</td>submitDocGiaInfo
+                                <td>{{$index + 1}}</td>
                                 <td>{{item.DauSach}}</td>
                                 <td>{{ item.PhieuTra.NgayTra ? displayDate(item.PhieuTra.NgayTra) : 'Chưa trả'}}</td>
                                 <td>{{displayDate(item.NgayHetHan)}}</td>
@@ -80,24 +80,27 @@
     </div>
 
     <div class="borrow-book" ng-show="dsSachMuonShow">
-        <form class="form-horizontal form-input">
+        <div class="form-horizontal form-input">
             <div class="form-group">
-
-                <label for="inputmavach" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã vạch cuốn sách</label>
-                <div class="col-xs-8 col-md-4">
-                    <div class="input-group">
-                        <input class="form-control" id="inputmavach" ng-model="maVachCuonSach" type="text" placeholder="Nhập mã vạch cuốn sách" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="togglePanelCuonSach()"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
-                        </span>
+                <form ng-submit="togglePanelCuonSach($event)">
+                    <label for="inputmavach" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã vạch cuốn sách</label>
+                    <div class="col-xs-8 col-md-4">
+                        <div class="input-group">
+                            <input class="form-control" id="inputmavach" ng-model="maVachCuonSach" type="text" placeholder="Nhập mã vạch cuốn sách" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
+                            </span>
+                        </div>
                     </div>
-                </div>
+                </form>
 
-                <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
-                    <button class="btn btn-primary" ng-click="detailPhieuMuon()"><i class="fa fa-check" aria-hidden="true"></i>Hoàn tất</button>
-                </div>
+                <form>
+                    <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
+                        <button class="btn btn-primary" ng-click="detailPhieuMuon()"><i class="fa fa-check" aria-hidden="true"></i>Hoàn tất</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
 
         <table class="table table-bordered table-striped">
             <thead>
@@ -123,4 +126,51 @@
         </table>
     </div>
 
+    <div ng-show="phieuMuonShow">
+        <div class="text-right btn-inphieu">
+            <button class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i>  In phiếu mượn</button>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="info-docgia">
+                    <div class="detail-docgia col-md-4">
+                        <h4>Mã phiếu mượn: {{phieuMuon.MaPhieuMuon}}</h4>
+                        <h4>Nhân viên: {{phieuMuon.NhanVienID}}</h4>
+                        <h4>Mã thẻ: {{phieuMuon.DocGia.MaThe}}</h4>
+                        <h4>Tên độc giả: {{phieuMuon.DocGia.Ten}}</h4>
+                        <h4>Số điện thoại: {{phieuMuon.DocGia.DienThoai}}</h4>
+                    </div>
+                    <div class="detail-docgia col-md-5">
+                        <h4>Email: {{phieuMuon.DocGia.Email}}</h4>
+                        <h4>Ngày mượn sách: {{displayDate(phieuMuon.NgayMuon)}}</h4>
+                        <h4>Ngày hết hạn: {{displayDate(phieuMuon.NgayHetHan)}}</h4>
+                        <h4>Chức vụ: {{phieuMuon.DocGia.Loai}}</h4>
+                        <h4>Địa chỉ: <br /> {{phieuMuon.DocGia.DiaChi}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="borrowed-books">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã vạch</th>
+                        <th>Tên đầu sách</th>
+                        <th>Tên thể loại</th>
+                        <th>Tên tác giả</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="chiTietMuon in phieuMuon.dsChiTietMuon | orderBy : 'CuonSach.MaVach'">
+                        <td>{{$index + 1}}</td>
+                        <td>{{chiTietMuon.CuonSach.MaVach}}</td>
+                        <td>{{chiTietMuon.CuonSach.DauSach.Ten}}</td>
+                        <td>{{chiTietMuon.CuonSach.DauSach.TheLoai.Ten}}</td>
+                        <td>{{chiTietMuon.CuonSach.DauSach.TacGia.Ten}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
