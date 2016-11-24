@@ -200,6 +200,34 @@ namespace Thu_Vien_MVC.Controllers
             foreach (CuonSach cuonSachMuon in dsCuonSachMuon)
             {
                 ChiTietMuon chiTietMuon = new ChiTietMuon();
+                DauSach dauSachUpdated = cuonSachMuon.DauSach;
+                dauSachUpdated.SoLuongTon = dauSachUpdated.SoLuongTon - 1;
+                db.Entry(dauSachUpdated).State = System.Data.Entity.EntityState.Modified;
+                ThongKeDauSach thongKeDauSach = new ThongKeDauSach();
+                db.SaveChanges();
+                DateTime today = DateTime.Now;
+                if (db.ThongKeDauSach.Any(a =>
+                a.DauSachID == cuonSachMuon.DauSachID &&
+                a.Ngay.Day == today.Day &&
+                a.Ngay.Month == today.Month &&
+                a.Ngay.Year == today.Year))
+                {
+                    thongKeDauSach = db.ThongKeDauSach.Where(a =>
+                      a.DauSachID == cuonSachMuon.DauSachID &&
+                      a.Ngay.Day == today.Day &&
+                      a.Ngay.Month == today.Month &&
+                      a.Ngay.Year == today.Year).FirstOrDefault();
+                    thongKeDauSach.SoLuongHienTai = cuonSachMuon.DauSach.SoLuongTon;
+                    db.Entry(thongKeDauSach).State = System.Data.Entity.EntityState.Modified;
+                }
+                else
+                {
+                    thongKeDauSach.DauSachID = cuonSachMuon.DauSachID;
+                    thongKeDauSach.Ngay = today;
+                    thongKeDauSach.SoLuongHienTai = cuonSachMuon.DauSach.SoLuongTon;
+                    db.ThongKeDauSach.Add(thongKeDauSach);
+                }
+                db.SaveChanges();
                 chiTietMuon.CuonSachID = cuonSachMuon.ID;
                 chiTietMuon.PhieuMuonID = PhieuMuon.ID;
                 chiTietMuon.TinhTrang = 0;

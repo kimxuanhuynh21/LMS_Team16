@@ -147,6 +147,7 @@
                         $scope.phieuMuon = response.data;
                         $scope.dsSachMuonShow = false;
                         $scope.phieuMuonShow = true;
+                        window.onbeforeunload = function () { };
                         console.log($scope.phieuMuon);
                     }
                 }, function errorCallback(error) {
