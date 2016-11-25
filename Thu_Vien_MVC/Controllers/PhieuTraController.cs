@@ -143,28 +143,70 @@ namespace Thu_Vien_MVC.Controllers
                    email = c.DocGia.Email,
                    ngayMuon = c.NgayMuon,
                    ngayHetHan = c.NgayHetHan,
-                   diaChi = c.DocGia.DiaChi
+                   diaChi = c.DocGia.DiaChi,
+                   DocGiaID = c.DocGiaID
                }).Where(d => d.maPhieuMuon == maPhieuMuon).FirstOrDefault();
             return new JsonResult() { Data = chiTietPhieuMuon, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         //GET: PhieuTra/CuonSach/?maVach=VH1&maPhieuMuon=PM1
-        public JsonResult CuonSach (string maVach, string maPhieuMuon)
+        public JsonResult CuonSach(string maVach, string maPhieuMuon)
         {
             var cuonSach = db.ChiTietMuon.Select(
                 x => new
                 {
                     ID = x.ID,
-                    MaVach = x.CuonSach.MaVach,
-                    TenDauSach = x.CuonSach.DauSach.Ten,
-                    TenTacGia = x.CuonSach.DauSach.TacGia.Ten,
-                    MaDocGia = x.PhieuMuon.DocGia.MaThe,
-                    TenDocGia = x.PhieuMuon.DocGia.Ten,
+                    CuonSach = x.CuonSach,
                     NgayHetHan = x.PhieuMuon.NgayHetHan,
                     PhieuMuonID = x.PhieuMuonID,
                     MaPhieuMuon = x.PhieuMuon.MaPhieuMuon
-                }).Where(dg => dg.MaVach == maVach && dg.MaPhieuMuon == maPhieuMuon).FirstOrDefault();
+                }).Where(dg => dg.CuonSach.MaVach == maVach && dg.MaPhieuMuon == maPhieuMuon).FirstOrDefault();
             return new JsonResult() { Data = cuonSach, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        //Thêm 1 phiếu mượn vào csdl
+        // POST: PhieuMuon/ChiTietPhieuMuon
+        [HttpPost]
+        public JsonResult ChiTietPhieuTra(PhieuTraModel PhieuTraJSON)
+        {
+            PhieuMuon phieuMuonInfo = PhieuTraJSON.PhieuMuon;
+            ICollection<ChiTietMuon> dsChiTietMuon = PhieuTraJSON.dsChiTietMuon;
+            PhieuTra PhieuTra = new PhieuTra();
+            PhieuTra.PhieuMuonID = phieuMuonInfo.ID;
+            PhieuTra.NgayTra = DateTime.Now;
+            PhieuTra.DocGiaID = phieuMuonInfo.DocGiaID;
+            db.PhieuTra.Add(PhieuTra);
+            db.SaveChanges();
+            PhieuTra.MaPhieuTra = "PT" + PhieuTra.ID;
+            db.SaveChanges();
+            foreach (ChiTietMuon chiTietMuon in dsChiTietMuon)
+            {
+                ChiTietTra chiTietTra = new ChiTietTra();
+                chiTietTra.CuonSachID = chiTietMuon.CuonSach.ID;
+                chiTietTra.PhieuTraID = PhieuTra.ID;
+                db.ChiTietTra.Add(chiTietTra);
+                db.SaveChanges();
+            }
+            var responsePhieuTra = db.PhieuTra.Select(
+                c => new
+                {
+                    ID = c.ID,
+                    DocGia = c.DocGia,
+                    DocGiaID = c.DocGiaID,
+                    PhieuMuonID = c.PhieuMuonID,
+                    MaPhieuMuon = c.PhieuMuon.MaPhieuMuon,
+                    NgayMuonSach = c.PhieuMuon.NgayMuon,
+                    NgayTra = c.NgayTra,
+                    MaPhieuTra = c.MaPhieuTra,
+                    dsChiTietTra = db.ChiTietTra.Select(ctt =>
+                   new
+                   {
+                       CuonSach = ctt.CuonSach,
+                       PhieuTraID = ctt.PhieuTraID,
+                   })
+                  .Where(d => d.PhieuTraID == c.ID)
+                }).Where(pt => pt.ID == PhieuTra.ID).FirstOrDefault();
+            return new JsonResult() { Data = responsePhieuTra, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         protected override void Dispose(bool disposing)
@@ -174,6 +216,13 @@ namespace Thu_Vien_MVC.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        //Tạo 1 model PhieuTraModel với 2 đối tượng PhieuMuon và dsChiTietMuon
+        public class PhieuTraModel
+        {
+            public PhieuMuon PhieuMuon { get; set; }
+            public ICollection<ChiTietMuon> dsChiTietMuon { get; set; }
         }
     }
 }

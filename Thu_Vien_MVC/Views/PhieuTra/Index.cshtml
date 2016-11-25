@@ -7,7 +7,7 @@
 <center><h2>Quản lý trả sách</h2></center>
 <div ng-controller="ThongTinNguoiTraCtrl">
 
-    <div class="lend-book" ng-show="phieuTraShow">
+    <div class="lend-book" ng-show="phieuMuonShow">
         <form class="form-horizontal form-input">
             <div class="form-group">
 
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
-                    <a class="btn btn-primary" href="/PhieuTra/Details/1"><i class="fa fa-check" aria-hidden="true"></i>Hoàn tất</a>
+                    <a class="btn btn-primary" ng-click="detailPhieuTra()"><i class="fa fa-check" aria-hidden="true"></i>Hoàn tất</a>
                 </div>
             </div>
         </form>
@@ -73,11 +73,9 @@
             <thead>
                 <tr>
                     <th class="col-md-1">STT</th>
-                    <th class="col-md-1">Mã vạch</th>
-                    <th class="col-md-2">Tên đầu sách</th>
-                    <th class="col-md-2">Tên tác giả</th>
-                    <th class="col-md-1">Mã độc giả</th>
-                    <th class="col-md-2">Tên độc giả</th>
+                    <th class="col-md-2">Mã vạch</th>
+                    <th class="col-md-3">Tên đầu sách</th>
+                    <th class="col-md-3">Tên tác giả</th>
                     <th class="col-md-2">Ngày hết hạn</th>
                     <th class="col-md-1">Xóa</th>
                 </tr>
@@ -85,16 +83,63 @@
             <tbody>
                 <tr ng-repeat="item in dsSachTra | orderBy: 'MaVach'">
                     <td>{{$index + 1}}</td>
-                    <td>{{item.MaVach}}</td>
-                    <td>{{item.TenDauSach}}</td>
-                    <td>{{item.TenTacGia}}</td>
-                    <td>{{item.MaDocGia}}</td>
-                    <td>{{item.TenDocGia}}</td>
+                    <td>{{item.CuonSach.MaVach}}</td>
+                    <td>{{item.CuonSach.DauSach.Ten}}</td>
+                    <td>{{item.CuonSach.DauSach.TacGia.Ten}}</td>
                     <td>{{displayDate(item.NgayHetHan)}}</td>
                     <td><button class="btn btn-default btn-xs" type="button" ng-click="removeCuonSach(item.MaVach)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
                 </tr>
             </tbody>
         </table>
+    </div>
+
+
+    <div ng-show="phieuTraShow">
+        <div class="text-right btn-inphieu">
+            <button class="btn btn-primary"><i class="fa fa-print" aria-hidden="true"></i>  In phiếu trả</button>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="info-docgia">
+                    <div class="detail-docgia col-md-4">
+                        <h4>Mã phiếu trả: {{phieuTra.MaPhieuTra}}</h4>
+                        <h4>Mã phiếu mượn: {{phieuTra.MaPhieuMuon}}</h4>
+                        <h4>Mã thẻ: {{phieuTra.DocGia.MaThe}}</h4>
+                        <h4>Tên độc giả: {{phieuTra.DocGia.Ten}}</h4>
+                        <h4>Số điện thoại:{{phieuTra.DocGia.DienThoai}}</h4>
+                        <h4>Chức vụ: {{phieuTra.DocGia.Loai}}</h4>
+                    </div>
+                    <div class="detail-docgia col-md-5">
+                        <h4>Email: {{phieuTra.DocGia.Email}}</h4>
+                        <h4>Ngày mượn sách: {{displayDate(phieuTra.NgayMuonSach)}}</h4>
+                        <h4>Ngày trả: {{displayDate(phieuTra. NgayTra)}}</h4>
+                        <h4>Địa chỉ: <br /> {{phieuTra.DocGia.DiaChi}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="borrowed-books">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-md-1">STT</th>
+                        <th class="col-md-2">Mã vạch</th>
+                        <th class="col-md-3">Tên đầu sách</th>
+                        <th class="col-md-3">Tên tác giả</th>
+                        <th class="col-md-3">Tên thể loại</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in phieuTra.dsChiTietTra | orderBy : 'MaVach'">
+                        <td>{{$index + 1}}</td>
+                        <td>{{item.CuonSach.MaVach}}</td>
+                        <td>{{item.CuonSach.DauSach.Ten}}</td>
+                        <td>{{item.CuonSach.DauSach.TacGia.Ten}}</td>
+                        <td>{{item.CuonSach.DauSach.TheLoai.Ten}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div>

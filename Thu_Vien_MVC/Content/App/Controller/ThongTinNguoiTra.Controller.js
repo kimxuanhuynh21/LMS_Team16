@@ -14,9 +14,10 @@
         $scope.panelPhieuTraShow = false;
         var phieuMuonFlag = false;
         $scope.dsSachTraShow = false;
-        $scope.phieuTraShow = true;
+        $scope.phieuMuonShow = true;
         $scope.dsSachTra = [];
         $scope.maVachSachTra;
+        $scope.phieuTraShow = false;
         
         //function
         $scope.togglePanelPhieuMuon = togglePanelPhieuMuon;
@@ -24,6 +25,7 @@
         $scope.submitPhieuMuonInfo = submitPhieuMuonInfo;
         $scope.togglePanelSachTra = togglePanelSachTra;
         $scope.removeCuonSach = removeCuonSach;
+        $scope.detailPhieuTra = detailPhieuTra;
 
         function togglePanelPhieuMuon()
         {
@@ -55,7 +57,7 @@
             }
             else
             {
-                $scope.phieuTraShow = false;
+                $scope.phieuMuonShow = false;
                 $scope.dsSachTraShow = true;
             }
         }
@@ -64,7 +66,7 @@
         {
             var flag = false;
             $scope.dsSachTra.forEach(function (item) {
-                if (item.MaVach.toLowerCase() == $scope.maVachSachTra.toLowerCase())
+                if (item.CuonSach.MaVach.toLowerCase() == $scope.maVachSachTra.toLowerCase())
                 {
                     flag = true;
                     return;
@@ -93,6 +95,7 @@
             }
         }
 
+        //Hàm xóa cuốn sách được chọn
         function removeCuonSach(maVach) {
             $scope.dsSachTra.forEach(function (item, index) {
                 if (item.MaVach == maVach) {
@@ -100,6 +103,27 @@
                     return;
                 }
             });
+        }
+
+        function detailPhieuTra()
+        {
+            var requestData = {
+                phieuMuon: $scope.phieuMuonInfo,
+                dsChiTietMuon: $scope.dsSachTra
+            };
+            $http
+                .post('/PhieuTra/ChiTietPhieuTra', requestData)
+                .then(function successCallback(response) {
+                    if (response.data != "")
+                    {
+                        $scope.phieuTra = response.data;
+                        $scope.dsSachTraShow = false;
+                        $scope.phieuTraShow = true;
+                        window.onbeforeunload = function () { };
+                    }
+                }, function errorCallback(error) {
+                    console.log(error);
+                });
         }
 
         //Hàm convert dd-mm-yyyy

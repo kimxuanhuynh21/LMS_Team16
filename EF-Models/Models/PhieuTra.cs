@@ -11,7 +11,6 @@ namespace EF_Models.Models
     public class PhieuTra
     {
         public int ID { get; set; }
-        [Required]
         [Index(IsUnique = true)]
         [StringLength(100)]
         public string MaPhieuTra { get; set; }
