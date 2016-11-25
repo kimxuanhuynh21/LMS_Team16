@@ -127,6 +127,46 @@ namespace Thu_Vien_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+
+        //GET: PhieuTra/PhieuMuon/?maPhieuMuon=pm1
+        public JsonResult PhieuMuon(string maPhieuMuon)
+        {
+            var chiTietPhieuMuon = db.PhieuMuon.Select(
+               c => new
+               {
+                   ID = c.ID,
+                   maPhieuMuon = c.MaPhieuMuon,
+                   maThe = c.DocGia.MaThe,
+                   tenDocGia = c.DocGia.Ten,
+                   soDienThoai = c.DocGia.DienThoai,
+                   chucVu = c.DocGia.Loai,
+                   email = c.DocGia.Email,
+                   ngayMuon = c.NgayMuon,
+                   ngayHetHan = c.NgayHetHan,
+                   diaChi = c.DocGia.DiaChi
+               }).Where(d => d.maPhieuMuon == maPhieuMuon).FirstOrDefault();
+            return new JsonResult() { Data = chiTietPhieuMuon, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        //GET: PhieuTra/CuonSach/?maVach=VH1&maPhieuMuon=PM1
+        public JsonResult CuonSach (string maVach, string maPhieuMuon)
+        {
+            var cuonSach = db.ChiTietMuon.Select(
+                x => new
+                {
+                    ID = x.ID,
+                    MaVach = x.CuonSach.MaVach,
+                    TenDauSach = x.CuonSach.DauSach.Ten,
+                    TenTacGia = x.CuonSach.DauSach.TacGia.Ten,
+                    MaDocGia = x.PhieuMuon.DocGia.MaThe,
+                    TenDocGia = x.PhieuMuon.DocGia.Ten,
+                    NgayHetHan = x.PhieuMuon.NgayHetHan,
+                    PhieuMuonID = x.PhieuMuonID,
+                    MaPhieuMuon = x.PhieuMuon.MaPhieuMuon
+                }).Where(dg => dg.MaVach == maVach && dg.MaPhieuMuon == maPhieuMuon).FirstOrDefault();
+            return new JsonResult() { Data = cuonSach, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -22,7 +22,7 @@ namespace Thu_Vien_MVC.Controllers
             var dsChiTietMuon = db.ChiTietMuon
                 .Where(ctm => ctm.PhieuMuonID == phieuMuon.ID)
                 .Include(p => p.CuonSach);
-            return View(dsChiTietMuon.ToList());
+            return View();
         }
 
         // GET: PhieuMuon/Details/5
@@ -183,7 +183,7 @@ namespace Thu_Vien_MVC.Controllers
             PhieuMuon PhieuMuon = new PhieuMuon();
             PhieuMuon.DocGiaID = docGiaMuon.ID;
             PhieuMuon.NgayMuon = DateTime.Now;
-            if (docGiaMuon.Loai == 0)
+            if (docGiaMuon.Loai == "Sinh viên")
             {
                 PhieuMuon.NgayHetHan = PhieuMuon.NgayMuon.AddDays(20);
             }
@@ -200,11 +200,12 @@ namespace Thu_Vien_MVC.Controllers
             foreach (CuonSach cuonSachMuon in dsCuonSachMuon)
             {
                 ChiTietMuon chiTietMuon = new ChiTietMuon();
-                DauSach dauSachUpdated = cuonSachMuon.DauSach;
+                DauSach dauSachUpdated = db.DauSach.Find(cuonSachMuon.DauSachID);
+                db.DauSach.Attach(dauSachUpdated);
                 dauSachUpdated.SoLuongTon = dauSachUpdated.SoLuongTon - 1;
-                db.Entry(dauSachUpdated).State = System.Data.Entity.EntityState.Modified;
-                ThongKeDauSach thongKeDauSach = new ThongKeDauSach();
                 db.SaveChanges();
+                //db.Entry(dauSachUpdated).State = System.Data.Entity.EntityState.Modified;
+                ThongKeDauSach thongKeDauSach = new ThongKeDauSach();
                 DateTime today = DateTime.Now;
                 if (db.ThongKeDauSach.Any(a =>
                 a.DauSachID == cuonSachMuon.DauSachID &&
@@ -217,14 +218,15 @@ namespace Thu_Vien_MVC.Controllers
                       a.Ngay.Day == today.Day &&
                       a.Ngay.Month == today.Month &&
                       a.Ngay.Year == today.Year).FirstOrDefault();
-                    thongKeDauSach.SoLuongHienTai = cuonSachMuon.DauSach.SoLuongTon;
+                    db.ThongKeDauSach.Attach(thongKeDauSach);
+                    thongKeDauSach.SoLuongHienTai = dauSachUpdated.SoLuongTon;
                     db.Entry(thongKeDauSach).State = System.Data.Entity.EntityState.Modified;
                 }
                 else
                 {
                     thongKeDauSach.DauSachID = cuonSachMuon.DauSachID;
                     thongKeDauSach.Ngay = today;
-                    thongKeDauSach.SoLuongHienTai = cuonSachMuon.DauSach.SoLuongTon;
+                    thongKeDauSach.SoLuongHienTai = dauSachUpdated.SoLuongTon;
                     db.ThongKeDauSach.Add(thongKeDauSach);
                 }
                 db.SaveChanges();
@@ -232,8 +234,8 @@ namespace Thu_Vien_MVC.Controllers
                 chiTietMuon.PhieuMuonID = PhieuMuon.ID;
                 chiTietMuon.TinhTrang = 0;
                 db.ChiTietMuon.Add(chiTietMuon);
+                db.SaveChanges();
             }
-            db.SaveChanges();
             var responsePhieuMuon = db.PhieuMuon.Select(c =>
               new
               {

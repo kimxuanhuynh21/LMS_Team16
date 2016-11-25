@@ -5,45 +5,96 @@
 }
 
 <center><h2>Quản lý trả sách</h2></center>
+<div ng-controller="ThongTinNguoiTraCtrl">
 
-<div class="lend-book">
-    <form class="form-horizontal form-input">
-        <div class="form-group">
+    <div class="lend-book" ng-show="phieuTraShow">
+        <form class="form-horizontal form-input">
+            <div class="form-group">
 
-            <label for="inputmaphieumuon" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã phiếu mượn</label>
-            <div class="col-xs-9 col-md-4">
-                <div class="input-group">
-                    <input class="form-control" id="inputmaphieumuon" type="text" placeholder="Nhập mã phiếu mượn" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</button>
-                    </span>
+                <label for="inputmaphieumuon" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã phiếu mượn</label>
+                <div class="col-xs-9 col-md-4">
+                    <div class="input-group">
+                        <input class="form-control" id="inputmaphieumuon" ng-model="maPhieuMuon" type="text" placeholder="Nhập mã phiếu mượn" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="togglePanelPhieuMuon()"><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
+                    <a class="btn btn-primary" ng-click="submitPhieuMuonInfo()"><i class="fa fa-check" aria-hidden="true"></i>Nhận trả sách</a>
                 </div>
             </div>
+        </form>
 
-            <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
-                <a class="btn btn-primary" href="/PhieuTra/Create">Nhận trả sách</a>
-            </div>
-        </div>
-    </form>
-
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="info-docgia">
-                <div class="detail-docgia col-md-4">
-                    <h4>Mã phiếu mượn: PM1</h4>
-                    <h4>Mã thẻ: DG1</h4>
-                    <h4>Tên độc giả: Huỳnh Kim Xuân</h4>
-                    <h4>Số điện thoại: 01212186931</h4>
-                    <h4>Chức vụ: Sinh viên</h4>
-                </div>
-                <div class="detail-docgia col-md-5">
-                    <h4>Email: kimxuanhuynh21@gmail.com</h4>
-                    <h4>Ngày mượn sách: 15/10/2016</h4>
-                    <h4>Ngày hết hạn: 20/10/2016</h4>
-                    <h4>Địa chỉ: <br /> Phan Văn Khỏe, P5, Q6, TP.HCM</h4>
+        <div class="panel panel-default" ng-show="panelPhieuTraShow">
+            <div class="panel-body">
+                <div class="info-docgia">
+                    <div class="detail-docgia col-md-4">
+                        <h4>Mã phiếu mượn: {{phieuMuonInfo.maPhieuMuon}}</h4>
+                        <h4>Mã thẻ: {{phieuMuonInfo.maThe}}</h4>
+                        <h4>Tên độc giả: {{phieuMuonInfo.tenDocGia}}</h4>
+                        <h4>Số điện thoại: {{phieuMuonInfo.soDienThoai}}</h4>
+                        <h4>Chức vụ: {{phieuMuonInfo.chucVu}}</h4>
+                    </div>
+                    <div class="detail-docgia col-md-5">
+                        <h4>Email: {{phieuMuonInfo.email}}</h4>
+                        <h4>Ngày mượn sách: {{displayDate(phieuMuonInfo.ngayMuon)}}</h4>
+                        <h4>Ngày hết hạn: {{displayDate(phieuMuonInfo.ngayHetHan)}}</h4>
+                        <h4>Địa chỉ: <br /> {{phieuMuonInfo.diaChi}}</h4>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
- 
+
+
+    <div class="borrow-book" ng-show="dsSachTraShow">
+        <form class="form-horizontal form-input">
+            <div class="form-group">
+
+                <label for="inputmavach" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã vạch cuốn sách</label>
+                <div class="col-xs-8 col-md-4">
+                    <div class="input-group">
+                        <input class="form-control" id="inputmavach" type="text" ng-model="maVachSachTra" placeholder="Nhập mã vạch cuốn sách" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="togglePanelSachTra()"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
+                    <a class="btn btn-primary" href="/PhieuTra/Details/1"><i class="fa fa-check" aria-hidden="true"></i>Hoàn tất</a>
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="col-md-1">STT</th>
+                    <th class="col-md-1">Mã vạch</th>
+                    <th class="col-md-2">Tên đầu sách</th>
+                    <th class="col-md-2">Tên tác giả</th>
+                    <th class="col-md-1">Mã độc giả</th>
+                    <th class="col-md-2">Tên độc giả</th>
+                    <th class="col-md-2">Ngày hết hạn</th>
+                    <th class="col-md-1">Xóa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in dsSachTra | orderBy: 'MaVach'">
+                    <td>{{$index + 1}}</td>
+                    <td>{{item.MaVach}}</td>
+                    <td>{{item.TenDauSach}}</td>
+                    <td>{{item.TenTacGia}}</td>
+                    <td>{{item.MaDocGia}}</td>
+                    <td>{{item.TenDocGia}}</td>
+                    <td>{{displayDate(item.NgayHetHan)}}</td>
+                    <td><button class="btn btn-default btn-xs" type="button" ng-click="removeCuonSach(item.MaVach)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>

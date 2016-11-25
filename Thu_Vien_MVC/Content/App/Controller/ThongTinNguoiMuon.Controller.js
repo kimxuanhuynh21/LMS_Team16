@@ -121,7 +121,7 @@
             else {
                 alert('Cuốn sách bạn chọn bị trùng');
             }
-            e.preventDefault();
+            e.preventDefault();    //stop mọi sự kiện của javascript
         }
 
         //Xóa sách được chọn
