@@ -182,6 +182,38 @@ namespace Thu_Vien_MVC.Controllers
             foreach (ChiTietMuon chiTietMuon in dsChiTietMuon)
             {
                 ChiTietTra chiTietTra = new ChiTietTra();
+                DauSach dauSachUpdated = db.DauSach.Find(chiTietMuon.CuonSach.DauSachID);
+                db.DauSach.Attach(dauSachUpdated);
+                dauSachUpdated.SoLuongTon = dauSachUpdated.SoLuongTon + 1;
+                chiTietTra.CuonSachID = chiTietMuon.CuonSach.ID;
+                chiTietTra.PhieuTraID = PhieuTra.ID;
+                db.SaveChanges();
+                //db.Entry(dauSachUpdated).State = System.Data.Entity.EntityState.Modified;
+                ThongKeDauSach thongKeDauSach = new ThongKeDauSach();
+                DateTime today = DateTime.Now;
+                if (db.ThongKeDauSach.Any(a =>
+                a.DauSachID == chiTietMuon.CuonSach.DauSachID &&
+                a.Ngay.Day == today.Day &&
+                a.Ngay.Month == today.Month &&
+                a.Ngay.Year == today.Year))
+                {
+                    thongKeDauSach = db.ThongKeDauSach.Where(a =>
+                      a.DauSachID == chiTietMuon.CuonSach.DauSachID &&
+                      a.Ngay.Day == today.Day &&
+                      a.Ngay.Month == today.Month &&
+                      a.Ngay.Year == today.Year).FirstOrDefault();
+                    db.ThongKeDauSach.Attach(thongKeDauSach);
+                    thongKeDauSach.SoLuongHienTai = dauSachUpdated.SoLuongTon;
+                    db.Entry(thongKeDauSach).State = System.Data.Entity.EntityState.Modified;
+                }
+                else
+                {
+                    thongKeDauSach.DauSachID = chiTietMuon.CuonSach.DauSachID;
+                    thongKeDauSach.Ngay = today;
+                    thongKeDauSach.SoLuongHienTai = dauSachUpdated.SoLuongTon;
+                    db.ThongKeDauSach.Add(thongKeDauSach);
+                }
+                db.SaveChanges();
                 chiTietTra.CuonSachID = chiTietMuon.CuonSach.ID;
                 chiTietTra.PhieuTraID = PhieuTra.ID;
                 db.ChiTietTra.Add(chiTietTra);
