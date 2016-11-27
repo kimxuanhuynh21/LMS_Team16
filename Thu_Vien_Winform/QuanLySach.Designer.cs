@@ -51,15 +51,16 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cbb_state = new System.Windows.Forms.ComboBox();
-            this.cbb_books = new System.Windows.Forms.ComboBox();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.txt_key = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.label_dausach = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.label_id = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btn_save = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label_id = new System.Windows.Forms.Label();
+            this.label_defaultMV = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -277,13 +278,14 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.cbb_state);
-            this.groupBox3.Controls.Add(this.cbb_books);
             this.groupBox3.Controls.Add(this.btn_cancel);
             this.groupBox3.Controls.Add(this.txt_key);
             this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.label_dausach);
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.label_id);
             this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.label_defaultMV);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.btn_save);
             this.groupBox3.Location = new System.Drawing.Point(450, 12);
@@ -301,14 +303,6 @@
             this.cbb_state.Size = new System.Drawing.Size(174, 21);
             this.cbb_state.TabIndex = 4;
             // 
-            // cbb_books
-            // 
-            this.cbb_books.FormattingEnabled = true;
-            this.cbb_books.Location = new System.Drawing.Point(128, 89);
-            this.cbb_books.Name = "cbb_books";
-            this.cbb_books.Size = new System.Drawing.Size(174, 21);
-            this.cbb_books.TabIndex = 4;
-            // 
             // btn_cancel
             // 
             this.btn_cancel.Location = new System.Drawing.Point(211, 167);
@@ -321,9 +315,9 @@
             // 
             // txt_key
             // 
-            this.txt_key.Location = new System.Drawing.Point(128, 54);
+            this.txt_key.Location = new System.Drawing.Point(164, 58);
             this.txt_key.Name = "txt_key";
-            this.txt_key.Size = new System.Drawing.Size(174, 20);
+            this.txt_key.Size = new System.Drawing.Size(138, 20);
             this.txt_key.TabIndex = 2;
             // 
             // label11
@@ -335,6 +329,15 @@
             this.label11.TabIndex = 1;
             this.label11.Text = "Tình trạng :";
             // 
+            // label_dausach
+            // 
+            this.label_dausach.AutoSize = true;
+            this.label_dausach.Location = new System.Drawing.Point(127, 93);
+            this.label_dausach.Name = "label_dausach";
+            this.label_dausach.Size = new System.Drawing.Size(10, 13);
+            this.label_dausach.TabIndex = 1;
+            this.label_dausach.Text = ".";
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -343,6 +346,24 @@
             this.label10.Size = new System.Drawing.Size(59, 13);
             this.label10.TabIndex = 1;
             this.label10.Text = "Đầu sách :";
+            // 
+            // label_id
+            // 
+            this.label_id.AutoSize = true;
+            this.label_id.Location = new System.Drawing.Point(127, 30);
+            this.label_id.Name = "label_id";
+            this.label_id.Size = new System.Drawing.Size(23, 13);
+            this.label_id.TabIndex = 1;
+            this.label_id.Text = "mới";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(97, 30);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(24, 13);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "ID :";
             // 
             // label9
             // 
@@ -363,23 +384,14 @@
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
-            // label12
+            // label_defaultMV
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(97, 30);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(24, 13);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "ID :";
-            // 
-            // label_id
-            // 
-            this.label_id.AutoSize = true;
-            this.label_id.Location = new System.Drawing.Point(127, 30);
-            this.label_id.Name = "label_id";
-            this.label_id.Size = new System.Drawing.Size(23, 13);
-            this.label_id.TabIndex = 1;
-            this.label_id.Text = "mới";
+            this.label_defaultMV.AutoSize = true;
+            this.label_defaultMV.Location = new System.Drawing.Point(127, 62);
+            this.label_defaultMV.Name = "label_defaultMV";
+            this.label_defaultMV.Size = new System.Drawing.Size(31, 13);
+            this.label_defaultMV.TabIndex = 1;
+            this.label_defaultMV.Text = "____";
             // 
             // QuanLySach
             // 
@@ -433,9 +445,10 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.Button btn_cancel;
-        private System.Windows.Forms.ComboBox cbb_books;
         private System.Windows.Forms.ComboBox cbb_state;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label_id;
+        private System.Windows.Forms.Label label_dausach;
+        private System.Windows.Forms.Label label_defaultMV;
     }
 }

@@ -72,6 +72,9 @@ namespace Thu_Vien_Winform
 
                     _context.DauSach.RemoveRange(_context.DauSach.Where(o => o.ID == dausach_id));
 
+                    //delete all cuonsach in dausach
+                    _context.CuonSach.RemoveRange(_context.CuonSach.Where(o => o.DauSachID == dausach_id));
+
                 }
 
                 _context.SaveChanges();

@@ -67,14 +67,36 @@ namespace Thu_Vien_Winform
                 _context.DauSach.Add(dausach);
                 _context.SaveChanges();
 
-                form_qlds = new QuanLyDauSach();
-                form_qlds.Refresh();
-                form_qlds.Refresh_DataGridView();
+                
+
+                for (int i = 1; i <= Convert.ToInt32(txt_sumnumber.Text); i++)
+                {
+                    var cuonsach = new CuonSach();
+                    cuonsach.MaVach = "MV" + dausach.ID + i;
+                    cuonsach.DauSachID = dausach.ID;
+                    cuonsach.TinhTrang = 2;
+                    _context.CuonSach.Add(cuonsach);
+                    
+                }
+
+                var phieunhap = new PhieuNhapDauSach();
+                phieunhap.DauSachID = dausach.ID;
+                phieunhap.NgayNhap = DateTime.Now;
+                phieunhap.SoLuongCuonSach = dausach.SoLuongTong;
+
+                _context.PhieuNhapDauSach.Add(phieunhap);
+
+                _context.SaveChanges();
+
 
                 txt_name.Text = null;
                 txt_republish.Text = null;
                 txt_summary.Text = null;
                 txt_sumnumber.Text = null;
+                form_qlds = new QuanLyDauSach();
+                form_qlds.Refresh();
+                form_qlds.Refresh_DataGridView();
+
             }
             catch (Exception ex)
             {

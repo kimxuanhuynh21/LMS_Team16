@@ -82,6 +82,14 @@
     <Compile Include="Migrations\201611251535474_vertion_25Nov2016.Designer.cs">
       <DependentUpon>201611251535474_vertion_25Nov2016.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611260425224_addtablephieunhapdausach.cs" />
+    <Compile Include="Migrations\201611260425224_addtablephieunhapdausach.Designer.cs">
+      <DependentUpon>201611260425224_addtablephieunhapdausach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611270735101_update again phieunhapdausach.cs" />
+    <Compile Include="Migrations\201611270735101_update again phieunhapdausach.Designer.cs">
+      <DependentUpon>201611270735101_update again phieunhapdausach.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietMuon.cs" />
     <Compile Include="Models\ChiTietTra.cs" />
@@ -93,6 +101,7 @@
     <Compile Include="Models\NhanVien.cs" />
     <Compile Include="Models\NhaSanXuat.cs" />
     <Compile Include="Models\PhieuMuon.cs" />
+    <Compile Include="Models\PhieuNhapDauSach.cs" />
     <Compile Include="Models\PhieuTra.cs" />
     <Compile Include="Models\TacGia.cs" />
     <Compile Include="Models\TheLoai.cs" />
@@ -128,6 +137,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611251535474_vertion_25Nov2016.resx">
       <DependentUpon>201611251535474_vertion_25Nov2016.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611260425224_addtablephieunhapdausach.resx">
+      <DependentUpon>201611260425224_addtablephieunhapdausach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611270735101_update again phieunhapdausach.resx">
+      <DependentUpon>201611270735101_update again phieunhapdausach.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

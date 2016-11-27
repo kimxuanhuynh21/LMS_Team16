@@ -35,10 +35,7 @@ namespace Thu_Vien_Winform
             label_numberexist.Text = dausach.SoLuongTon.ToString();
             label_state.Text = dausach.TinhTrang.ToString();
 
-            var list_books = _context.DauSach.ToList().Select(i => new DauSachViewModel() { ID = i.ID, Ten = i.Ten }).ToList();
-            cbb_books.DataSource = list_books;
-            cbb_books.DisplayMember = "Ten";
-            cbb_books.ValueMember = "ID";
+            label_dausach.Text = dausach.Ten;
 
             //combobox tinh trang
             List<ComboboxItem> list_states = new List<ComboboxItem> { };
@@ -108,18 +105,18 @@ namespace Thu_Vien_Winform
                 {
                     int id = Convert.ToInt32(cuonsach_id);
                     var cuonsach = _context.CuonSach.Where(i => i.ID.Equals(id)).FirstOrDefault();
-                    cuonsach.MaVach = txt_key.Text;
-                    cuonsach.DauSachID = Convert.ToInt32(cbb_books.SelectedValue);
                     cuonsach.TinhTrang = Convert.ToByte(cbb_state.SelectedValue);
                 }
                 else
                 {
                     var cuonsach = new CuonSach();
-                    cuonsach.MaVach = txt_key.Text;
-                    cuonsach.DauSachID = Convert.ToInt32(cbb_books.SelectedValue);
+                    cuonsach.MaVach = "MV" + DauSachID + txt_key.Text;
+                    cuonsach.DauSachID = DauSachID;
                     cuonsach.TinhTrang = Convert.ToByte(cbb_state.SelectedValue);
-
                     _context.CuonSach.Add(cuonsach);
+
+                    var dausach = _context.DauSach.Where(i => i.ID.Equals(DauSachID)).FirstOrDefault();
+                    dausach.SoLuongTong = dausach.SoLuongTong + 1;
 
                 }
                 _context.SaveChanges();
@@ -141,11 +138,17 @@ namespace Thu_Vien_Winform
             {
                 var index_row = dataGridView1.SelectedRows[0].Index;
                 CuonSachViewModel cuonsach = (CuonSachViewModel)dataGridView1.Rows[index_row].DataBoundItem;
-                //var obj = dataGridView1.Rows[index_row];
-                label_id.Text = cuonsach.ID.ToString();
-                txt_key.Text = cuonsach.MaVach;
-                cbb_books.SelectedValue = cuonsach.DauSachID;
-                cbb_state.SelectedValue = cuonsach.TinhTrangID;
+                if (cuonsach != null)
+                {
+                    //var obj = dataGridView1.Rows[index_row];
+                    label_id.Text = cuonsach.ID.ToString();
+                    label_defaultMV.Text = "MV" + DauSachID.ToString();
+                    string mavach = cuonsach.MaVach.Substring(2 + DauSachID.ToString().Length, cuonsach.MaVach.Length - (2 + DauSachID.ToString().Length));
+                    txt_key.Text = mavach;
+                    txt_key.ReadOnly = true;
+                    cbb_state.SelectedValue = cuonsach.TinhTrangID;
+                }
+
             }
         }
 
@@ -168,6 +171,9 @@ namespace Thu_Vien_Winform
 
                 }
 
+                var dausach = _context.DauSach.Where(i => i.ID.Equals(DauSachID)).FirstOrDefault();
+                dausach.SoLuongTong = dausach.SoLuongTong - selectedRowCount;
+
                 _context.SaveChanges();
                 MessageBox.Show("Success...!!!");
                 //reload
@@ -178,8 +184,9 @@ namespace Thu_Vien_Winform
         private void btn_cancel_Click(object sender, EventArgs e)
         {
             label_id.Text = "mới";
+            txt_key.ReadOnly = false;
             txt_key.Text = null;
+            label_defaultMV.Text = "MV" + DauSachID.ToString();
         }
-
     }
 }

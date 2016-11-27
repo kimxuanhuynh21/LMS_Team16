@@ -25,6 +25,12 @@ namespace Thu_Vien_Winform
         {
             _context = new ThuVienDbContext();
             InitializeDataGridView(_context.ThongKeDauSach.ToList().Select(i => new ThongKeDauSachViewModel(i)).ToList());
+
+            var list_books = _context.DauSach.ToList().Select(i => new DauSachViewModel() { ID = i.ID, Ten = i.Ten }).ToList();
+            cbb_dausachs.DataSource = list_books;
+            cbb_dausachs.DisplayMember = "Ten";
+            cbb_dausachs.ValueMember = "ID";
+
         }
 
         private void InitializeDataGridView(List<ThongKeDauSachViewModel> list)
@@ -44,32 +50,36 @@ namespace Thu_Vien_Winform
             var source = new BindingSource(bindingList, null);
             dataGridView1.DataSource = source;
             dataGridView1.Columns[0].Visible = false;
+            dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             //dataGridView1.Columns[3].Visible = false;
             //dataGridView1.Columns[5].Visible = false;
             //dataGridView1.Columns[9].Visible = false;
+
+
         }
 
         private void btn_statistic_Click(object sender, EventArgs e)
         {
-            if (dateTimePicker1.Value.Date < DateTime.Now && dateTimePicker2.Value.Date < DateTime.Now && dateTimePicker1.Value.Date <= dateTimePicker2.Value.Date)
+            if (dateTimePicker1.Value.Date <= DateTime.Now)
             {
 
 
                 //var Arr_fromdate = dateTimePicker1.Value.Date.ToString().Split(' ');
                 //var Arr_todate = dateTimePicker2.Value.Date.ToString().Split(' ');
 
-                string temp_dausach_id = txt_dausachid.Text;
+                string temp_dausach_id = cbb_dausachs.SelectedValue.ToString();
 
                 if (temp_dausach_id != null)
                 {
                     int dausach_id = Convert.ToInt32(temp_dausach_id);
                     InitializeDataGridView(_context.ThongKeDauSach
-                        .Where(i => i.Ngay >= dateTimePicker1.Value.Date && i.Ngay <= dateTimePicker2.Value.Date
+                        .Where(i => i.Ngay <= dateTimePicker1.Value.Date
                             && i.DauSachID == dausach_id).ToList().Select(i => new ThongKeDauSachViewModel(i)).ToList());
                 }
                 else
                 {
-                    InitializeDataGridView(_context.ThongKeDauSach.Where(i => i.Ngay >= dateTimePicker1.Value.Date && i.Ngay <= dateTimePicker2.Value.Date).ToList().Select(i => new ThongKeDauSachViewModel(i)).ToList());
+                    InitializeDataGridView(_context.ThongKeDauSach.Where(i => i.Ngay <= dateTimePicker1.Value.Date).ToList().Select(i => new ThongKeDauSachViewModel(i)).ToList());
                 }
 
                 

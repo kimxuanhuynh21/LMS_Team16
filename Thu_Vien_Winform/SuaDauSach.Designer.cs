@@ -30,7 +30,6 @@
         {
             this.btn_cancel = new System.Windows.Forms.Button();
             this.btn_add = new System.Windows.Forms.Button();
-            this.txt_sumnumber = new System.Windows.Forms.TextBox();
             this.txt_republish = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -46,6 +45,7 @@
             this.cbb_producer = new System.Windows.Forms.ComboBox();
             this.cbb_author = new System.Windows.Forms.ComboBox();
             this.cbb_category = new System.Windows.Forms.ComboBox();
+            this.label_sumnumber = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_cancel
@@ -66,13 +66,6 @@
             this.btn_add.Text = "Lưu";
             this.btn_add.UseVisualStyleBackColor = true;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
-            // 
-            // txt_sumnumber
-            // 
-            this.txt_sumnumber.Location = new System.Drawing.Point(156, 269);
-            this.txt_sumnumber.Name = "txt_sumnumber";
-            this.txt_sumnumber.Size = new System.Drawing.Size(180, 20);
-            this.txt_sumnumber.TabIndex = 18;
             // 
             // txt_republish
             // 
@@ -199,6 +192,15 @@
             this.cbb_category.Size = new System.Drawing.Size(180, 21);
             this.cbb_category.TabIndex = 4;
             // 
+            // label_sumnumber
+            // 
+            this.label_sumnumber.AutoSize = true;
+            this.label_sumnumber.Location = new System.Drawing.Point(153, 269);
+            this.label_sumnumber.Name = "label_sumnumber";
+            this.label_sumnumber.Size = new System.Drawing.Size(10, 13);
+            this.label_sumnumber.TabIndex = 14;
+            this.label_sumnumber.Text = ".";
+            // 
             // SuaDauSach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -206,9 +208,9 @@
             this.ClientSize = new System.Drawing.Size(372, 422);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_add);
-            this.Controls.Add(this.txt_sumnumber);
             this.Controls.Add(this.txt_republish);
             this.Controls.Add(this.label8);
+            this.Controls.Add(this.label_sumnumber);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txt_summary);
@@ -234,7 +236,6 @@
 
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Button btn_add;
-        private System.Windows.Forms.TextBox txt_sumnumber;
         private System.Windows.Forms.TextBox txt_republish;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
@@ -250,6 +251,7 @@
         private System.Windows.Forms.ComboBox cbb_producer;
         private System.Windows.Forms.ComboBox cbb_author;
         private System.Windows.Forms.ComboBox cbb_category;
+        private System.Windows.Forms.Label label_sumnumber;
 
     }
 }

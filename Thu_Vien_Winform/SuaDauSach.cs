@@ -32,7 +32,7 @@ namespace Thu_Vien_Winform
             txt_name.Text = dausach.Ten;
             txt_republish.Text = dausach.TaiBan.ToString();
             txt_summary.Text = dausach.TomTat;
-            txt_sumnumber.Text = dausach.SoLuongTong.ToString();
+            label_sumnumber.Text = dausach.SoLuongTong.ToString();
 
 
             //combobox
@@ -98,7 +98,6 @@ namespace Thu_Vien_Winform
                     dausach.TomTat = txt_summary.Text;
                     dausach.TaiBan = Convert.ToInt32(txt_republish.Text);
                     dausach.NhaSanXuatID = Convert.ToInt32(cbb_producer.SelectedValue);
-                    dausach.SoLuongTong = Convert.ToInt32(txt_sumnumber.Text);
                     dausach.TinhTrang = Convert.ToByte(cbb_state.SelectedValue);
 
                     _context.SaveChanges();
