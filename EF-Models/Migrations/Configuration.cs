@@ -58,8 +58,8 @@ namespace EF_Models.Migrations
            );
 
             context.DocGia.AddOrUpdate(
-                new DocGia { ID = 1, MaThe = "DG1", Ten = "Huỳnh Kim Xuân", DiaChi = "210 Phan Văn Khỏe", Email ="kimxuanhuynh21@gmail.com", DienThoai = "01212186032", NgayCapThe = DateTime.ParseExact("21/10/2016", "dd/MM/yyyy", CultureInfo.InvariantCulture), NgayHetHan = DateTime.ParseExact("21/10/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture), NamTotNghiep = 2018, Loai = "Sinh viên", SoSachConLai = 2, TinhTrang = 0},
-                new DocGia { ID = 2, MaThe = "DG2", Ten = "Ngô Văn Lợi", DiaChi = "12 An Dương Vương", Email = "vanloi@gmail.com", DienThoai = "01212134567", NgayCapThe = DateTime.ParseExact("20/10/2016","dd/MM/yyyy", CultureInfo.InvariantCulture), NgayHetHan = DateTime.ParseExact("20/10/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture), NamTotNghiep = 1998, Loai = "Giáo viên", SoSachConLai = 2, TinhTrang = 0 }
+                new DocGia { ID = 1, MaThe = "DG1", Ten = "Huỳnh Kim Xuân", DiaChi = "210 Phan Văn Khỏe", Email ="kimxuanhuynh21@gmail.com", DienThoai = "01212186032", NgayCapThe = DateTime.ParseExact("21/10/2016", "dd/MM/yyyy", CultureInfo.InvariantCulture), NgayHetHan = DateTime.ParseExact("21/10/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture), NamTotNghiep = 2018, Loai = 0, SoSachConLai = 2, TinhTrang = 0},
+                new DocGia { ID = 2, MaThe = "DG2", Ten = "Ngô Văn Lợi", DiaChi = "12 An Dương Vương", Email = "vanloi@gmail.com", DienThoai = "01212134567", NgayCapThe = DateTime.ParseExact("20/10/2016","dd/MM/yyyy", CultureInfo.InvariantCulture), NgayHetHan = DateTime.ParseExact("20/10/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture), NamTotNghiep = 1998, Loai = 1, SoSachConLai = 2, TinhTrang = 0 }
            );
 
             context.NhanVien.AddOrUpdate(

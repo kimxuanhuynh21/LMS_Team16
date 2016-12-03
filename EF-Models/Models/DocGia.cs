@@ -35,7 +35,8 @@ namespace EF_Models.Models
         public DateTime NgayHetHan { get; set; }
         public int NamTotNghiep { get; set; }
         [Required]
-        public string Loai { get; set; }
+        public byte Loai { get; set; }
+        public string HinhAnh { get; set; }
         public int SoSachConLai { get; set; }
         [Required]
         [Range(0,2)]

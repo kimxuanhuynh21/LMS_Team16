@@ -26,5 +26,20 @@ namespace EF_Models.Handlers
             [Description("Sách đang chờ bảo dưỡng")]
             SachBaoDuong = 3,
         }
+        public enum TinhTrang_DocGia
+        {
+            [Description("Đang mượn")]
+            DangMuon = 0,
+            [Description("Đang chờ")]
+            DangCho = 1,
+        }
+
+        public enum Loai_DocGia
+        {
+            [Description("Giáo Viên")]
+            GiaoVien = 0,
+            [Description("Sinh Viên")]
+            SinhVien = 1,
+        }
     }
 }

@@ -183,7 +183,7 @@ namespace Thu_Vien_MVC.Controllers
             PhieuMuon PhieuMuon = new PhieuMuon();
             PhieuMuon.DocGiaID = docGiaMuon.ID;
             PhieuMuon.NgayMuon = DateTime.Now;
-            if (docGiaMuon.Loai == "Sinh viên")
+            if (docGiaMuon.Loai == 1)
             {
                 PhieuMuon.NgayHetHan = PhieuMuon.NgayMuon.AddDays(20);
             }

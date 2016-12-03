@@ -122,6 +122,10 @@ namespace Thu_Vien_Winform
                 _context.SaveChanges();
 
                 Refresh_DataGridView();
+                label_id.Text = "mới";
+                txt_key.ReadOnly = false;
+                txt_key.Text = null;
+                label_defaultMV.Text = "MV" + DauSachID.ToString();
 
             }
             catch (Exception ex)
@@ -187,6 +191,8 @@ namespace Thu_Vien_Winform
             txt_key.ReadOnly = false;
             txt_key.Text = null;
             label_defaultMV.Text = "MV" + DauSachID.ToString();
+
+            dataGridView1.ClearSelection();
         }
     }
 }

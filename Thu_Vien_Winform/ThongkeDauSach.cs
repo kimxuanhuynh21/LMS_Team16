@@ -26,11 +26,16 @@ namespace Thu_Vien_Winform
             _context = new ThuVienDbContext();
             InitializeDataGridView(_context.ThongKeDauSach.ToList().Select(i => new ThongKeDauSachViewModel(i)).ToList());
 
+            
+
             var list_books = _context.DauSach.ToList().Select(i => new DauSachViewModel() { ID = i.ID, Ten = i.Ten }).ToList();
+            
+            //important
+            cbb_dausachs.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbb_dausachs.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbb_dausachs.DataSource = list_books;
             cbb_dausachs.DisplayMember = "Ten";
             cbb_dausachs.ValueMember = "ID";
-
         }
 
         private void InitializeDataGridView(List<ThongKeDauSachViewModel> list)
@@ -63,27 +68,36 @@ namespace Thu_Vien_Winform
         {
             if (dateTimePicker1.Value.Date <= DateTime.Now)
             {
-
-
-                //var Arr_fromdate = dateTimePicker1.Value.Date.ToString().Split(' ');
-                //var Arr_todate = dateTimePicker2.Value.Date.ToString().Split(' ');
-
                 string temp_dausach_id = cbb_dausachs.SelectedValue.ToString();
 
                 if (temp_dausach_id != null)
                 {
                     int dausach_id = Convert.ToInt32(temp_dausach_id);
-                    InitializeDataGridView(_context.ThongKeDauSach
-                        .Where(i => i.Ngay <= dateTimePicker1.Value.Date
-                            && i.DauSachID == dausach_id).ToList().Select(i => new ThongKeDauSachViewModel(i)).ToList());
-                }
-                else
-                {
-                    InitializeDataGridView(_context.ThongKeDauSach.Where(i => i.Ngay <= dateTimePicker1.Value.Date).ToList().Select(i => new ThongKeDauSachViewModel(i)).ToList());
-                }
 
-                
+                    var data = _context.ThongKeDauSach.Where(i => i.Ngay <= dateTimePicker1.Value.Date && i.DauSachID == dausach_id)
+                        .OrderByDescending(i => i.Ngay).ToList()
+                        .Select(i => new ThongKeDauSachViewModel(i)).FirstOrDefault();
 
+                    List<ThongKeDauSachViewModel> list = new List<ThongKeDauSachViewModel>();
+
+                    if (data != null)
+                    {
+                        ThongKeDauSachViewModel model = new ThongKeDauSachViewModel();
+
+                        model.ID = data.ID;
+                        model.DauSachID = data.DauSachID;
+                        model.DauSach = data.DauSach;
+                        model.Ngay = dateTimePicker1.Value.Date;
+                        model.SoLuongHienTai = data.SoLuongHienTai;
+                        model.SoLuongDaMuon = data.SoLuongDaMuon;
+                        list.Add(model);
+                        
+                    }
+
+
+                    InitializeDataGridView(list);
+
+                }
                 //MessageBox.Show("Your've selected the meeting date: " + Arr_fromdate[0]);
 
                 //MessageBox.Show("Your've selected the meeting date: " + Arr_todate[0]);

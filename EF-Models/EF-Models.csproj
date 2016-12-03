@@ -90,6 +90,14 @@
     <Compile Include="Migrations\201611270735101_update again phieunhapdausach.Designer.cs">
       <DependentUpon>201611270735101_update again phieunhapdausach.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612010713369_editDocGia.cs" />
+    <Compile Include="Migrations\201612010713369_editDocGia.Designer.cs">
+      <DependentUpon>201612010713369_editDocGia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612011103406_update_tableDocGia.cs" />
+    <Compile Include="Migrations\201612011103406_update_tableDocGia.Designer.cs">
+      <DependentUpon>201612011103406_update_tableDocGia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietMuon.cs" />
     <Compile Include="Models\ChiTietTra.cs" />
@@ -110,6 +118,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CuonSachViewModel.cs" />
     <Compile Include="ViewModels\DauSachViewModel.cs" />
+    <Compile Include="ViewModels\DocGiaViewModel.cs" />
     <Compile Include="ViewModels\ThongKeDauSachViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +153,18 @@
     <EmbeddedResource Include="Migrations\201611270735101_update again phieunhapdausach.resx">
       <DependentUpon>201611270735101_update again phieunhapdausach.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612010713369_editDocGia.resx">
+      <DependentUpon>201612010713369_editDocGia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612011103406_update_tableDocGia.resx">
+      <DependentUpon>201612011103406_update_tableDocGia.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Images\2.jpg" />
+    <Content Include="Images\Back-Swept-Quiff-haircuts-men.jpg" />
+    <Content Include="Images\no-image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
