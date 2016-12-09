@@ -16,6 +16,7 @@ namespace Thu_Vien_Winform
     public partial class QuanLyDauSach : Form
     {
         ThuVienDbContext _context;
+        ComboboxItem item;
         public QuanLyDauSach()
         {
             InitializeComponent();
@@ -24,13 +25,28 @@ namespace Thu_Vien_Winform
         public void Refresh_DataGridView()
         {
             Form1_Load(null, null);
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             _context = new ThuVienDbContext();
             InitializeDataGridView(_context.DauSach.ToList().Select(i => new DauSachViewModel(i)).ToList());
+
+            List<ComboboxItem> list_cbb = new List<ComboboxItem> { };
+            list_cbb = new List<ComboboxItem> { };
+            for (int i = 1; i < dataGridView1.ColumnCount; i++)
+            {
+                item = new ComboboxItem();
+                item.Text = dataGridView1.Columns[i].DataPropertyName;
+                item.Value = (byte)i;
+                list_cbb.Add(item);
+            }
+
+            cbb_column.DataSource = list_cbb;
+            cbb_column.DisplayMember = "Text";
+            cbb_column.ValueMember = "Value";
+
         }
 
         private void InitializeDataGridView(List<DauSachViewModel> list)
@@ -49,7 +65,7 @@ namespace Thu_Vien_Winform
             var bindingList = new BindingList<DauSachViewModel>(list);
             var source = new BindingSource(bindingList, null);
             dataGridView1.DataSource = source;
-            //dataGridView1.Columns[0].Visible = false;
+            dataGridView1.Columns[0].Visible = false;
             //dataGridView1.Columns[3].Visible = false;
             //dataGridView1.Columns[5].Visible = false;
             //dataGridView1.Columns[9].Visible = false;
@@ -128,6 +144,59 @@ namespace Thu_Vien_Winform
         {
             ThongkeDauSach thongkedausach = new ThongkeDauSach();
             thongkedausach.Show();
+        }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            string number_column = cbb_column.SelectedValue.ToString();
+            var fromsearch = txt_from.Text;
+            var tosearch = txt_to.Text;
+
+            if (number_column == "1")
+            {
+                if (fromsearch != null)
+                {
+                    var list = _context.DauSach.Where(i => i.Ten.Contains(fromsearch)).ToList().Select(i => new DauSachViewModel(i)).ToList();
+                    var bindingList = new BindingList<DauSachViewModel>(list);
+                    var source = new BindingSource(bindingList, null);
+                    dataGridView1.DataSource = source;
+                    dataGridView1.Columns[0].Visible = false;
+                }
+            }
+            if (number_column == "2")
+            {
+                if (fromsearch != null && tosearch != null)
+                {
+                    int from = Convert.ToInt32(fromsearch);
+                    int to = Convert.ToInt32(tosearch);
+
+                    var list = _context.DauSach.Where(i => i.TheLoaiID >= from && i.TheLoaiID >= to).ToList().Select(i => new DauSachViewModel(i)).ToList();
+                    var bindingList = new BindingList<DauSachViewModel>(list);
+                    var source = new BindingSource(bindingList, null);
+                    dataGridView1.DataSource = source;
+                    dataGridView1.Columns[0].Visible = false;
+                }
+                if (fromsearch != null)
+                {
+                    int from = Convert.ToInt32(fromsearch);
+
+                    var list = _context.DauSach.Where(i => i.TheLoaiID >= from).ToList().Select(i => new DauSachViewModel(i)).ToList();
+                    var bindingList = new BindingList<DauSachViewModel>(list);
+                    var source = new BindingSource(bindingList, null);
+                    dataGridView1.DataSource = source;
+                    dataGridView1.Columns[0].Visible = false;
+                }
+                if (tosearch != null)
+                {
+                    int to = Convert.ToInt32(tosearch);
+
+                    var list = _context.DauSach.Where(i => i.TheLoaiID >= to).ToList().Select(i => new DauSachViewModel(i)).ToList();
+                    var bindingList = new BindingList<DauSachViewModel>(list);
+                    var source = new BindingSource(bindingList, null);
+                    dataGridView1.DataSource = source;
+                    dataGridView1.Columns[0].Visible = false;
+                }
+            }
         }
     }
 }

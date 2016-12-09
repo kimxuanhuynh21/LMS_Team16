@@ -29,7 +29,6 @@ namespace Thu_Vien_Winform
             QuanLyDocGia_Load(null, null);
 
         }
-
         private void InitializeDataGridView(List<DocGiaViewModel> list)
         {
             // Create an unbound DataGridView by declaring a column count.
@@ -47,32 +46,52 @@ namespace Thu_Vien_Winform
             var source = new BindingSource(bindingList, null);
             dataGridView1.DataSource = source;
             dataGridView1.Columns[0].Visible = false;
-            dataGridView1.Columns[10].Visible = false;
+            dataGridView1.Columns[11].Visible = false;
             //dataGridView1.Columns[5].Visible = false;
             //dataGridView1.Columns[9].Visible = false;
         }
 
         private void QuanLyDocGia_Load(object sender, EventArgs e)
         {
+
+            dateTimePickerfrom.Visible = false;
+            dateTimePickerto.Visible = false;
+
             _context = new ThuVienDbContext();
             InitializeDataGridView(_context.DocGia.ToList().Select(i => new DocGiaViewModel(i)).ToList());
 
-            List<ComboboxItem> list_states = new List<ComboboxItem> { };
             //combobox category
-            list_states = new List<ComboboxItem> { };
+            List<ComboboxItem> list_cbb = new List<ComboboxItem> { };
             item = new ComboboxItem();
             item.Text = "Sinh Viên";
             item.Value = (byte)ConstantHandler.Loai_DocGia.SinhVien;
-            list_states.Add(item);
+            list_cbb.Add(item);
 
             item = new ComboboxItem();
             item.Text = "Giáo Viên";
             item.Value = (byte)ConstantHandler.Loai_DocGia.GiaoVien;
-            list_states.Add(item);
+            list_cbb.Add(item);
 
-            cbb_category.DataSource = list_states;
+            cbb_category.DataSource = list_cbb;
             cbb_category.DisplayMember = "Text";
             cbb_category.ValueMember = "Value";
+
+
+            //combobox category
+            list_cbb = new List<ComboboxItem> { };
+            item = new ComboboxItem();
+            item.Text = "Khóa";
+            item.Value = (byte)ConstantHandler.TinhTrang_DocGia.Khoa;
+            list_cbb.Add(item);
+
+            item = new ComboboxItem();
+            item.Text = "Đang sử dụng";
+            item.Value = (byte)ConstantHandler.TinhTrang_DocGia.Dangsudung;
+            list_cbb.Add(item);
+
+            cbb_state.DataSource = list_cbb;
+            cbb_state.DisplayMember = "Text";
+            cbb_state.ValueMember = "Value";
 
 
             var path = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
@@ -81,6 +100,19 @@ namespace Thu_Vien_Winform
 
             pictureBox.Image = new Bitmap(path + @"\\EF-Models\\Images\\no-image.png");
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            list_cbb = new List<ComboboxItem> { };
+            for (int i = 1; i < dataGridView1.ColumnCount; i++)
+            {
+                item = new ComboboxItem();
+                item.Text = dataGridView1.Columns[i].DataPropertyName;
+                item.Value = (byte)i;
+                list_cbb.Add(item);
+            }
+
+            cbb_column.DataSource = list_cbb;
+            cbb_column.DisplayMember = "Text";
+            cbb_column.ValueMember = "Value";
 
 
         }
@@ -107,6 +139,7 @@ namespace Thu_Vien_Winform
                     txt_yeargraduate.Text = docgia.NamTotNghiep.ToString();
                     cbb_category.SelectedValue = docgia.LoaiID;
                     txt_numberbooks.Text = docgia.SoSachConLai.ToString();
+                    cbb_state.SelectedValue = docgia.TinhTrangID;
 
 
                     var path = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
@@ -190,6 +223,7 @@ namespace Thu_Vien_Winform
                             docgia.NamTotNghiep = Convert.ToInt32(txt_yeargraduate.Text);
                             docgia.Loai = (byte)cbb_category.SelectedValue;
                             docgia.SoSachConLai = Convert.ToInt32(txt_numberbooks.Text);
+                            docgia.TinhTrang = (byte)cbb_state.SelectedValue;
                             docgia.HinhAnh = des + iName;
                             _context.DocGia.Add(docgia);
                         }
@@ -207,6 +241,7 @@ namespace Thu_Vien_Winform
                             docgia.NamTotNghiep = Convert.ToInt32(txt_yeargraduate.Text);
                             docgia.Loai = (byte)cbb_category.SelectedValue;
                             docgia.SoSachConLai = Convert.ToInt32(txt_numberbooks.Text);
+                            docgia.TinhTrang = (byte)cbb_state.SelectedValue;
                             docgia.HinhAnh = des + iName;
                         }
                         _context.SaveChanges();
@@ -238,6 +273,7 @@ namespace Thu_Vien_Winform
                         docgia.NamTotNghiep = Convert.ToInt32(txt_yeargraduate.Text);
                         docgia.Loai = (byte)cbb_category.SelectedValue;
                         docgia.SoSachConLai = Convert.ToInt32(txt_numberbooks.Text);
+                        docgia.TinhTrang = (byte)cbb_state.SelectedValue;
 
                         _context.SaveChanges();
                     }
@@ -257,6 +293,212 @@ namespace Thu_Vien_Winform
         private void btn_refresh_Click(object sender, EventArgs e)
         {
             Refresh_DataGridView();
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            Int32 selectedRowCount =
+        dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0)
+            {
+                try
+                {
+                    for (int i = 0; i < selectedRowCount; i++)
+                    {
+                        //sb.Append("Row: ");
+                        //sb.Append(dataGridView1.SelectedRows[i].Index.ToString());
+                        //sb.Append(Environment.NewLine);
+
+                        var index_row = dataGridView1.SelectedRows[i].Index;
+                        int docgia_id = Convert.ToInt32(dataGridView1.Rows[index_row].Cells[0].Value);
+
+                        _context.DocGia.RemoveRange(_context.DocGia.Where(o => o.ID == docgia_id));
+
+                    }
+                    _context.SaveChanges();
+                    MessageBox.Show("Success...!!!");
+
+                    //reload
+                    Refresh_DataGridView();
+                    txt_key.Text = "";
+                    txt_name.Text = "";
+                    txt_email.Text = "";
+                    txt_phone.Text = "";
+                    txt_address.Text = "";
+                    label_daterelease.Text = "";
+                    dateTimePicker_dateend.Value = DateTime.Now;
+                    txt_yeargraduate.Text = "";
+                    cbb_category.SelectedValue = "";
+                    txt_numberbooks.Text = "";
+                    label_id.Text = "Mới";
+
+                    var path = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+                    int d = path.LastIndexOf("\\");
+                    path = path.Substring(0, d);
+
+                    pictureBox.Image = new Bitmap(path + @"\\EF-Models\\Images\\no-image.png");
+                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            string number_column = cbb_column.SelectedValue.ToString();
+            var fromsearch = txt_from.Text;
+            var tosearch = txt_to.Text;
+            if (number_column == "1")
+            {
+                if (fromsearch != null)
+                {
+                    var list = _context.DocGia.Where(i => i.MaThe.Contains(fromsearch)).ToList().Select(i => new DocGiaViewModel(i)).ToList();
+                    var bindingList = new BindingList<DocGiaViewModel>(list);
+                    var source = new BindingSource(bindingList, null);
+                    dataGridView1.DataSource = source;
+                    dataGridView1.Columns[0].Visible = false;
+                    dataGridView1.Columns[11].Visible = false;
+                }
+            }
+
+            if (number_column == "2")
+            {
+                if (fromsearch != null)
+                {
+                    var list = _context.DocGia.Where(i => i.Ten.Contains(fromsearch)).ToList().Select(i => new DocGiaViewModel(i)).ToList();
+                    var bindingList = new BindingList<DocGiaViewModel>(list);
+                    var source = new BindingSource(bindingList, null);
+                    dataGridView1.DataSource = source;
+                    dataGridView1.Columns[0].Visible = false;
+                    dataGridView1.Columns[11].Visible = false;
+                }
+            }
+            if (number_column == "3")
+            {
+                if (fromsearch != null)
+                {
+                    var list = _context.DocGia.Where(i => i.DiaChi.Contains(fromsearch)).ToList().Select(i => new DocGiaViewModel(i)).ToList();
+                    var bindingList = new BindingList<DocGiaViewModel>(list);
+                    var source = new BindingSource(bindingList, null);
+                    dataGridView1.DataSource = source;
+                    dataGridView1.Columns[0].Visible = false;
+                    dataGridView1.Columns[11].Visible = false;
+                }
+            }
+            if (number_column == "4")
+            {
+                if (fromsearch != null)
+                {
+                    var list = _context.DocGia.Where(i => i.Email.Contains(fromsearch)).ToList().Select(i => new DocGiaViewModel(i)).ToList();
+                    var bindingList = new BindingList<DocGiaViewModel>(list);
+                    var source = new BindingSource(bindingList, null);
+                    dataGridView1.DataSource = source;
+                    dataGridView1.Columns[0].Visible = false;
+                    dataGridView1.Columns[11].Visible = false;
+                }
+            }
+            if (number_column == "5")
+            {
+                if (fromsearch != null)
+                {
+                    var list = _context.DocGia.Where(i => i.DienThoai.Contains(fromsearch)).ToList().Select(i => new DocGiaViewModel(i)).ToList();
+                    var bindingList = new BindingList<DocGiaViewModel>(list);
+                    var source = new BindingSource(bindingList, null);
+                    dataGridView1.DataSource = source;
+                    dataGridView1.Columns[0].Visible = false;
+                    dataGridView1.Columns[11].Visible = false;
+                }
+            }
+            if (number_column == "6")
+            {
+                var list = _context.DocGia.Where(i => i.NgayCapThe >= dateTimePickerfrom.Value.Date && i.NgayCapThe <= dateTimePickerto.Value.Date).ToList().Select(i => new DocGiaViewModel(i)).ToList();
+                var bindingList = new BindingList<DocGiaViewModel>(list);
+                var source = new BindingSource(bindingList, null);
+                dataGridView1.DataSource = source;
+                dataGridView1.Columns[0].Visible = false;
+                dataGridView1.Columns[11].Visible = false;
+            }
+
+            if (number_column == "7")
+            {
+                var list = _context.DocGia.Where(i => i.NgayHetHan >= dateTimePickerfrom.Value.Date && i.NgayHetHan <= dateTimePickerto.Value.Date).ToList().Select(i => new DocGiaViewModel(i)).ToList();
+                var bindingList = new BindingList<DocGiaViewModel>(list);
+                var source = new BindingSource(bindingList, null);
+                dataGridView1.DataSource = source;
+                dataGridView1.Columns[0].Visible = false;
+                dataGridView1.Columns[11].Visible = false;
+            }
+
+            if (number_column == "8")
+            {
+                if (fromsearch != null && tosearch != null)
+                {
+                    int from = Convert.ToInt32(fromsearch);
+                    int to = Convert.ToInt32(tosearch);
+
+                    var list = _context.DocGia.Where(i => i.NamTotNghiep >= from && i.NamTotNghiep >= to).ToList().Select(i => new DocGiaViewModel(i)).ToList();
+                    var bindingList = new BindingList<DocGiaViewModel>(list);
+                    var source = new BindingSource(bindingList, null);
+                    dataGridView1.DataSource = source;
+                    dataGridView1.Columns[0].Visible = false;
+                    dataGridView1.Columns[11].Visible = false;
+                }
+                if (fromsearch != null)
+                {
+                    int from = Convert.ToInt32(fromsearch);
+
+                    var list = _context.DocGia.Where(i => i.NamTotNghiep >= from).ToList().Select(i => new DocGiaViewModel(i)).ToList();
+                    var bindingList = new BindingList<DocGiaViewModel>(list);
+                    var source = new BindingSource(bindingList, null);
+                    dataGridView1.DataSource = source;
+                    dataGridView1.Columns[0].Visible = false;
+                    dataGridView1.Columns[11].Visible = false;
+                }
+                if (tosearch != null)
+                {
+                    int to = Convert.ToInt32(tosearch);
+
+                    var list = _context.DocGia.Where(i => i.NamTotNghiep >= to).ToList().Select(i => new DocGiaViewModel(i)).ToList();
+                    var bindingList = new BindingList<DocGiaViewModel>(list);
+                    var source = new BindingSource(bindingList, null);
+                    dataGridView1.DataSource = source;
+                    dataGridView1.Columns[0].Visible = false;
+                    dataGridView1.Columns[11].Visible = false;
+                }
+            }
+
+
+        }
+
+        private void cbb_column_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbb_column.SelectedValue.ToString() == "6")
+            {
+                txt_from.Visible = false;
+                txt_to.Visible = false;
+
+                dateTimePickerfrom.Visible = true;
+                dateTimePickerto.Visible = true;
+            }
+            else if (cbb_column.SelectedValue.ToString() == "7")
+            {
+                txt_from.Visible = false;
+                txt_to.Visible = false;
+
+                dateTimePickerfrom.Visible = true;
+                dateTimePickerto.Visible = true;
+            }
+            else
+            {
+                txt_from.Visible = true;
+                txt_to.Visible = true;
+
+                dateTimePickerfrom.Visible = false;
+                dateTimePickerto.Visible = false;
+            }
         }
     }
 }

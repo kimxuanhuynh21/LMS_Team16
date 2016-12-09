@@ -16,8 +16,8 @@ namespace Thu_Vien_Winform
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new QuanLyDauSach());
-            Application.Run(new QuanLyDocGia());
+            Application.Run(new QuanLyDauSach());
+            //Application.Run(new QuanLyDocGia());
 
         }
     }

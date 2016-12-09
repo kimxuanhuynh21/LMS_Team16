@@ -8,11 +8,18 @@
     <link rel="stylesheet" href="/Content/bootstrap.css" />
     <link rel="stylesheet" href="/Content/font-awesome.css" />
     <link rel="stylesheet" href="/Content/SCSS/app.css" />
+    <link href="~/Content/datetimepicker.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
     <script type="text/javascript" src="/Scripts/angular.min.js"></script>
     <script type="text/javascript" src="/Content/App/App.Module.js"></script>
     <script type="text/javascript" src="/Content/App/Controller/ThongTinNguoiMuon.Controller.js"></script>
     <script type="text/javascript" src="/Content/App/Controller/ThongTinNguoiTra.Controller.js"></script>
+    <script type="text/javascript" src="~/Content/App/Controller/ThongKeSachMuon.Controller.js"></script>
+    <script src="~/Scripts/datetimepicker.js"></script>
+    <script src="~/Scripts/datetimepicker.templates.js"></script>
+    <script src="~/Scripts/ui-bootstrap-tpls-2.0.1.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/moment-with-locales.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -29,7 +36,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Mượn sách", "Index", "PhieuMuon")</li>
                     <li>@Html.ActionLink("Trả sách", "Index", "PhieuTra")</li>
-                    <li>@Html.ActionLink("Thống kê", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Thống kê", "Index", "ThongKe")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

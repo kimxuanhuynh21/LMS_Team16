@@ -31,9 +31,13 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txt_address = new System.Windows.Forms.TextBox();
             this.dateTimePicker_dateend = new System.Windows.Forms.DateTimePicker();
+            this.cbb_state = new System.Windows.Forms.ComboBox();
             this.cbb_category = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -57,14 +61,22 @@
             this.btn_changeimage = new System.Windows.Forms.Button();
             this.btn_save = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cbb_column = new System.Windows.Forms.ComboBox();
+            this.txt_from = new System.Windows.Forms.TextBox();
+            this.txt_to = new System.Windows.Forms.TextBox();
+            this.btn_search = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_refresh = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txt_address = new System.Windows.Forms.TextBox();
+            this.dateTimePickerfrom = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerto = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,9 +87,9 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 107);
+            this.dataGridView1.Location = new System.Drawing.Point(5, 107);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(544, 458);
+            this.dataGridView1.Size = new System.Drawing.Size(611, 523);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
@@ -86,8 +98,10 @@
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.txt_address);
             this.groupBox1.Controls.Add(this.dateTimePicker_dateend);
+            this.groupBox1.Controls.Add(this.cbb_state);
             this.groupBox1.Controls.Add(this.cbb_category);
             this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label7);
@@ -110,19 +124,43 @@
             this.groupBox1.Controls.Add(this.btn_cancel);
             this.groupBox1.Controls.Add(this.btn_changeimage);
             this.groupBox1.Controls.Add(this.btn_save);
-            this.groupBox1.Location = new System.Drawing.Point(562, 102);
+            this.groupBox1.Location = new System.Drawing.Point(622, 102);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(475, 463);
+            this.groupBox1.Size = new System.Drawing.Size(475, 528);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin chi tiết";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(249, 296);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(46, 13);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "Địa chỉ :";
+            // 
+            // txt_address
+            // 
+            this.txt_address.Location = new System.Drawing.Point(251, 319);
+            this.txt_address.Name = "txt_address";
+            this.txt_address.Size = new System.Drawing.Size(186, 20);
+            this.txt_address.TabIndex = 30;
+            // 
             // dateTimePicker_dateend
             // 
-            this.dateTimePicker_dateend.Location = new System.Drawing.Point(25, 202);
+            this.dateTimePicker_dateend.Location = new System.Drawing.Point(253, 434);
             this.dateTimePicker_dateend.Name = "dateTimePicker_dateend";
             this.dateTimePicker_dateend.Size = new System.Drawing.Size(186, 20);
             this.dateTimePicker_dateend.TabIndex = 29;
+            // 
+            // cbb_state
+            // 
+            this.cbb_state.FormattingEnabled = true;
+            this.cbb_state.Location = new System.Drawing.Point(25, 433);
+            this.cbb_state.Name = "cbb_state";
+            this.cbb_state.Size = new System.Drawing.Size(186, 21);
+            this.cbb_state.TabIndex = 28;
             // 
             // cbb_category
             // 
@@ -135,11 +173,20 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(25, 354);
+            this.label9.Location = new System.Drawing.Point(25, 356);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(138, 13);
             this.label9.TabIndex = 25;
             this.label9.Text = "Số lượng sách được mượn :";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(25, 413);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(61, 13);
+            this.label12.TabIndex = 24;
+            this.label12.Text = "Tình trạng :";
             // 
             // label8
             // 
@@ -153,7 +200,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(25, 177);
+            this.label6.Location = new System.Drawing.Point(250, 413);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 13);
             this.label6.TabIndex = 23;
@@ -171,7 +218,7 @@
             // label_daterelease
             // 
             this.label_daterelease.AutoSize = true;
-            this.label_daterelease.Location = new System.Drawing.Point(248, 377);
+            this.label_daterelease.Location = new System.Drawing.Point(255, 380);
             this.label_daterelease.Name = "label_daterelease";
             this.label_daterelease.Size = new System.Drawing.Size(10, 13);
             this.label_daterelease.TabIndex = 21;
@@ -180,7 +227,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(249, 354);
+            this.label5.Location = new System.Drawing.Point(249, 356);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 13);
             this.label5.TabIndex = 21;
@@ -293,15 +340,15 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(76, 21);
+            this.pictureBox.Location = new System.Drawing.Point(68, 30);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(100, 113);
+            this.pictureBox.Size = new System.Drawing.Size(121, 145);
             this.pictureBox.TabIndex = 7;
             this.pictureBox.TabStop = false;
             // 
             // btn_cancel
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(258, 424);
+            this.btn_cancel.Location = new System.Drawing.Point(258, 484);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_cancel.TabIndex = 6;
@@ -311,7 +358,7 @@
             // 
             // btn_changeimage
             // 
-            this.btn_changeimage.Location = new System.Drawing.Point(90, 140);
+            this.btn_changeimage.Location = new System.Drawing.Point(91, 189);
             this.btn_changeimage.Name = "btn_changeimage";
             this.btn_changeimage.Size = new System.Drawing.Size(75, 23);
             this.btn_changeimage.TabIndex = 5;
@@ -321,7 +368,7 @@
             // 
             // btn_save
             // 
-            this.btn_save.Location = new System.Drawing.Point(149, 424);
+            this.btn_save.Location = new System.Drawing.Point(149, 484);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(75, 23);
             this.btn_save.TabIndex = 5;
@@ -331,18 +378,87 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Location = new System.Drawing.Point(12, 4);
+            this.groupBox2.Controls.Add(this.dateTimePickerto);
+            this.groupBox2.Controls.Add(this.dateTimePickerfrom);
+            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.cbb_column);
+            this.groupBox2.Controls.Add(this.txt_from);
+            this.groupBox2.Controls.Add(this.txt_to);
+            this.groupBox2.Controls.Add(this.btn_search);
+            this.groupBox2.Location = new System.Drawing.Point(5, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(544, 94);
+            this.groupBox2.Size = new System.Drawing.Size(611, 94);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tìm kiếm";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(219, 66);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(53, 13);
+            this.label16.TabIndex = 3;
+            this.label16.Text = "Kết thúc :";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(221, 29);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(51, 13);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "Bắt đầu :";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(30, 26);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(56, 13);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "Chọn cột :";
+            // 
+            // cbb_column
+            // 
+            this.cbb_column.FormattingEnabled = true;
+            this.cbb_column.Location = new System.Drawing.Point(32, 48);
+            this.cbb_column.Name = "cbb_column";
+            this.cbb_column.Size = new System.Drawing.Size(163, 21);
+            this.cbb_column.TabIndex = 2;
+            this.cbb_column.SelectedIndexChanged += new System.EventHandler(this.cbb_column_SelectedIndexChanged);
+            // 
+            // txt_from
+            // 
+            this.txt_from.Location = new System.Drawing.Point(280, 25);
+            this.txt_from.Name = "txt_from";
+            this.txt_from.Size = new System.Drawing.Size(161, 20);
+            this.txt_from.TabIndex = 1;
+            // 
+            // txt_to
+            // 
+            this.txt_to.Location = new System.Drawing.Point(280, 62);
+            this.txt_to.Name = "txt_to";
+            this.txt_to.Size = new System.Drawing.Size(161, 20);
+            this.txt_to.TabIndex = 1;
+            // 
+            // btn_search
+            // 
+            this.btn_search.Location = new System.Drawing.Point(521, 40);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(75, 21);
+            this.btn_search.TabIndex = 0;
+            this.btn_search.Text = "Tìm kiếm";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btn_delete);
             this.groupBox3.Controls.Add(this.btn_refresh);
-            this.groupBox3.Location = new System.Drawing.Point(562, 4);
+            this.groupBox3.Location = new System.Drawing.Point(622, 4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(475, 94);
             this.groupBox3.TabIndex = 6;
@@ -351,16 +467,17 @@
             // 
             // btn_delete
             // 
-            this.btn_delete.Location = new System.Drawing.Point(291, 40);
+            this.btn_delete.Location = new System.Drawing.Point(281, 40);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(75, 23);
             this.btn_delete.TabIndex = 8;
             this.btn_delete.Text = "Xóa";
             this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // btn_refresh
             // 
-            this.btn_refresh.Location = new System.Drawing.Point(101, 40);
+            this.btn_refresh.Location = new System.Drawing.Point(123, 40);
             this.btn_refresh.Name = "btn_refresh";
             this.btn_refresh.Size = new System.Drawing.Size(75, 23);
             this.btn_refresh.TabIndex = 7;
@@ -368,27 +485,25 @@
             this.btn_refresh.UseVisualStyleBackColor = true;
             this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
             // 
-            // label10
+            // dateTimePickerfrom
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(249, 296);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(46, 13);
-            this.label10.TabIndex = 31;
-            this.label10.Text = "Địa chỉ :";
+            this.dateTimePickerfrom.Location = new System.Drawing.Point(290, 25);
+            this.dateTimePickerfrom.Name = "dateTimePickerfrom";
+            this.dateTimePickerfrom.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerfrom.TabIndex = 4;
             // 
-            // txt_address
+            // dateTimePickerto
             // 
-            this.txt_address.Location = new System.Drawing.Point(251, 319);
-            this.txt_address.Name = "txt_address";
-            this.txt_address.Size = new System.Drawing.Size(186, 20);
-            this.txt_address.TabIndex = 30;
+            this.dateTimePickerto.Location = new System.Drawing.Point(290, 62);
+            this.dateTimePickerto.Name = "dateTimePickerto";
+            this.dateTimePickerto.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerto.TabIndex = 4;
             // 
             // QuanLyDocGia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1039, 567);
+            this.ClientSize = new System.Drawing.Size(1097, 626);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -400,6 +515,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -441,5 +558,16 @@
         private System.Windows.Forms.Label label_key;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txt_address;
+        private System.Windows.Forms.ComboBox cbb_state;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txt_to;
+        private System.Windows.Forms.Button btn_search;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox cbb_column;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txt_from;
+        private System.Windows.Forms.DateTimePicker dateTimePickerto;
+        private System.Windows.Forms.DateTimePicker dateTimePickerfrom;
     }
 }

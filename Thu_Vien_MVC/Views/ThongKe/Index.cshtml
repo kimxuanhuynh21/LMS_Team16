@@ -1,0 +1,106 @@
+﻿@using EF_Models.ViewModels;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var docgia = ViewData["DocGia"] as List<DocGiaViewModel>;
+}
+
+<h2>Thống kê sách mượn</h2>
+
+<section class="container" style="margin-top:20px;" ng-controller="ThongKeSachMuonCtrl">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6" style="border-radius: 4px 4px 4px 4px; -moz-border-radius: 4px 4px 4px 4px; -webkit-border-radius: 4px 4px 4px 4px; border: 0px solid #000000; background-color: khaki">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Horizontal Form</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form action="@Url.Action("GetDataStatistic", "ThongKe")" method="post" role="form" enctype="multipart/form-data" style="padding: 10px;">
+                    <div class="form-group">
+                        <label for="email">Chọn Độc Giả:</label>
+                        <select class="form-control" id="cbb_docgia" name="DocGiaID">
+                            @foreach (var item in docgia)
+                            {
+                                <option value="@item.ID">@item.Ten</option>
+                            }
+                        </select>
+                    </div>
+
+                    @{
+                        var day = DateTime.Now.Day.ToString();
+                        var month = DateTime.Now.Month.ToString();
+                        if (day.Length == 1)
+                        {
+                            day = "0" + day;
+                        }
+                        if (month.Length == 1)
+                        {
+                            month = "0" + month;
+                        }
+                    }
+                    <div class="form-group">
+                        <label for="pwd">Từ ngày:</label>
+                        <input type="date" class="form-control" id="cbb_datefrom" name="DateFrom" value="@DateTime.Now.Date.Year-@month-@day" />
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Đến ngày:</label>
+                        <input type="date" class="form-control" id="cbb_dateto" name="DateTo" value="@DateTime.Now.Date.Year-@month-@day" />
+                    </div>
+                    <button type="button" class="btn btn-primary" ng-click="submit()">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+
+    <div class="row" style="margin-top: 20px">
+        <div class="box" style="border-radius: 4px 4px 4px 4px; -moz-border-radius: 4px 4px 4px 4px; -webkit-border-radius: 4px 4px 4px 4px; border: 0px solid #000000; padding: 20px; border: 1px solid; box-shadow: 0 3px 5px 0">
+            <div class="box-header">
+                <h3 class="box-title">Danh Sách</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                    <div class="row">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6">
+                            <div id="example1_filter" class="dataTables_filter">
+                                <label style="float:right">Search:<input type="text" ng-model="keysearch" class="form-control input-sm" placeholder="" aria-controls="example1"></label>
+                            </div>
+                        </div>
+                    </div><div class="row">
+                        <div class="col-sm-12">
+                            <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                                <thead>
+                                    <tr>
+                                        <th>Ngày Mượn</th>
+                                        <th>Phiếu Mượn ID</th>
+                                        <th>Mã Vạch Cuốn Sách</th>
+                                        <th>Đầu Sách ID</th>
+                                        <th>Tên Đầu Sách</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="x in data_statistic | filter: {TenDauSach: keysearch} | limitTo:20">
+                                        <td>{{x.NgayMuon}}</td>
+                                        <td>{{x.PhieuMuonID}}</td>
+                                        <td>{{x.MaVachCuonSach}}</td>
+                                        <td>{{x.DauSachID}}</td>
+                                        <td>{{x.TenDauSach}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</section>
+
+
+
+

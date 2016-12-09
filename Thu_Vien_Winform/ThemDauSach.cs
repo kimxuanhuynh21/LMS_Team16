@@ -26,17 +26,23 @@ namespace Thu_Vien_Winform
             _context = new ThuVienDbContext();
 
             var list_category = _context.TheLoai.ToList().Select(i => new TheLoai(i)).ToList();
+            cbb_category.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbb_category.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbb_category.DataSource = list_category;
             cbb_category.DisplayMember = "Ten";
             cbb_category.ValueMember = "ID";
 
 
             var list_author = _context.TacGia.ToList().Select(i => new TacGia(i)).ToList();
+            cbb_author.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbb_author.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbb_author.DataSource = list_author;
             cbb_author.DisplayMember = "Ten";
             cbb_author.ValueMember = "ID";
 
             var list_producer = _context.NhaSanXuat.ToList().Select(i => new NhaSanXuat(i)).ToList();
+            cbb_producer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbb_producer.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbb_producer.DataSource = list_producer;
             cbb_producer.DisplayMember = "Ten";
             cbb_producer.ValueMember = "ID";
