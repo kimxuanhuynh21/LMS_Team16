@@ -13,6 +13,7 @@
 
         $scope.data_statistic = [];
         $scope.data_reader = [];
+        $scope.displayDate = displayDate;
 
         $scope.submit = function () {
             var fd = new FormData();
@@ -55,6 +56,25 @@
               });
         };
 
+        //Hàm convert dd-mm-yyyy
+        function displayDate(date) {
+            if (date) {
+                //var dateInMilisecond = parseInt(date.replace("/Date(", "").replace(")/", ""));
+                var convertedDate = new Date(date);
+                var month = convertedDate.getMonth() + 1;
+                var date = convertedDate.getDate();
+                if (month < 10) {
+                    month = '0' + month;
+                }
+                if (date < 10) {
+                    date = '0' + date;
+                }
+                return date + "-" + month + "-" + convertedDate.getFullYear();
+            }
+        }
+
     };
+
+
 
 })();

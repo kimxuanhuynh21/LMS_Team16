@@ -94,9 +94,9 @@
     <Compile Include="Migrations\201612010713369_editDocGia.Designer.cs">
       <DependentUpon>201612010713369_editDocGia.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612011103406_update_tableDocGia.cs" />
-    <Compile Include="Migrations\201612011103406_update_tableDocGia.Designer.cs">
-      <DependentUpon>201612011103406_update_tableDocGia.cs</DependentUpon>
+    <Compile Include="Migrations\201612100244549_version_10Dec2016.cs" />
+    <Compile Include="Migrations\201612100244549_version_10Dec2016.Designer.cs">
+      <DependentUpon>201612100244549_version_10Dec2016.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietMuon.cs" />
@@ -156,8 +156,8 @@
     <EmbeddedResource Include="Migrations\201612010713369_editDocGia.resx">
       <DependentUpon>201612010713369_editDocGia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612011103406_update_tableDocGia.resx">
-      <DependentUpon>201612011103406_update_tableDocGia.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612100244549_version_10Dec2016.resx">
+      <DependentUpon>201612100244549_version_10Dec2016.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

@@ -7,13 +7,13 @@ namespace EF_Models.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class update_tableDocGia : IMigrationMetadata
+    public sealed partial class version_10Dec2016 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(update_tableDocGia));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(version_10Dec2016));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612011103406_update_tableDocGia"; }
+            get { return "201612100244549_version_10Dec2016"; }
         }
         
         string IMigrationMetadata.Source

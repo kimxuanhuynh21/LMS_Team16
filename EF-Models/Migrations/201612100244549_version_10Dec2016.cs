@@ -3,7 +3,7 @@ namespace EF_Models.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class update_tableDocGia : DbMigration
+    public partial class version_10Dec2016 : DbMigration
     {
         public override void Up()
         {
