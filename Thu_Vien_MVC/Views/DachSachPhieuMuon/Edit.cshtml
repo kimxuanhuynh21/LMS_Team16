@@ -1,16 +1,16 @@
 ﻿@model EF_Models.Models.PhieuMuon
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Sửa";
 }
 
-<h2>Edit</h2>
+<h2>Phiếu mượn</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>PhieuMuon</h4>
         <hr />
@@ -80,9 +80,56 @@
         </div>
     </div>
 }
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            <p>STT</p>
+        </th>
+        <th>
+            <p>Mã vạch</p>
+        </th>
+        <th>
+            <p>Tên đầu sách</p>
+        </th>
+        <th>
+            <p>Tên tác giả</p>
+        </th>
+        <th>
+            <p>Tên thể loại</p>
+        </th>
+        <th>
+            <p>Chức năng</p>
+        </th>
+    </tr>
+
+    @foreach (var item in Model.dsChiTietMuon)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CuonSach.MaVach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CuonSach.MaVach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CuonSach.DauSach.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CuonSach.DauSach.TacGia.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CuonSach.DauSach.TheLoai.Ten)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { controller = "ChiTietMuon", id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Quay lại", "Index")
 </div>
 
 @section Scripts {
