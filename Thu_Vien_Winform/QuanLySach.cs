@@ -118,6 +118,14 @@ namespace Thu_Vien_Winform
                     var dausach = _context.DauSach.Where(i => i.ID.Equals(DauSachID)).FirstOrDefault();
                     dausach.SoLuongTong = dausach.SoLuongTong + 1;
 
+
+                    var phieunhap = new PhieuNhapDauSach();
+                    phieunhap.DauSachID = dausach.ID;
+                    phieunhap.NgayNhap = DateTime.Now;
+                    phieunhap.SoLuongCuonSach = 1;
+
+                    _context.PhieuNhapDauSach.Add(phieunhap);
+
                 }
                 _context.SaveChanges();
 
