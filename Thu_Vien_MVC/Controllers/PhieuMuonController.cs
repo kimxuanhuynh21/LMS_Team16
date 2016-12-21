@@ -156,11 +156,10 @@ namespace Thu_Vien_MVC.Controllers
                       ctt => new
                       {                   //Lọc các thuộc tính trong ChiTietTra (NgayTra)
                           ID = ctt.ID,
-                          PhieuMuonID = ctt.PhieuTra.PhieuMuonID,
                           CuonSachID = ctt.CuonSachID,
                           NgayTra = ctt.PhieuTra.NgayTra
                       })
-                      .Where(d => c.CuonSachID == d.CuonSachID && c.PhieuMuonID == d.PhieuMuonID)
+                      .Where(d => c.CuonSachID == d.CuonSachID)
                       .FirstOrDefault()        //lấy danh sách chi tiết mượn
                 }).Where(dg => dg.MaThe == maThe);
             return new JsonResult() { Data = dsChiTietMuon, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -201,7 +200,7 @@ namespace Thu_Vien_MVC.Controllers
             {
                 ChiTietMuon chiTietMuon = new ChiTietMuon();
                 DauSach dauSachUpdated = db.DauSach.Find(cuonSachMuon.DauSachID);
-                db.DauSach.Attach(dauSachUpdated);
+                db.DauSach.Attach(dauSachUpdated);   //gán biến dauSachUpdated vào db Dau Sach
                 dauSachUpdated.SoLuongTon = dauSachUpdated.SoLuongTon - 1;
                 db.SaveChanges();
                 //db.Entry(dauSachUpdated).State = System.Data.Entity.EntityState.Modified;
@@ -234,6 +233,7 @@ namespace Thu_Vien_MVC.Controllers
                 chiTietMuon.PhieuMuonID = PhieuMuon.ID;
                 chiTietMuon.TinhTrang = 0;
                 db.ChiTietMuon.Add(chiTietMuon);
+                PhieuMuon.TongSoLuongMuon = PhieuMuon.TongSoLuongMuon + 1;
                 db.SaveChanges();
             }
             var responsePhieuMuon = db.PhieuMuon.Select(c =>

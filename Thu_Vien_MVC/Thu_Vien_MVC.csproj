@@ -206,6 +206,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChiTietMuonController.cs" />
     <Compile Include="Controllers\DachSachPhieuMuonController.cs" />
+    <Compile Include="Controllers\DanhSachPhieuTraController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PhieuMuonController.cs" />
@@ -1139,6 +1140,11 @@
     <Content Include="Views\ChiTietMuon\Details.cshtml" />
     <Content Include="Views\ChiTietMuon\Edit.cshtml" />
     <Content Include="Views\ChiTietMuon\Index.cshtml" />
+    <Content Include="Views\DanhSachPhieuTra\Create.cshtml" />
+    <Content Include="Views\DanhSachPhieuTra\Delete.cshtml" />
+    <Content Include="Views\DanhSachPhieuTra\Details.cshtml" />
+    <Content Include="Views\DanhSachPhieuTra\Edit.cshtml" />
+    <Content Include="Views\DanhSachPhieuTra\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

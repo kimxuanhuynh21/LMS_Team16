@@ -62,7 +62,6 @@ namespace Thu_Vien_MVC.Controllers
             }
 
             ViewBag.DocGiaID = new SelectList(db.DocGia, "ID", "MaThe", phieuTra.DocGiaID);
-            ViewBag.PhieuMuonID = new SelectList(db.PhieuMuon, "ID", "MaPhieuMuon", phieuTra.PhieuMuonID);
             return View(phieuTra);
         }
 
@@ -79,7 +78,6 @@ namespace Thu_Vien_MVC.Controllers
                 return HttpNotFound();
             }
             ViewBag.DocGiaID = new SelectList(db.DocGia, "ID", "MaThe", phieuTra.DocGiaID);
-            ViewBag.PhieuMuonID = new SelectList(db.PhieuMuon, "ID", "MaPhieuMuon", phieuTra.PhieuMuonID);
             return View(phieuTra);
         }
 
@@ -97,7 +95,6 @@ namespace Thu_Vien_MVC.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.DocGiaID = new SelectList(db.DocGia, "ID", "MaThe", phieuTra.DocGiaID);
-            ViewBag.PhieuMuonID = new SelectList(db.PhieuMuon, "ID", "MaPhieuMuon", phieuTra.PhieuMuonID);
             return View(phieuTra);
         }
 
@@ -172,7 +169,6 @@ namespace Thu_Vien_MVC.Controllers
             PhieuMuon phieuMuonInfo = PhieuTraJSON.PhieuMuon;
             ICollection<ChiTietMuon> dsChiTietMuon = PhieuTraJSON.dsChiTietMuon;
             PhieuTra PhieuTra = new PhieuTra();
-            PhieuTra.PhieuMuonID = phieuMuonInfo.ID;
             PhieuTra.NgayTra = DateTime.Now;
             PhieuTra.DocGiaID = phieuMuonInfo.DocGiaID;
             db.PhieuTra.Add(PhieuTra);
@@ -225,9 +221,6 @@ namespace Thu_Vien_MVC.Controllers
                     ID = c.ID,
                     DocGia = c.DocGia,
                     DocGiaID = c.DocGiaID,
-                    PhieuMuonID = c.PhieuMuonID,
-                    MaPhieuMuon = c.PhieuMuon.MaPhieuMuon,
-                    NgayMuonSach = c.PhieuMuon.NgayMuon,
                     NgayTra = c.NgayTra,
                     MaPhieuTra = c.MaPhieuTra,
                     dsChiTietTra = db.ChiTietTra.Select(ctt =>

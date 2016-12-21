@@ -42,11 +42,13 @@
         </th>
     </tr>
 
+    @{ int i = 1;}
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.MaPhieuMuon)
+            @i
         </td>
+        @{ i++;}
         <td>
             @Html.DisplayFor(modelItem => item.MaPhieuMuon)
         </td>
@@ -76,9 +78,8 @@
             }
         </td>
         <td>
-            @Html.ActionLink("Sửa", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Xem", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Xóa", "Delete", new { id=item.ID })
+            @Html.ActionLink("Xem", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Cập nhật", "Edit", new { id=item.ID }) 
         </td>
     </tr>
 }

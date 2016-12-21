@@ -20,6 +20,7 @@ namespace EF_Models.Models
         public string MaPhieuMuon { get; set; }
         [Required]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NgayMuon { get; set; }
         [Required]
         public int DocGiaID { get; set; }
@@ -31,6 +32,7 @@ namespace EF_Models.Models
         public virtual NhanVien NhanVien { get; set; }
         [Required]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NgayHetHan { get; set; }
         public int TongSoLuongMuon { get; set; }
         [Required]

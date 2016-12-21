@@ -1,0 +1,62 @@
+﻿@model PagedList.IPagedList<EF_Models.Models.PhieuTra>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Trả sách", "Index", "PhieuTra")
+</p>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            <p>STT</p>
+        </th>
+        <th>
+            <p>Mã phiếu trả</p>
+        </th>
+        <th>
+            <p>Mã thẻ độc giả</p>
+        </th>
+        <th>
+            <p>Ngày trả</p>
+        </th>
+        <th>
+            <p>Chức năng</p>
+        </th>
+    </tr>
+
+    @{ int i = 1; }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @i
+        </td>
+        @{ i++; }
+        <td>
+            @Html.DisplayFor(modelItem => item.MaPhieuTra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocGia.MaThe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayTra)
+        </td>
+        <td>
+            @Html.ActionLink("Xem", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Cập nhật", "Edit", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

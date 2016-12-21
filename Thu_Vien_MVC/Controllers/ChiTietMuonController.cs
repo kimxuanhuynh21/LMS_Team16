@@ -110,7 +110,14 @@ namespace Thu_Vien_MVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(chiTietMuon);
+            db.ChiTietMuon.Remove(chiTietMuon);
+            db.SaveChanges();
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        private ActionResult Redirect(HttpRequestBase request)
+        {
+            throw new NotImplementedException();
         }
 
         // POST: ChiTietMuon/Delete/5

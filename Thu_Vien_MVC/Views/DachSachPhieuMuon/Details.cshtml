@@ -4,71 +4,88 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Xem chi tiết phiếu mượn</h2>
 
 <div>
     <h4>PhieuMuon</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DocGia.MaThe)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.DocGia.MaThe)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NhanVien.MaNhanVien)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NhanVien.MaNhanVien)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MaPhieuMuon)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MaPhieuMuon)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayMuon)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayMuon)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayHetHan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayHetHan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TongSoLuongMuon)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TongSoLuongMuon)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TinhTrang)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TinhTrang)
-        </dd>
-
-    </dl>
+    <form class="form-horizontal">
+        <div class="form-group col-md-12 col-xs-12">
+            <label class="text-right col-sm-2">Mã phiếu mượn</label>
+            <div class="col-md-5">
+                @Html.DisplayFor(model => model.MaPhieuMuon)
+            </div>
+        </div>
+        <div class="form-group col-md-12 col-xs-12">
+            <label class="text-right col-sm-2">Mã thẻ độc giả</label>
+            <div class="col-md-5">
+                @Html.DisplayFor(model => model.DocGia.Ten)
+            </div>
+        </div>
+        <div class="form-group col-md-12 col-xs-12">
+            <label class="text-right col-sm-2">Mã nhân viên</label>
+            <div class="col-md-5">
+                @Html.DisplayFor(model => model.NhanVien.MaNhanVien)
+            </div>
+        </div>
+        <div class="form-group col-md-12 col-xs-12">
+            <label class="text-right col-sm-2">Ngày mượn</label>
+            <div class="col-md-5">
+                @Html.DisplayFor(model => model.NgayMuon)
+            </div>
+        </div>
+        <div class="form-group col-md-12 col-xs-12">
+            <label class="text-right col-sm-2">Ngày hết hạn</label>
+            <div class="col-md-5">
+                @Html.DisplayFor(model => model.NgayHetHan)
+            </div>
+        </div>
+    </form>
 </div>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            <p>STT</p>
+        </th>
+        <th>
+            <p>Mã vạch</p>
+        </th>
+        <th>
+            <p>Tên đầu sách</p>
+        </th>
+        <th>
+            <p>Tên tác giả</p>
+        </th>
+        <th>
+            <p>Tên thể loại</p>
+        </th>
+    </tr>
+    @{ int i = 1;}
+    @foreach (var item in Model.dsChiTietMuon)
+    {
+        <tr>
+            <td>
+                @i
+            </td>
+            @{i++;}
+            <td>
+                @Html.DisplayFor(modelItem => item.CuonSach.MaVach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CuonSach.DauSach.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CuonSach.DauSach.TacGia.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CuonSach.DauSach.TheLoai.Ten)
+            </td>
+        </tr>
+      }
+</table>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Quay lại", "Index")
 </p>
