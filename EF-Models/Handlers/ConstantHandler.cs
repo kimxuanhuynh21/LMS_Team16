@@ -28,6 +28,8 @@ namespace EF_Models.Handlers
         }
         public enum TinhTrang_DocGia
         {
+            [Description("Đã Xóa")]
+            Xoa = 2,
             [Description("Khóa")]
             Khoa = 1,
             [Description("Đang sử dụng")]
