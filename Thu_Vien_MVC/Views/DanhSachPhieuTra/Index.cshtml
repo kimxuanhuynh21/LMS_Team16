@@ -8,52 +8,57 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Trả sách", "Index", "PhieuTra")
-</p>
-<table class="table table-bordered table-striped">
-    <tr>
-        <th>
-            <p>STT</p>
-        </th>
-        <th>
-            <p>Mã phiếu trả</p>
-        </th>
-        <th>
-            <p>Mã thẻ độc giả</p>
-        </th>
-        <th>
-            <p>Ngày trả</p>
-        </th>
-        <th>
-            <p>Chức năng</p>
-        </th>
-    </tr>
+    <div class="col-sm-3">
+        @Html.ActionLink("Trả sách", "Index", "PhieuTra", new object { }, new { @class = "btn btn-block btn-info" })
+    </div>
+    
 
-    @{ int i = 1; }
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @i
-        </td>
-        @{ i++; }
-        <td>
-            @Html.DisplayFor(modelItem => item.MaPhieuTra)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DocGia.MaThe)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayTra)
-        </td>
-        <td>
-            @Html.ActionLink("Xem", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Cập nhật", "Edit", new { id=item.ID })
-        </td>
-    </tr>
-}
+<div class="col-sm-12" style="margin-top:30px">
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                <p>STT</p>
+            </th>
+            <th>
+                <p>Mã phiếu trả</p>
+            </th>
+            <th>
+                <p>Mã thẻ độc giả</p>
+            </th>
+            <th>
+                <p>Ngày trả</p>
+            </th>
+            <th>
+                <p>Chức năng</p>
+            </th>
+        </tr>
 
-</table>
+        @{ int i = 1; }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @i
+                </td>
+                @{ i++; }
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaPhieuTra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DocGia.MaThe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayTra)
+                </td>
+                <td>
+                    @Html.ActionLink("Xem", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Cập nhật", "Edit", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
 
 <br />
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount

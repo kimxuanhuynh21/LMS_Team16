@@ -229,6 +229,7 @@
     <Content Include="Content\App\Controller\ThongKeSachMuon.Controller.js" />
     <Content Include="Content\App\Controller\ThongTinNguoiMuon.Controller.js" />
     <Content Include="Content\App\Controller\ThongTinNguoiTra.Controller.js" />
+    <Content Include="Content\App\Controller\TraSach.Controller.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />

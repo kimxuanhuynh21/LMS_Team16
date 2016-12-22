@@ -58,7 +58,7 @@ namespace Thu_Vien_Winform
             dateTimePickerto.Visible = false;
 
             _context = new ThuVienDbContext();
-            InitializeDataGridView(_context.DocGia.Where(i=>i.TinhTrang.Equals(0) && i.TinhTrang.Equals(1)).ToList().Select(i => new DocGiaViewModel(i)).ToList());
+            InitializeDataGridView(_context.DocGia.Where(i => i.TinhTrang == 0 || i.TinhTrang == 1).ToList().Select(i => new DocGiaViewModel(i)).ToList());
 
             //combobox category
             List<ComboboxItem> list_cbb = new List<ComboboxItem> { };

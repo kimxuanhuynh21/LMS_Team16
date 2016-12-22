@@ -1,14 +1,15 @@
-﻿@model IEnumerable<EF_Models.Models.ChiTietTra>
+﻿@*@model IEnumerable<EF_Models.Models.ChiTietTra>*@
 
 @{
     ViewBag.Title = "Quản lý trả sách";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <center><h2>Quản lý trả sách</h2></center>
-<div ng-controller="ThongTinNguoiTraCtrl">
+<div ng-controller="TraSachCtrl">
 
 
-    <div class="borrow-book" ng-show="dsSachTraShow">
+    <div class="borrow-book" >
         <form class="form-horizontal form-input">
             <div class="form-group">
 
@@ -25,24 +26,12 @@
             <div class="form-group">
 
                 <label for="inputmavach" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã vạch cuốn sách</label>
-                <div class="col-xs-8 col-md-4">
-                    <div class="input-group">
-                        @*<input class="form-control" id="inputmavach" type="text" ng-model="maVachSachTra" placeholder="Nhập mã vạch cuốn sách" />*@
-                        <ui-select ng-model="dsCuonSach.selected" theme="bootstrap" title="Chọn cuốn sách">
-                            <ui-select-match placeholder="Chọn cuốn sách trả">{{$select.selected.MaVach}}</ui-select-match>
-                            <ui-select-choices groupBy="'TenDauSach'" repeat="cuonSach in dsCuonSach | propsFilter: {MaVach: $select.search, TenDauSach: $select.search}">
-                                Mã Vạch:  <span ng-bind-html="cuonSach.MaVach | highlight: $select.search"></span>
-                                <small>
-                                    Đầu Sách: <span ng-bind-html="''+cuonSach.TenDauSach | highlight: $select.search"></span>,
-                                    Tình Trạng: {{cuonSach.TinhTrang}}
-                                </small>
-                            </ui-select-choices>
-                        </ui-select>
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="themCuonSachTra(dsCuonSach.selected)"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
-                        </span>
-                    </div>
-                </div>
+                <select name="" id=""
+                        ng-options="option.Name for option in Buildings.availableOptions track by option.ID"
+                        ng-model="CuonSach.selectedOption"
+                        ng-change="change_cuonsach(CuonSach.selectedOption.ID)"
+                        class="form-control"
+                        style="width:200px"></select>
 
                 <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
                     <a class="btn btn-primary" ng-click="detailPhieuTra()"><i class="fa fa-check" aria-hidden="true"></i>Hoàn tất</a>
