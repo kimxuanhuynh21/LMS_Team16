@@ -3,7 +3,7 @@ namespace EF_Models.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class versionfinal_02Nov2016 : DbMigration
+    public partial class version_22Dec2016 : DbMigration
     {
         public override void Up()
         {
@@ -50,6 +50,7 @@ namespace EF_Models.Migrations
                         SoLuongTong = c.Int(nullable: false),
                         SoLuongTon = c.Int(nullable: false),
                         TinhTrang = c.Byte(nullable: false),
+                        TT_Xoa = c.Byte(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.NhaSanXuat", t => t.NhaSanXuatID)
@@ -95,7 +96,7 @@ namespace EF_Models.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        MaPhieuMuon = c.String(nullable: false, maxLength: 100),
+                        MaPhieuMuon = c.String(maxLength: 100),
                         NgayMuon = c.DateTime(nullable: false),
                         DocGiaID = c.Int(nullable: false),
                         NhanVienID = c.Int(nullable: false),
@@ -106,7 +107,6 @@ namespace EF_Models.Migrations
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.DocGia", t => t.DocGiaID)
                 .ForeignKey("dbo.NhanVien", t => t.NhanVienID)
-                .Index(t => t.MaPhieuMuon, unique: true)
                 .Index(t => t.DocGiaID)
                 .Index(t => t.NhanVienID);
             
@@ -124,6 +124,7 @@ namespace EF_Models.Migrations
                         NgayHetHan = c.DateTime(nullable: false),
                         NamTotNghiep = c.Int(nullable: false),
                         Loai = c.Byte(nullable: false),
+                        HinhAnh = c.String(),
                         SoSachConLai = c.Int(nullable: false),
                         TinhTrang = c.Byte(nullable: false),
                     })
@@ -164,16 +165,13 @@ namespace EF_Models.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        MaPhieuTra = c.String(nullable: false, maxLength: 100),
-                        PhieuMuonID = c.Int(nullable: false),
+                        MaPhieuTra = c.String(maxLength: 100),
                         NgayTra = c.DateTime(nullable: false),
                         DocGiaID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.DocGia", t => t.DocGiaID)
-                .ForeignKey("dbo.PhieuMuon", t => t.PhieuMuonID)
                 .Index(t => t.MaPhieuTra, unique: true)
-                .Index(t => t.PhieuMuonID)
                 .Index(t => t.DocGiaID);
             
             CreateTable(
@@ -192,28 +190,56 @@ namespace EF_Models.Migrations
                 .Index(t => t.DocGiaID, unique: true)
                 .Index(t => t.DauSachID);
             
+            CreateTable(
+                "dbo.PhieuNhapDauSach",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        DauSachID = c.Int(nullable: false),
+                        NgayNhap = c.DateTime(nullable: false),
+                        SoLuongCuonSach = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.DauSach", t => t.DauSachID)
+                .Index(t => t.DauSachID);
+            
+            CreateTable(
+                "dbo.ThongKeDauSach",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        DauSachID = c.Int(nullable: false),
+                        Ngay = c.DateTime(nullable: false),
+                        SoLuongHienTai = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.DauSach", t => t.DauSachID)
+                .Index(t => t.DauSachID);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.ThongKeDauSach", "DauSachID", "dbo.DauSach");
+            DropForeignKey("dbo.PhieuNhapDauSach", "DauSachID", "dbo.DauSach");
             DropForeignKey("dbo.DangKy", "DocGiaID", "dbo.DocGia");
             DropForeignKey("dbo.DangKy", "DauSachID", "dbo.DauSach");
             DropForeignKey("dbo.ChiTietTra", "PhieuTraID", "dbo.PhieuTra");
-            DropForeignKey("dbo.PhieuTra", "PhieuMuonID", "dbo.PhieuMuon");
             DropForeignKey("dbo.PhieuTra", "DocGiaID", "dbo.DocGia");
             DropForeignKey("dbo.ChiTietTra", "CuonSachID", "dbo.CuonSach");
-            DropForeignKey("dbo.ChiTietMuon", "PhieuMuonID", "dbo.PhieuMuon");
             DropForeignKey("dbo.PhieuMuon", "NhanVienID", "dbo.NhanVien");
+            DropForeignKey("dbo.ChiTietMuon", "PhieuMuonID", "dbo.PhieuMuon");
             DropForeignKey("dbo.PhieuMuon", "DocGiaID", "dbo.DocGia");
             DropForeignKey("dbo.ChiTietMuon", "CuonSachID", "dbo.CuonSach");
             DropForeignKey("dbo.CuonSach", "DauSachID", "dbo.DauSach");
             DropForeignKey("dbo.DauSach", "TheLoaiID", "dbo.TheLoai");
             DropForeignKey("dbo.DauSach", "TacGiaID", "dbo.TacGia");
             DropForeignKey("dbo.DauSach", "NhaSanXuatID", "dbo.NhaSanXuat");
+            DropIndex("dbo.ThongKeDauSach", new[] { "DauSachID" });
+            DropIndex("dbo.PhieuNhapDauSach", new[] { "DauSachID" });
             DropIndex("dbo.DangKy", new[] { "DauSachID" });
             DropIndex("dbo.DangKy", new[] { "DocGiaID" });
             DropIndex("dbo.PhieuTra", new[] { "DocGiaID" });
-            DropIndex("dbo.PhieuTra", new[] { "PhieuMuonID" });
             DropIndex("dbo.PhieuTra", new[] { "MaPhieuTra" });
             DropIndex("dbo.ChiTietTra", new[] { "CuonSachID" });
             DropIndex("dbo.ChiTietTra", new[] { "PhieuTraID" });
@@ -221,7 +247,6 @@ namespace EF_Models.Migrations
             DropIndex("dbo.DocGia", new[] { "MaThe" });
             DropIndex("dbo.PhieuMuon", new[] { "NhanVienID" });
             DropIndex("dbo.PhieuMuon", new[] { "DocGiaID" });
-            DropIndex("dbo.PhieuMuon", new[] { "MaPhieuMuon" });
             DropIndex("dbo.TheLoai", new[] { "MaTheLoai" });
             DropIndex("dbo.DauSach", new[] { "NhaSanXuatID" });
             DropIndex("dbo.DauSach", new[] { "TacGiaID" });
@@ -230,6 +255,8 @@ namespace EF_Models.Migrations
             DropIndex("dbo.CuonSach", new[] { "MaVach" });
             DropIndex("dbo.ChiTietMuon", new[] { "CuonSachID" });
             DropIndex("dbo.ChiTietMuon", new[] { "PhieuMuonID" });
+            DropTable("dbo.ThongKeDauSach");
+            DropTable("dbo.PhieuNhapDauSach");
             DropTable("dbo.DangKy");
             DropTable("dbo.PhieuTra");
             DropTable("dbo.ChiTietTra");

@@ -54,53 +54,9 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Handlers\CommonHandler.cs" />
     <Compile Include="Handlers\ConstantHandler.cs" />
-    <Compile Include="Migrations\201611021709144_version_03Nov2016.cs" />
-    <Compile Include="Migrations\201611021709144_version_03Nov2016.Designer.cs">
-      <DependentUpon>201611021709144_version_03Nov2016.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611161531400_version_16Nov2016.cs" />
-    <Compile Include="Migrations\201611161531400_version_16Nov2016.Designer.cs">
-      <DependentUpon>201611161531400_version_16Nov2016.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611161537347_version_16Nov20161.cs" />
-    <Compile Include="Migrations\201611161537347_version_16Nov20161.Designer.cs">
-      <DependentUpon>201611161537347_version_16Nov20161.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611200744243_version_20Nov2016.cs" />
-    <Compile Include="Migrations\201611200744243_version_20Nov2016.Designer.cs">
-      <DependentUpon>201611200744243_version_20Nov2016.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611200750350_version_20Nov20161.cs" />
-    <Compile Include="Migrations\201611200750350_version_20Nov20161.Designer.cs">
-      <DependentUpon>201611200750350_version_20Nov20161.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611241005565_version_24Nov2016.cs" />
-    <Compile Include="Migrations\201611241005565_version_24Nov2016.Designer.cs">
-      <DependentUpon>201611241005565_version_24Nov2016.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611251535474_vertion_25Nov2016.cs" />
-    <Compile Include="Migrations\201611251535474_vertion_25Nov2016.Designer.cs">
-      <DependentUpon>201611251535474_vertion_25Nov2016.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611260425224_addtablephieunhapdausach.cs" />
-    <Compile Include="Migrations\201611260425224_addtablephieunhapdausach.Designer.cs">
-      <DependentUpon>201611260425224_addtablephieunhapdausach.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611270735101_update again phieunhapdausach.cs" />
-    <Compile Include="Migrations\201611270735101_update again phieunhapdausach.Designer.cs">
-      <DependentUpon>201611270735101_update again phieunhapdausach.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612010713369_editDocGia.cs" />
-    <Compile Include="Migrations\201612010713369_editDocGia.Designer.cs">
-      <DependentUpon>201612010713369_editDocGia.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612100244549_version_10Dec2016.cs" />
-    <Compile Include="Migrations\201612100244549_version_10Dec2016.Designer.cs">
-      <DependentUpon>201612100244549_version_10Dec2016.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612210405240_update_dausach.cs" />
-    <Compile Include="Migrations\201612210405240_update_dausach.Designer.cs">
-      <DependentUpon>201612210405240_update_dausach.cs</DependentUpon>
+    <Compile Include="Migrations\201612220829285_version_22Dec2016.cs" />
+    <Compile Include="Migrations\201612220829285_version_22Dec2016.Designer.cs">
+      <DependentUpon>201612220829285_version_22Dec2016.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietMuon.cs" />
@@ -130,44 +86,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611021709144_version_03Nov2016.resx">
-      <DependentUpon>201611021709144_version_03Nov2016.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611161531400_version_16Nov2016.resx">
-      <DependentUpon>201611161531400_version_16Nov2016.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611161537347_version_16Nov20161.resx">
-      <DependentUpon>201611161537347_version_16Nov20161.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611200744243_version_20Nov2016.resx">
-      <DependentUpon>201611200744243_version_20Nov2016.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611200750350_version_20Nov20161.resx">
-      <DependentUpon>201611200750350_version_20Nov20161.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611241005565_version_24Nov2016.resx">
-      <DependentUpon>201611241005565_version_24Nov2016.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611251535474_vertion_25Nov2016.resx">
-      <DependentUpon>201611251535474_vertion_25Nov2016.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611260425224_addtablephieunhapdausach.resx">
-      <DependentUpon>201611260425224_addtablephieunhapdausach.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611270735101_update again phieunhapdausach.resx">
-      <DependentUpon>201611270735101_update again phieunhapdausach.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612010713369_editDocGia.resx">
-      <DependentUpon>201612010713369_editDocGia.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612100244549_version_10Dec2016.resx">
-      <DependentUpon>201612100244549_version_10Dec2016.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612210405240_update_dausach.resx">
-      <DependentUpon>201612210405240_update_dausach.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612220829285_version_22Dec2016.resx">
+      <DependentUpon>201612220829285_version_22Dec2016.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Images\2.jpg" />
     <Content Include="Images\Back-Swept-Quiff-haircuts-men.jpg" />
