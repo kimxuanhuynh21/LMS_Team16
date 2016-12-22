@@ -15,11 +15,8 @@ namespace EF_Models.Models
         [StringLength(100)]
         public string MaPhieuTra { get; set; }
         [Required]
-        public int PhieuMuonID { get; set; }
-        [ForeignKey("PhieuMuonID")]
-        public virtual PhieuMuon PhieuMuon { get; set; }
-        [Required]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NgayTra { get; set; }
         [Required]
         public int DocGiaID { get; set; }

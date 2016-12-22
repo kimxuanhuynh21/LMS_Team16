@@ -7,39 +7,38 @@
 
     ThongTinNguoiTraCtrl.$inject = ['$scope', '$http'];
 
-    function ThongTinNguoiTraCtrl($scope,$http)
-    {
+    function ThongTinNguoiTraCtrl($scope, $http) {
         $scope.maPhieuMuon;
         $scope.phieuMuonInfo;
         $scope.panelPhieuTraShow = false;
         var phieuMuonFlag = false;
-        $scope.dsSachTraShow = false;
-        $scope.phieuMuonShow = true;
+        $scope.dsSachTraShow = true;
+        $scope.phieuMuonShow = false;
         $scope.dsSachTra = [];
-        $scope.maVachSachTra;
+        $scope.dsCuonSach = [];
         $scope.phieuTraShow = false;
-        
+        $scope.maTheDocGia;
+
         //function
         $scope.togglePanelPhieuMuon = togglePanelPhieuMuon;
         $scope.displayDate = displayDate;
         $scope.submitPhieuMuonInfo = submitPhieuMuonInfo;
-        $scope.togglePanelSachTra = togglePanelSachTra;
+        $scope.themCuonSachTra = themCuonSachTra;
         $scope.removeCuonSach = removeCuonSach;
         $scope.detailPhieuTra = detailPhieuTra;
+        $scope.getDsCuonSach = getDsCuonSach;
+        $scope.nhapDocGia = nhapDocGia;
 
-        function togglePanelPhieuMuon()
-        {
+        function togglePanelPhieuMuon() {
             $http
                 .get('/PhieuTra/PhieuMuon/?maPhieuMuon=' + $scope.maPhieuMuon)
                 .then(function successCallback(response) {
-                    if(response.data != "")
-                    {
+                    if (response.data != "") {
                         $scope.panelPhieuTraShow = true;
                         $scope.phieuMuonInfo = response.data;
                         phieuMuonFlag = true;
                     }
-                    else
-                    {
+                    else {
                         alert('Không tìm thấy phiếu mượn');
                         phieuMuonFlag = false;
                     }
@@ -49,48 +48,30 @@
                 });
         }
 
-        function submitPhieuMuonInfo()
-        {
-            if(phieuMuonFlag == false)
-            {
+        function submitPhieuMuonInfo() {
+            if (phieuMuonFlag == false) {
                 alert('Bạn chưa chọn phiếu mượn');
             }
-            else
-            {
+            else {
                 $scope.phieuMuonShow = false;
                 $scope.dsSachTraShow = true;
             }
         }
 
-        function togglePanelSachTra()
-        {
+        function themCuonSachTra(cuonSachTra) {
             var flag = false;
-            $scope.dsSachTra.forEach(function (item) {
-                if (item.CuonSach.MaVach.toLowerCase() == $scope.maVachSachTra.toLowerCase())
-                {
-                    flag = true;
-                    return;
-                }
-            });
-            if (flag == false)
-            {
-                $http
-                    .get('/PhieuTra/CuonSach/?maVach='+ $scope.maVachSachTra + '&maPhieuMuon=' + $scope.maPhieuMuon)
-                    .then(function successCallBack(response) {
-                        if(response.data != "")
-                        {
-                            $scope.dsSachTra.push(response.data);
-                        }
-                        else
-                        {
-                            alert('Không tìm thấy mã vạch cuốn sách');
-                        }
-                    }, function errorCallBack(error) {
-                        console.log(error);
-                    });
+            if (cuonSachTra) {
+                $scope.dsSachTra.forEach(function (item) {
+                    if (item.MaVach.toLowerCase() == cuonSachTra.MaVach.toLowerCase()) {
+                        flag = true;
+                        return;
+                    }
+                });
             }
-            else
-            {
+            if (flag == false) {
+                $scope.dsSachTra.push(cuonSachTra);
+            }
+            else {
                 alert('Cuốn sách bạn chọn bị trùng');
             }
         }
@@ -105,8 +86,7 @@
             });
         }
 
-        function detailPhieuTra()
-        {
+        function detailPhieuTra() {
             var requestData = {
                 phieuMuon: $scope.phieuMuonInfo,
                 dsChiTietMuon: $scope.dsSachTra
@@ -114,8 +94,7 @@
             $http
                 .post('/PhieuTra/ChiTietPhieuTra', requestData)
                 .then(function successCallback(response) {
-                    if (response.data != "")
-                    {
+                    if (response.data != "") {
                         $scope.phieuTra = response.data;
                         $scope.dsSachTraShow = false;
                         $scope.phieuTraShow = true;
@@ -141,6 +120,20 @@
                 }
                 return date + "-" + month + "-" + convertedDate.getFullYear();
             }
+        }
+
+        function getDsCuonSach() {
+            $http
+                .get('/AngularAPI/dsCuonSach?maTheDocGia=' + $scope.maTheDocGia)
+                .then(function successCallback(response) {
+                    $scope.dsCuonSach = response.data;
+                }, function errorCallback(error) {
+                    console.log(error);
+                });
+        }
+
+        function nhapDocGia(maTheDocGia) {
+            $scope.getDsCuonSach();
         }
 
         //Alert when user attempt to leave or reload this page

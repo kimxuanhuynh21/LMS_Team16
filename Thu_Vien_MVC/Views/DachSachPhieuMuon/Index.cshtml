@@ -6,13 +6,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Danh sách phiếu mượn</h2>
 
 <p>
     @Html.ActionLink("Mượn sách", "Index", "PhieuMuon")
 </p>
 <table class="table table-bordered table-striped">
     <tr>
+        <th>
+            <p>STT</p>
+        </th>
         <th>
             <p>Mã phiếu mượn</p>
         </th>
@@ -39,8 +42,13 @@
         </th>
     </tr>
 
+    @{ int i = 1;}
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @i
+        </td>
+        @{ i++;}
         <td>
             @Html.DisplayFor(modelItem => item.MaPhieuMuon)
         </td>
@@ -70,9 +78,8 @@
             }
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Xem", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Cập nhật", "Edit", new { id=item.ID }) 
         </td>
     </tr>
 }

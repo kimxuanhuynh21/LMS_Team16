@@ -7,58 +7,39 @@
 <center><h2>Quản lý trả sách</h2></center>
 <div ng-controller="ThongTinNguoiTraCtrl">
 
-    <div class="lend-book" ng-show="phieuMuonShow">
-        <form class="form-horizontal form-input">
-            <div class="form-group">
-
-                <label for="inputmaphieumuon" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã phiếu mượn</label>
-                <div class="col-xs-9 col-md-4">
-                    <div class="input-group">
-                        <input class="form-control" id="inputmaphieumuon" ng-model="maPhieuMuon" type="text" placeholder="Nhập mã phiếu mượn" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="togglePanelPhieuMuon()"><i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm</button>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="col-xs-3 col-md-offset-1 col-md-2 text-right">
-                    <a class="btn btn-primary" ng-click="submitPhieuMuonInfo()"><i class="fa fa-check" aria-hidden="true"></i>Nhận trả sách</a>
-                </div>
-            </div>
-        </form>
-
-        <div class="panel panel-default" ng-show="panelPhieuTraShow">
-            <div class="panel-body">
-                <div class="info-docgia">
-                    <div class="detail-docgia col-md-4">
-                        <h4>Mã phiếu mượn: {{phieuMuonInfo.maPhieuMuon}}</h4>
-                        <h4>Mã thẻ: {{phieuMuonInfo.maThe}}</h4>
-                        <h4>Tên độc giả: {{phieuMuonInfo.tenDocGia}}</h4>
-                        <h4>Số điện thoại: {{phieuMuonInfo.soDienThoai}}</h4>
-                        <h4>Chức vụ: {{phieuMuonInfo.chucVu}}</h4>
-                    </div>
-                    <div class="detail-docgia col-md-5">
-                        <h4>Email: {{phieuMuonInfo.email}}</h4>
-                        <h4>Ngày mượn sách: {{displayDate(phieuMuonInfo.ngayMuon)}}</h4>
-                        <h4>Ngày hết hạn: {{displayDate(phieuMuonInfo.ngayHetHan)}}</h4>
-                        <h4>Địa chỉ: <br /> {{phieuMuonInfo.diaChi}}</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <div class="borrow-book" ng-show="dsSachTraShow">
         <form class="form-horizontal form-input">
             <div class="form-group">
 
+                <label for="inputmavach" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã thẻ độc giả</label>
+                <div class="col-xs-8 col-md-4">
+                    <div class="input-group">
+                        <input ng-model="maTheDocGia" class="form-control" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="nhapDocGia(maTheDocGia)"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+
                 <label for="inputmavach" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã vạch cuốn sách</label>
                 <div class="col-xs-8 col-md-4">
                     <div class="input-group">
-                        <input class="form-control" id="inputmavach" type="text" ng-model="maVachSachTra" placeholder="Nhập mã vạch cuốn sách" />
+                        @*<input class="form-control" id="inputmavach" type="text" ng-model="maVachSachTra" placeholder="Nhập mã vạch cuốn sách" />*@
+                        <ui-select ng-model="dsCuonSach.selected" theme="bootstrap" title="Chọn cuốn sách">
+                            <ui-select-match placeholder="Chọn cuốn sách trả">{{$select.selected.MaVach}}</ui-select-match>
+                            <ui-select-choices groupBy="'TenDauSach'" repeat="cuonSach in dsCuonSach | propsFilter: {MaVach: $select.search, TenDauSach: $select.search}">
+                                Mã Vạch:  <span ng-bind-html="cuonSach.MaVach | highlight: $select.search"></span>
+                                <small>
+                                    Đầu Sách: <span ng-bind-html="''+cuonSach.TenDauSach | highlight: $select.search"></span>,
+                                    Tình Trạng: {{cuonSach.TinhTrang}}
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="togglePanelSachTra()"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
+                            <button class="btn btn-default" type="button" ng-click="themCuonSachTra(dsCuonSach.selected)"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
                         </span>
                     </div>
                 </div>

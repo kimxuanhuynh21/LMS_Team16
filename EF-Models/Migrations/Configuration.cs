@@ -84,7 +84,7 @@ namespace EF_Models.Migrations
            );
 
             context.PhieuTra.AddOrUpdate(
-                new PhieuTra { ID = 1, MaPhieuTra = "PT1", PhieuMuonID = 1, NgayTra = DateTime.ParseExact("22/10/2016", "dd/MM/yyyy", CultureInfo.InvariantCulture), DocGiaID = 1}
+                new PhieuTra { ID = 1, MaPhieuTra = "PT1", NgayTra = DateTime.ParseExact("22/10/2016", "dd/MM/yyyy", CultureInfo.InvariantCulture), DocGiaID = 1}
            );
 
             context.ChiTietTra.AddOrUpdate(

@@ -1,0 +1,42 @@
+﻿@model EF_Models.Models.ChiTietMuon
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ChiTietMuon</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CuonSach.MaVach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CuonSach.MaVach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhieuMuon.MaPhieuMuon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhieuMuon.MaPhieuMuon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TinhTrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrang)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
