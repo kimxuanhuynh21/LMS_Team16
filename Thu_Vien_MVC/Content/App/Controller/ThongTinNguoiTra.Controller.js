@@ -8,9 +8,6 @@
     ThongTinNguoiTraCtrl.$inject = ['$scope', '$http', '$filter'];
 
     function ThongTinNguoiTraCtrl($scope, $http, $filter) {
-
-        alert("haha");
-
         var list_cuonsach = [];
 
         function get_sachdocgia() {

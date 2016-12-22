@@ -88,17 +88,104 @@ namespace Thu_Vien_MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,MaPhieuMuon,NgayMuon,DocGiaID,NhanVienID,NgayHetHan,TongSoLuongMuon,TinhTrang")] PhieuMuon phieuMuon)
+        public ActionResult Edit(EditPhieuMuonRequest phieuMuonRequest)
         {
-            if (ModelState.IsValid)
+            PhieuMuon phieuMuonUpdate = db.PhieuMuon.Find(phieuMuonRequest.ID);
+            phieuMuonUpdate.DocGiaID = phieuMuonRequest.DocGiaID;
+            db.SaveChanges();
+            ViewBag.DocGiaID = new SelectList(db.DocGia, "ID", "MaThe", phieuMuonUpdate.DocGiaID);
+            ViewBag.NhanVienID = new SelectList(db.NhanVien, "ID", "MaNhanVien", phieuMuonUpdate.NhanVienID);
+            ICollection<ChiTietMuon> dsChiTietMuonCu = db.ChiTietMuon
+                .Where(x => x.PhieuMuonID == phieuMuonRequest.ID)
+                .ToList();
+            foreach (EditChiTietMuon chiTietMuonRequest in phieuMuonRequest.dsChiTietMuon)
             {
-                db.Entry(phieuMuon).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //Nếu chi tiết mượn đã tồn tại và bị xóa trên giao diện thì tiến hành xóa trong CSDL
+                //và cập nhật lại tình trạng
+                if (chiTietMuonRequest.isOld == true && chiTietMuonRequest.isDeleted == true)
+                {
+                    //Tìm chi tiết mượn theo id để xóa
+                    ChiTietMuon chiTietMuonDeleted = db.ChiTietMuon.Find(chiTietMuonRequest.ChiTietMuonId);
+                    db.ChiTietMuon.Remove(chiTietMuonDeleted);
+                    //Tiến hành cập nhật lại số lượng tồn kho và thống kê đầu sách
+                    CuonSach cuonSachMuon = db.CuonSach.Find(chiTietMuonRequest.cuonSachMuonId);
+                    DauSach dauSachUpdated = db.DauSach.Find(cuonSachMuon.DauSachID);
+                    db.DauSach.Attach(dauSachUpdated);   //gán biến dauSachUpdated vào db Dau Sach
+                    dauSachUpdated.SoLuongTon = dauSachUpdated.SoLuongTon + 1;
+                    cuonSachMuon.TinhTrang = 2;
+                    db.SaveChanges();
+                    ThongKeDauSach thongKeDauSach = new ThongKeDauSach();
+                    DateTime today = DateTime.Now;
+                    if (db.ThongKeDauSach.Any(a =>
+                    a.DauSachID == cuonSachMuon.DauSachID &&
+                    a.Ngay.Day == today.Day &&
+                    a.Ngay.Month == today.Month &&
+                    a.Ngay.Year == today.Year))
+                    {
+                        thongKeDauSach = db.ThongKeDauSach.Where(a =>
+                          a.DauSachID == cuonSachMuon.DauSachID &&
+                          a.Ngay.Day == today.Day &&
+                          a.Ngay.Month == today.Month &&
+                          a.Ngay.Year == today.Year).FirstOrDefault();
+                        db.ThongKeDauSach.Attach(thongKeDauSach);
+                        thongKeDauSach.SoLuongHienTai = dauSachUpdated.SoLuongTon;
+                        db.Entry(thongKeDauSach).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    else
+                    {
+                        thongKeDauSach.DauSachID = cuonSachMuon.DauSachID;
+                        thongKeDauSach.Ngay = today;
+                        thongKeDauSach.SoLuongHienTai = dauSachUpdated.SoLuongTon;
+                        db.ThongKeDauSach.Add(thongKeDauSach);
+                    }
+                    phieuMuonUpdate.TongSoLuongMuon = phieuMuonUpdate.TongSoLuongMuon -1;
+                    db.SaveChanges();
+                }
+                //Nếu chi tiết mượn là mới thì tiến hành thêm như bình thường
+                if (chiTietMuonRequest.isOld == false && chiTietMuonRequest.isDeleted == false)
+                {
+                    CuonSach cuonSachMuon = db.CuonSach.Find(chiTietMuonRequest.cuonSachMuonId);
+                    ChiTietMuon chiTietMuon = new ChiTietMuon();
+                    DauSach dauSachUpdated = db.DauSach.Find(cuonSachMuon.DauSachID);
+                    db.DauSach.Attach(dauSachUpdated);   //gán biến dauSachUpdated vào db Dau Sach
+                    dauSachUpdated.SoLuongTon = dauSachUpdated.SoLuongTon - 1;
+                    cuonSachMuon.TinhTrang = 1;
+                    db.SaveChanges();
+                    //db.Entry(dauSachUpdated).State = System.Data.Entity.EntityState.Modified;
+                    ThongKeDauSach thongKeDauSach = new ThongKeDauSach();
+                    DateTime today = DateTime.Now;
+                    if (db.ThongKeDauSach.Any(a =>
+                    a.DauSachID == cuonSachMuon.DauSachID &&
+                    a.Ngay.Day == today.Day &&
+                    a.Ngay.Month == today.Month &&
+                    a.Ngay.Year == today.Year))
+                    {
+                        thongKeDauSach = db.ThongKeDauSach.Where(a =>
+                          a.DauSachID == cuonSachMuon.DauSachID &&
+                          a.Ngay.Day == today.Day &&
+                          a.Ngay.Month == today.Month &&
+                          a.Ngay.Year == today.Year).FirstOrDefault();
+                        db.ThongKeDauSach.Attach(thongKeDauSach);
+                        thongKeDauSach.SoLuongHienTai = dauSachUpdated.SoLuongTon;
+                        db.Entry(thongKeDauSach).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    else
+                    {
+                        thongKeDauSach.DauSachID = cuonSachMuon.DauSachID;
+                        thongKeDauSach.Ngay = today;
+                        thongKeDauSach.SoLuongHienTai = dauSachUpdated.SoLuongTon;
+                        db.ThongKeDauSach.Add(thongKeDauSach);
+                    }
+                    db.SaveChanges();
+                    chiTietMuon.CuonSachID = cuonSachMuon.ID;
+                    chiTietMuon.PhieuMuonID = phieuMuonUpdate.ID;
+                    chiTietMuon.TinhTrang = 0;
+                    db.ChiTietMuon.Add(chiTietMuon);
+                    phieuMuonUpdate.TongSoLuongMuon = phieuMuonUpdate.TongSoLuongMuon + 1;
+                    db.SaveChanges();
+                }
             }
-            ViewBag.DocGiaID = new SelectList(db.DocGia, "ID", "MaThe", phieuMuon.DocGiaID);
-            ViewBag.NhanVienID = new SelectList(db.NhanVien, "ID", "MaNhanVien", phieuMuon.NhanVienID);
-            return View(phieuMuon);
+            return View(phieuMuonUpdate);
         }
 
         // GET: DachSachPhieuMuon/Delete/5
@@ -127,6 +214,7 @@ namespace Thu_Vien_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -135,5 +223,20 @@ namespace Thu_Vien_MVC.Controllers
             }
             base.Dispose(disposing);
         }
+    }
+
+    public class EditPhieuMuonRequest
+    {
+        public int ID { get; set; }
+        public int DocGiaID { get; set; }
+        public ICollection<EditChiTietMuon> dsChiTietMuon { get; set; }
+    }
+
+    public class EditChiTietMuon
+    {
+        public int ChiTietMuonId { get; set; }
+        public int cuonSachMuonId { get; set; }
+        public bool isOld { get; set; }
+        public bool isDeleted { get; set; }
     }
 }

@@ -6,117 +6,137 @@
 
 <h2>Phiếu mượn</h2>
 
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>PhieuMuon</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
-
+<div ng-controller="SuaPhieuMuonCtrl" ng-init="getDsChiTietMuon(@Html.DisplayFor(item => Model.ID))">
+    @using (Html.BeginForm())
+    {
         <form class="form-horizontal">
-            <div class="form-group col-md-12 col-xs-12">
-                <label class="control-label col-sm-2">Mã phiếu mượn</label>
-                <div class="col-md-5">
-                    @Html.EditorFor(model => model.MaPhieuMuon, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.MaPhieuMuon, "", new { @class = "text-danger" })
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Phiếu mượn</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+
+                <div class="form-group col-md-12 col-xs-12">
+                    <label class="text-right col-sm-2">Mã phiếu mượn</label>
+                    <div class="col-md-5">
+                        <span>@Html.DisplayFor(model => model.MaPhieuMuon)</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-12 col-xs-12">
+                    <label class="text-right col-sm-2">Mã thẻ độc giả</label>
+                    <div class="col-md-5">
+                        @Html.DropDownList("DocGiaID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DocGiaID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group col-md-12 col-xs-12">
+                    <label class="text-right col-sm-2">Mã nhân viên</label>
+                    <div class="col-md-5">
+                        <span>@Html.DisplayFor(model => model.NhanVienID)</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-12 col-xs-12">
+                    <label class="text-right col-sm-2">Ngày mượn</label>
+                    <div class="col-md-5">
+                        <span>@Html.DisplayFor(model => model.NgayMuon)</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-12 col-xs-12">
+                    <label class="text-right col-sm-2">Ngày hết hạn</label>
+                    <div class="col-md-5">
+                        <span>@Html.DisplayFor(model => model.NgayHetHan)</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-horizontal row col-md-12">
+                <h4>Chi tiết phiếu mượn</h4>
+                <hr />
+                <div class="form-group">
+                    <label for="inputmavach" class="col-xs-12 col-md-4 control-label">Mã vạch cuốn sách</label>
+                    <div class="col-xs-8 col-md-6">
+                        <div class="input-group">
+                            <ui-select ng-model="dsCuonSach.selected" theme="bootstrap" title="Chọn cuốn sách">
+                                <ui-select-match placeholder="Chọn cuốn sách mượn">{{$select.selected.MaVach}}</ui-select-match>
+                                <ui-select-choices groupBy="'TenDauSach'" repeat="cuonSach in dsCuonSach | propsFilter: {MaVach: $select.search, TenDauSach: $select.search}">
+                                    Mã Vạch:  <span ng-bind-html="cuonSach.MaVach | highlight: $select.search"></span>
+                                    <small>
+                                        Đầu Sách: <span ng-bind-html="''+cuonSach.DauSach.Ten | highlight: $select.search"></span>
+                                    </small>
+                                </ui-select-choices>
+                            </ui-select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="themCuonSachMuon(dsCuonSach.selected)"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="form-group col-md-12 col-xs-12">
-                <label class="control-label col-sm-2">Mã thẻ độc giả</label>
-                <div class="col-md-5">
-                    @Html.DropDownList("DocGiaID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.DocGiaID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group col-md-12 col-xs-12">
-                <label class="control-label col-sm-2">Mã nhân viên</label>
-                <div class="col-md-5">
-                    @Html.DropDownList("NhanVienID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.NhanVienID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group col-md-12 col-xs-12">
-                <label class="control-label col-sm-2">Ngày mượn</label>
-                <div class="col-md-5">
-                    @Html.EditorFor(model => model.NgayMuon, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.NgayMuon, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group col-md-12 col-xs-12">
-                <label class="control-label col-sm-2">Ngày hết hạn</label>
-                <div class="col-md-5">
-                    @Html.EditorFor(model => model.NgayHetHan, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.NgayHetHan, "", new { @class = "text-danger" })
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            <p>STT</p>
+                        </th>
+                        <th>
+                            <p>Mã vạch</p>
+                        </th>
+                        <th>
+                            <p>Tên đầu sách</p>
+                        </th>
+                        <th>
+                            <p>Tên tác giả</p>
+                        </th>
+                        <th>
+                            <p>Tên thể loại</p>
+                        </th>
+                        <th>
+                            <p>Chức năng</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="cuonSachMuon in dsCuonSachMuon" ng-hide="cuonSachMuon.isDeleted">
+                        <td>
+                            {{$index + 1}}
+                        </td>
+                        <td>
+                            {{cuonSachMuon.MaVach}}
+                        </td>
+                        <td>
+                            {{cuonSachMuon.DauSach.Ten}}
+                        </td>
+                        <td>
+                            {{cuonSachMuon.DauSach.TacGia.Ten}}
+                        </td>
+                        <td>
+                            {{cuonSachMuon.DauSach.TheLoai.Ten}}
+                        </td>
+                        <td>
+                            <input value="{{ cuonSachMuon.ID }}" type="hidden" name="dsChiTietMuon[{{$index}}].cuonSachMuonId" />
+                            <input value="{{ cuonSachMuon.ChiTietMuonId }}" type="hidden" name="dsChiTietMuon[{{$index}}].chiTietMuonId" />
+                            <input value="{{ cuonSachMuon.isDeleted }}" type="hidden" name="dsChiTietMuon[{{$index}}].isDeleted" />
+                            <input value="{{ cuonSachMuon.PhieuMuonId ? true : false }}" type="hidden" name="dsChiTietMuon[{{$index}}].isOld" />
+                            <button class="btn btn-link" type="button" ng-click="xoaChiTietPhieuMuon(cuonSachMuon)">Xóa</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="form-group text-right">
+                    <div class="col-xs-3 col-md-2 col-md-offset-10">
+                        <button type="submit" class="btn btn-primary form-control"><i class="fa fa-check" aria-hidden="true"></i>Hoàn tất</button>
+                    </div>
                 </div>
             </div>
         </form>
+    }
 
-    </div>
-}
-<table class="table table-bordered table-striped">
-    <tr>
-        <th>
-            <p>STT</p>
-        </th>
-        <th>
-            <p>Mã vạch</p>
-        </th>
-        <th>
-            <p>Tên đầu sách</p>
-        </th>
-        <th>
-            <p>Tên tác giả</p>
-        </th>
-        <th>
-            <p>Tên thể loại</p>
-        </th>
-        <th>
-            <p>Chức năng</p>
-        </th>
-    </tr>
-    @{ int i = 1;}
-    @foreach (var item in Model.dsChiTietMuon)
-    {
-        <tr>
-            <td>
-                @i
-            </td>
-            @{i++;}
-            <td>
-                @Html.DisplayFor(modelItem => item.CuonSach.MaVach)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CuonSach.DauSach.Ten)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CuonSach.DauSach.TacGia.Ten)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CuonSach.DauSach.TheLoai.Ten)
-            </td>
-            <td>
-                @Html.ActionLink("Xóa", "Delete", new { controller = "ChiTietMuon", id = item.ID })
-            </td>
-        </tr>
-     }
-
-</table>
-
-<div class="row">
-    <div class="form-group text-right">
-        <div class="col-xs-3 col-md-offset-8 col-md-2">
-            <button type="button" class="btn btn-warning form-control"><i class="fa fa-times" aria-hidden="true"></i>Hủy phiếu nhập</button>
-        </div>
-        <div class="col-xs-3 col-md-2">
-            <button type="submit" class="btn btn-primary form-control""><i class="fa fa-check" aria-hidden="true"></i>Hoàn tất</button>
-        </div>
-    </div>
 </div>
-
 <div>
     @Html.ActionLink("Quay lại", "Index")
 </div>
