@@ -203,7 +203,7 @@ namespace Thu_Vien_Winform
                 string filepath = dlg.FileName;    // <---
                 if (File.Exists(path + des + iName))
                 {
-                    MessageBox.Show("File da ton tai");
+                    MessageBox.Show("Ten File da ton tai");
                 }
                 else
                 {

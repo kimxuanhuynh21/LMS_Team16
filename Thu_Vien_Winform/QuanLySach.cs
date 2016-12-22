@@ -80,6 +80,8 @@ namespace Thu_Vien_Winform
             var bindingList = new BindingList<CuonSachViewModel>(list);
             var source = new BindingSource(bindingList, null);
             dataGridView1.DataSource = source;
+            dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[0].Visible = false;
             dataGridView1.Columns[3].Visible = false;
         }
@@ -101,6 +103,7 @@ namespace Thu_Vien_Winform
             try
             {
                 var cuonsach_id = label_id.Text;
+                int soluong_dausach = Convert.ToInt32(label_sumnumber.Text);
                 if (cuonsach_id != "mới")
                 {
                     int id = Convert.ToInt32(cuonsach_id);
@@ -110,13 +113,14 @@ namespace Thu_Vien_Winform
                 else
                 {
                     var cuonsach = new CuonSach();
-                    cuonsach.MaVach = "MV" + DauSachID + txt_key.Text;
+                    cuonsach.MaVach = txt_key.Text;
                     cuonsach.DauSachID = DauSachID;
                     cuonsach.TinhTrang = Convert.ToByte(cbb_state.SelectedValue);
                     _context.CuonSach.Add(cuonsach);
 
                     var dausach = _context.DauSach.Where(i => i.ID.Equals(DauSachID)).FirstOrDefault();
                     dausach.SoLuongTong = dausach.SoLuongTong + 1;
+                    soluong_dausach = dausach.SoLuongTong;
 
 
                     var phieunhap = new PhieuNhapDauSach();
@@ -129,11 +133,13 @@ namespace Thu_Vien_Winform
                 }
                 _context.SaveChanges();
 
+                label_sumnumber.Text = soluong_dausach.ToString();
+
                 Refresh_DataGridView();
                 label_id.Text = "mới";
                 txt_key.ReadOnly = false;
                 txt_key.Text = null;
-                label_defaultMV.Text = "MV" + DauSachID.ToString();
+                //label_defaultMV.Text = "MV" + DauSachID.ToString();
 
             }
             catch (Exception ex)
@@ -154,9 +160,9 @@ namespace Thu_Vien_Winform
                 {
                     //var obj = dataGridView1.Rows[index_row];
                     label_id.Text = cuonsach.ID.ToString();
-                    label_defaultMV.Text = "MV" + DauSachID.ToString();
-                    string mavach = cuonsach.MaVach.Substring(2 + DauSachID.ToString().Length, cuonsach.MaVach.Length - (2 + DauSachID.ToString().Length));
-                    txt_key.Text = mavach;
+                    //label_defaultMV.Text = "MV" + DauSachID.ToString();
+                    //string mavach = cuonsach.MaVach.Substring(2 + DauSachID.ToString().Length, cuonsach.MaVach.Length - (2 + DauSachID.ToString().Length));
+                    txt_key.Text = cuonsach.MaVach;
                     txt_key.ReadOnly = true;
                     cbb_state.SelectedValue = cuonsach.TinhTrangID;
                 }
@@ -188,6 +194,9 @@ namespace Thu_Vien_Winform
 
                 _context.SaveChanges();
                 MessageBox.Show("Success...!!!");
+
+                label_sumnumber.Text = dausach.SoLuongTong.ToString();
+
                 //reload
                 Refresh_DataGridView();
             }
@@ -198,9 +207,16 @@ namespace Thu_Vien_Winform
             label_id.Text = "mới";
             txt_key.ReadOnly = false;
             txt_key.Text = null;
-            label_defaultMV.Text = "MV" + DauSachID.ToString();
+            //label_defaultMV.Text = "MV" + DauSachID.ToString();
 
             dataGridView1.ClearSelection();
+        }
+
+        private void btn_refresh_Click(object sender, EventArgs e)
+        {
+            //Refresh_DataGridView();
+            //_context = new ThuVienDbContext();
+
         }
     }
 }

@@ -60,7 +60,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btn_save = new System.Windows.Forms.Button();
-            this.label_defaultMV = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -75,6 +74,7 @@
             this.btn_refresh.TabIndex = 9;
             this.btn_refresh.Text = "Tải lại";
             this.btn_refresh.UseVisualStyleBackColor = true;
+            this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
             // 
             // btn_delete
             // 
@@ -285,7 +285,6 @@
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.label_id);
             this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Controls.Add(this.label_defaultMV);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.btn_save);
             this.groupBox3.Location = new System.Drawing.Point(450, 12);
@@ -315,9 +314,9 @@
             // 
             // txt_key
             // 
-            this.txt_key.Location = new System.Drawing.Point(164, 58);
+            this.txt_key.Location = new System.Drawing.Point(130, 58);
             this.txt_key.Name = "txt_key";
-            this.txt_key.Size = new System.Drawing.Size(138, 20);
+            this.txt_key.Size = new System.Drawing.Size(72, 20);
             this.txt_key.TabIndex = 2;
             // 
             // label11
@@ -384,15 +383,6 @@
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
-            // label_defaultMV
-            // 
-            this.label_defaultMV.AutoSize = true;
-            this.label_defaultMV.Location = new System.Drawing.Point(127, 62);
-            this.label_defaultMV.Name = "label_defaultMV";
-            this.label_defaultMV.Size = new System.Drawing.Size(31, 13);
-            this.label_defaultMV.TabIndex = 1;
-            this.label_defaultMV.Text = "____";
-            // 
             // QuanLySach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -449,6 +439,5 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label_id;
         private System.Windows.Forms.Label label_dausach;
-        private System.Windows.Forms.Label label_defaultMV;
     }
 }

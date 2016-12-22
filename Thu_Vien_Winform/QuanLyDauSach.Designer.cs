@@ -44,9 +44,11 @@
             this.cbb_column = new System.Windows.Forms.ComboBox();
             this.txt_from = new System.Windows.Forms.TextBox();
             this.btn_search = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -59,9 +61,9 @@
             // 
             // btn_delete
             // 
-            this.btn_delete.Location = new System.Drawing.Point(211, 28);
+            this.btn_delete.Location = new System.Drawing.Point(172, 124);
             this.btn_delete.Name = "btn_delete";
-            this.btn_delete.Size = new System.Drawing.Size(102, 28);
+            this.btn_delete.Size = new System.Drawing.Size(112, 28);
             this.btn_delete.TabIndex = 1;
             this.btn_delete.Text = "Xóa";
             this.btn_delete.UseVisualStyleBackColor = true;
@@ -69,7 +71,7 @@
             // 
             // btn_refresh
             // 
-            this.btn_refresh.Location = new System.Drawing.Point(22, 28);
+            this.btn_refresh.Location = new System.Drawing.Point(38, 48);
             this.btn_refresh.Name = "btn_refresh";
             this.btn_refresh.Size = new System.Drawing.Size(112, 28);
             this.btn_refresh.TabIndex = 2;
@@ -79,7 +81,7 @@
             // 
             // btn_add
             // 
-            this.btn_add.Location = new System.Drawing.Point(22, 84);
+            this.btn_add.Location = new System.Drawing.Point(20, 124);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(112, 28);
             this.btn_add.TabIndex = 3;
@@ -89,7 +91,7 @@
             // 
             // btn_update
             // 
-            this.btn_update.Location = new System.Drawing.Point(22, 140);
+            this.btn_update.Location = new System.Drawing.Point(172, 47);
             this.btn_update.Name = "btn_update";
             this.btn_update.Size = new System.Drawing.Size(112, 28);
             this.btn_update.TabIndex = 4;
@@ -99,9 +101,9 @@
             // 
             // btn_showbooks
             // 
-            this.btn_showbooks.Location = new System.Drawing.Point(211, 84);
+            this.btn_showbooks.Location = new System.Drawing.Point(20, 47);
             this.btn_showbooks.Name = "btn_showbooks";
-            this.btn_showbooks.Size = new System.Drawing.Size(102, 28);
+            this.btn_showbooks.Size = new System.Drawing.Size(112, 28);
             this.btn_showbooks.TabIndex = 6;
             this.btn_showbooks.Text = "Xem sách";
             this.btn_showbooks.UseVisualStyleBackColor = true;
@@ -109,9 +111,9 @@
             // 
             // btn_statistical
             // 
-            this.btn_statistical.Location = new System.Drawing.Point(211, 140);
+            this.btn_statistical.Location = new System.Drawing.Point(38, 124);
             this.btn_statistical.Name = "btn_statistical";
-            this.btn_statistical.Size = new System.Drawing.Size(102, 28);
+            this.btn_statistical.Size = new System.Drawing.Size(112, 28);
             this.btn_statistical.TabIndex = 7;
             this.btn_statistical.Text = "Thống kê";
             this.btn_statistical.UseVisualStyleBackColor = true;
@@ -119,18 +121,16 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btn_refresh);
-            this.groupBox1.Controls.Add(this.btn_statistical);
             this.groupBox1.Controls.Add(this.btn_add);
             this.groupBox1.Controls.Add(this.btn_showbooks);
             this.groupBox1.Controls.Add(this.btn_update);
             this.groupBox1.Controls.Add(this.btn_delete);
             this.groupBox1.Location = new System.Drawing.Point(12, 306);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(338, 192);
+            this.groupBox1.Size = new System.Drawing.Size(307, 192);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Điều khiển";
+            this.groupBox1.Text = "Quản lý";
             // 
             // groupBox2
             // 
@@ -141,16 +141,16 @@
             this.groupBox2.Controls.Add(this.cbb_column);
             this.groupBox2.Controls.Add(this.txt_from);
             this.groupBox2.Controls.Add(this.btn_search);
-            this.groupBox2.Location = new System.Drawing.Point(458, 313);
+            this.groupBox2.Location = new System.Drawing.Point(534, 306);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(478, 185);
+            this.groupBox2.Size = new System.Drawing.Size(402, 192);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tìm kiếm";
             // 
             // txt_to
             // 
-            this.txt_to.Location = new System.Drawing.Point(73, 126);
+            this.txt_to.Location = new System.Drawing.Point(75, 125);
             this.txt_to.Name = "txt_to";
             this.txt_to.Size = new System.Drawing.Size(196, 20);
             this.txt_to.TabIndex = 5;
@@ -158,7 +158,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(14, 128);
+            this.label16.Location = new System.Drawing.Point(16, 127);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(53, 13);
             this.label16.TabIndex = 3;
@@ -167,7 +167,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(16, 90);
+            this.label15.Location = new System.Drawing.Point(18, 89);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(51, 13);
             this.label15.TabIndex = 3;
@@ -176,7 +176,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(11, 49);
+            this.label13.Location = new System.Drawing.Point(13, 48);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(56, 13);
             this.label13.TabIndex = 3;
@@ -185,21 +185,21 @@
             // cbb_column
             // 
             this.cbb_column.FormattingEnabled = true;
-            this.cbb_column.Location = new System.Drawing.Point(73, 45);
+            this.cbb_column.Location = new System.Drawing.Point(75, 44);
             this.cbb_column.Name = "cbb_column";
             this.cbb_column.Size = new System.Drawing.Size(196, 21);
             this.cbb_column.TabIndex = 2;
             // 
             // txt_from
             // 
-            this.txt_from.Location = new System.Drawing.Point(73, 86);
+            this.txt_from.Location = new System.Drawing.Point(75, 85);
             this.txt_from.Name = "txt_from";
             this.txt_from.Size = new System.Drawing.Size(196, 20);
             this.txt_from.TabIndex = 1;
             // 
             // btn_search
             // 
-            this.btn_search.Location = new System.Drawing.Point(333, 73);
+            this.btn_search.Location = new System.Drawing.Point(296, 76);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(91, 37);
             this.btn_search.TabIndex = 0;
@@ -207,11 +207,23 @@
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btn_refresh);
+            this.groupBox3.Controls.Add(this.btn_statistical);
+            this.groupBox3.Location = new System.Drawing.Point(332, 306);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(189, 192);
+            this.groupBox3.TabIndex = 9;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Chung";
+            // 
             // QuanLyDauSach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(948, 510);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
@@ -222,6 +234,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -256,6 +269,7 @@
         private System.Windows.Forms.TextBox txt_from;
         private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.TextBox txt_to;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
 

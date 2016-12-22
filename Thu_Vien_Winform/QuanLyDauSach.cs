@@ -31,7 +31,7 @@ namespace Thu_Vien_Winform
         private void Form1_Load(object sender, EventArgs e)
         {
             _context = new ThuVienDbContext();
-            InitializeDataGridView(_context.DauSach.ToList().Select(i => new DauSachViewModel(i)).ToList());
+            InitializeDataGridView(_context.DauSach.ToList().Where(i=>i.TT_Xoa.Equals(0)).Select(i => new DauSachViewModel(i)).ToList());
 
             List<ComboboxItem> list_cbb = new List<ComboboxItem> { };
             list_cbb = new List<ComboboxItem> { };
@@ -86,10 +86,8 @@ namespace Thu_Vien_Winform
                     var index_row = dataGridView1.SelectedRows[i].Index;
                     int dausach_id = Convert.ToInt32(dataGridView1.Rows[index_row].Cells[0].Value);
 
-                    _context.DauSach.RemoveRange(_context.DauSach.Where(o => o.ID == dausach_id));
-
-                    //delete all cuonsach in dausach
-                    _context.CuonSach.RemoveRange(_context.CuonSach.Where(o => o.DauSachID == dausach_id));
+                    var dausach = _context.DauSach.Where(o => o.ID.Equals(dausach_id)).FirstOrDefault();
+                    dausach.TT_Xoa = 1;
 
                 }
 

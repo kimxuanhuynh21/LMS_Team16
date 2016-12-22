@@ -74,26 +74,33 @@ namespace Thu_Vien_Winform
                 {
                     int dausach_id = Convert.ToInt32(temp_dausach_id);
 
-                    var data = _context.ThongKeDauSach.Where(i => i.Ngay <= dateTimePicker1.Value.Date && i.DauSachID == dausach_id)
-                        .OrderByDescending(i => i.Ngay).ToList()
-                        .Select(i => new ThongKeDauSachViewModel(i)).FirstOrDefault();
+                    var record = _context.ThongKeDauSach.Where(i => i.Ngay <= dateTimePicker1.Value.Date && i.DauSachID == dausach_id)
+                        .OrderByDescending(i => i.Ngay).FirstOrDefault();
 
                     List<ThongKeDauSachViewModel> list = new List<ThongKeDauSachViewModel>();
 
-                    if (data != null)
+                    if (record != null)
                     {
                         ThongKeDauSachViewModel model = new ThongKeDauSachViewModel();
-
-                        model.ID = data.ID;
-                        model.DauSachID = data.DauSachID;
-                        model.DauSach = data.DauSach;
+                        model.DauSachID = record.DauSachID;
+                        model.DauSach = record.DauSach.Ten;
                         model.Ngay = dateTimePicker1.Value.Date;
-                        model.SoLuongHienTai = data.SoLuongHienTai;
-                        model.SoLuongDaMuon = data.SoLuongDaMuon;
+                        model.SoLuongHienTai = record.SoLuongHienTai;
+                        model.SoLuongDaMuon = record.DauSach.SoLuongTong - record.SoLuongHienTai;
                         list.Add(model);
                         
                     }
-
+                    else
+                    {
+                        var dausach = _context.DauSach.Where(i => i.ID.Equals(dausach_id)).FirstOrDefault();
+                        ThongKeDauSachViewModel model = new ThongKeDauSachViewModel();
+                        model.DauSachID = dausach.ID;
+                        model.DauSach = dausach.Ten;
+                        model.Ngay = dateTimePicker1.Value.Date;
+                        model.SoLuongHienTai = dausach.SoLuongTong;
+                        model.SoLuongDaMuon = 0;
+                        list.Add(model);
+                    }
 
                     InitializeDataGridView(list);
 

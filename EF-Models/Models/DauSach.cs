@@ -36,5 +36,6 @@ namespace EF_Models.Models
         [Required]
         [Range(0,2)]
         public byte TinhTrang { get; set; }
+        public byte TT_Xoa { get; set; }
     }
 }
