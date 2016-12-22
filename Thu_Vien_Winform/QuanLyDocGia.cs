@@ -58,7 +58,7 @@ namespace Thu_Vien_Winform
             dateTimePickerto.Visible = false;
 
             _context = new ThuVienDbContext();
-            InitializeDataGridView(_context.DocGia.ToList().Select(i => new DocGiaViewModel(i)).ToList());
+            InitializeDataGridView(_context.DocGia.Where(i=>i.TinhTrang.Equals(0) && i.TinhTrang.Equals(1)).ToList().Select(i => new DocGiaViewModel(i)).ToList());
 
             //combobox category
             List<ComboboxItem> list_cbb = new List<ComboboxItem> { };
@@ -312,7 +312,8 @@ namespace Thu_Vien_Winform
                         var index_row = dataGridView1.SelectedRows[i].Index;
                         int docgia_id = Convert.ToInt32(dataGridView1.Rows[index_row].Cells[0].Value);
 
-                        _context.DocGia.RemoveRange(_context.DocGia.Where(o => o.ID == docgia_id));
+                        var dg = _context.DocGia.Where(o => o.ID == docgia_id).FirstOrDefault();
+                        dg.TinhTrang = 2;
 
                     }
                     _context.SaveChanges();
