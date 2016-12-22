@@ -1147,15 +1147,12 @@
     <Content Include="Views\ChiTietMuon\Details.cshtml" />
     <Content Include="Views\ChiTietMuon\Edit.cshtml" />
     <Content Include="Views\ChiTietMuon\Index.cshtml" />
-
     <Content Include="Views\DanhSachPhieuTra\Create.cshtml" />
     <Content Include="Views\DanhSachPhieuTra\Delete.cshtml" />
     <Content Include="Views\DanhSachPhieuTra\Details.cshtml" />
     <Content Include="Views\DanhSachPhieuTra\Edit.cshtml" />
     <Content Include="Views\DanhSachPhieuTra\Index.cshtml" />
-
     <Content Include="Scripts\select.min.js.map" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
