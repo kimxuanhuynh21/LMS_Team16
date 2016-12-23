@@ -71,8 +71,8 @@ namespace EF_Models.Migrations
                 new CuonSach { ID = 7, MaVach = "VH7", DauSachID = 1, TinhTrang = 2 },
                 new CuonSach { ID = 8, MaVach = "VH8", DauSachID = 1, TinhTrang = 2 },
                 new CuonSach { ID = 9, MaVach = "VH9", DauSachID = 1, TinhTrang = 2 },
+
                 new CuonSach { ID = 10, MaVach = "VH10", DauSachID = 1, TinhTrang = 2 },
-        
                 new CuonSach { ID = 11, MaVach = "VH11", DauSachID = 2, TinhTrang = 2 },
                 new CuonSach { ID = 12, MaVach = "VH12", DauSachID = 2, TinhTrang = 2 },
                 new CuonSach { ID = 13, MaVach = "VH13", DauSachID = 2, TinhTrang = 2 },

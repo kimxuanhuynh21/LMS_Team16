@@ -1,71 +1,87 @@
 ﻿@model EF_Models.Models.PhieuTra
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Sửa";
 }
 
-<h2>Edit</h2>
+<h2>Phiếu trả</h2>
 
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
+    <form class="form-horizontal">
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>PhieuTra</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+        <div class="form-horizontal">
+            <h4>Phiếu mượn</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ID)
 
-        <form class="form-horizontal">
             <div class="form-group col-md-12 col-xs-12">
-                <label class="control-label col-sm-2">Mã phiếu trả</label>
+                <label class="text-right col-sm-2">Mã phiếu trả</label>
                 <div class="col-md-5">
-                    @Html.EditorFor(model => model.MaPhieuTra, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.MaPhieuTra, "", new { @class = "text-danger" })
+                    <span>@Html.DisplayFor(model => model.MaPhieuTra)</span>
                 </div>
             </div>
             <div class="form-group col-md-12 col-xs-12">
-                <label class="control-label col-sm-2">Mã thẻ độc giả</label>
+                <label class="text-right col-sm-2">Mã thẻ độc giả</label>
                 <div class="col-md-5">
-                    @Html.DropDownList("DocGiaID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.DocGiaID, "", new { @class = "text-danger" })
+                    <span>@Html.DisplayFor(model => model.DocGiaID)</span>
                 </div>
             </div>
             <div class="form-group col-md-12 col-xs-12">
-                <label class="control-label col-sm-2">Ngày trả</label>
+                <label class="text-right col-sm-2">Ngày trả</label>
                 <div class="col-md-5">
-                    @Html.EditorFor(model => model.NgayTra, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.NgayTra, "", new { @class = "text-danger" })
+                    <span>@Html.DisplayFor(model => model.NgayTra)</span>
                 </div>
             </div>
-        </form>
+        </div>
 
-    </div>
+        <div class="form-horizontal row col-md-12">
+            <h4>Chi tiết phiếu trả</h4>
+            <hr />
+            <div class="form-group">
+                <label for="inputmavach" class="col-xs-12 col-md-4 control-label">Mã vạch cuốn sách</label>
+                <div class="col-xs-8 col-md-6">
+                    <div class="input-group">
+                        <input class="form-control" value="" placeholder="Nhập mã vạch cuốn sách" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="themCuonSachMuon(dsCuonSach.selected)"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <p>STT</p>
+                    </th>
+                    <th>
+                        <p>Mã vạch</p>
+                    </th>
+                    <th>
+                        <p>Tên đầu sách</p>
+                    </th>
+                    <th>
+                        <p>Tên tác giả</p>
+                    </th>
+                    <th>
+                        <p>Tên thể loại</p>
+                    </th>
+                    <th>
+                        <p>Chức năng</p>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </form>
 }
 
-<table class="table table-bordered table-striped">
-    <tr>
-        <th>
-            <p>STT</p>
-        </th>
-        <th>
-            <p>Mã vạch</p>
-        </th>
-        <th>
-            <p>Tên đầu sách</p>
-        </th>
-        <th>
-            <p>Tên tác giả</p>
-        </th>
-        <th>
-            <p>Tên thể loại</p>
-        </th>
-        <th>
-            <p>Chức năng</p>
-        </th>
-    </tr>
-</table>
+
 
 <div>
     @Html.ActionLink("Quay lại", "Index")
