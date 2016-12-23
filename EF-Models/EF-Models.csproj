@@ -58,6 +58,10 @@
     <Compile Include="Migrations\201612220829285_version_22Dec2016.Designer.cs">
       <DependentUpon>201612220829285_version_22Dec2016.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612231014299_version_23Dec2016.cs" />
+    <Compile Include="Migrations\201612231014299_version_23Dec2016.Designer.cs">
+      <DependentUpon>201612231014299_version_23Dec2016.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChiTietMuon.cs" />
     <Compile Include="Models\ChiTietTra.cs" />
@@ -88,6 +92,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612220829285_version_22Dec2016.resx">
       <DependentUpon>201612220829285_version_22Dec2016.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612231014299_version_23Dec2016.resx">
+      <DependentUpon>201612231014299_version_23Dec2016.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

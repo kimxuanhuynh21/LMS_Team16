@@ -78,17 +78,27 @@
 
         $scope.change_cuonsach = function (mavach) {
             if (mavach != -1) {
-                angular.forEach($scope.listCuonSach, function (value, key) {
+
+                var d = 0;
+                angular.forEach($scope.listSachTra, function (value, key) {
                     if (value.MaVach == mavach) {
-                        $scope.listSachTra.push(value);
+                        d++;
                     }
                 });
+                if (d == 0) {
+                    angular.forEach($scope.listCuonSach, function (value, key) {
+                        if (value.MaVach == mavach) {
+                            $scope.listSachTra.push(value);
+                        }
+                    });
+                }
+                
             }
         };
 
         $scope.removeCuonSach = function (mavach) {
             if (mavach != -1) {
-                angular.forEach($scope.listCuonSach, function (value, key) {
+                angular.forEach($scope.listSachTra, function (value, key) {
                     if (value.MaVach == mavach) {
                         $scope.listSachTra.splice(key, 1);
                     }

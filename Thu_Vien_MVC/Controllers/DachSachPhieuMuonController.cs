@@ -107,11 +107,14 @@ namespace Thu_Vien_MVC.Controllers
                     //Tìm chi tiết mượn theo id để xóa
                     ChiTietMuon chiTietMuonDeleted = db.ChiTietMuon.Find(chiTietMuonRequest.ChiTietMuonId);
                     db.ChiTietMuon.Remove(chiTietMuonDeleted);
-                    //Tiến hành cập nhật lại số lượng tồn kho và thống kê đầu sách
+                    //Tiến hành cập nhật lại số lượng tồn kho và số lượng còn lại của độc giả và thống kê đầu sách
                     CuonSach cuonSachMuon = db.CuonSach.Find(chiTietMuonRequest.cuonSachMuonId);
                     DauSach dauSachUpdated = db.DauSach.Find(cuonSachMuon.DauSachID);
-                    db.DauSach.Attach(dauSachUpdated);   //gán biến dauSachUpdated vào db Dau Sach
+                    DocGia docGiaUpdated = db.DocGia.Find(phieuMuonRequest.DocGiaID);
+                    //gán biến dauSachUpdated vào db Dau Sach
+                    db.DauSach.Attach(dauSachUpdated);   
                     dauSachUpdated.SoLuongTon = dauSachUpdated.SoLuongTon + 1;
+                    docGiaUpdated.SoSachConLai = docGiaUpdated.SoSachConLai + 1;
                     cuonSachMuon.TinhTrang = 2;
                     db.SaveChanges();
                     ThongKeDauSach thongKeDauSach = new ThongKeDauSach();
@@ -146,9 +149,13 @@ namespace Thu_Vien_MVC.Controllers
                 {
                     CuonSach cuonSachMuon = db.CuonSach.Find(chiTietMuonRequest.cuonSachMuonId);
                     ChiTietMuon chiTietMuon = new ChiTietMuon();
+                    //Tiến hành cập nhật lại số lượng tồn kho và số lượng còn lại của độc giả và thống kê đầu sách
                     DauSach dauSachUpdated = db.DauSach.Find(cuonSachMuon.DauSachID);
-                    db.DauSach.Attach(dauSachUpdated);   //gán biến dauSachUpdated vào db Dau Sach
+                    DocGia docGiaUpdated = db.DocGia.Find(phieuMuonRequest.DocGiaID);
+                    db.DauSach.Attach(dauSachUpdated);   
+                    //gán biến dauSachUpdated vào db Dau Sach
                     dauSachUpdated.SoLuongTon = dauSachUpdated.SoLuongTon - 1;
+                    docGiaUpdated.SoSachConLai = docGiaUpdated.SoSachConLai - 1;
                     cuonSachMuon.TinhTrang = 1;
                     db.SaveChanges();
                     //db.Entry(dauSachUpdated).State = System.Data.Entity.EntityState.Modified;

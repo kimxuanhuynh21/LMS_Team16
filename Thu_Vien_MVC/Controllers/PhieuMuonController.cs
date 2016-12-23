@@ -168,7 +168,7 @@ namespace Thu_Vien_MVC.Controllers
         //GET: PhieuMuon/CuonSach/?maVach=VH1
         public JsonResult CuonSach(string maVach)
         {
-            CuonSach cuonSach = db.CuonSach.Where(c => c.MaVach == maVach).FirstOrDefault();
+            CuonSach cuonSach = db.CuonSach.Where(c => c.MaVach == maVach && c.TinhTrang == 2).FirstOrDefault();
             return new JsonResult() { Data = cuonSach, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
@@ -200,7 +200,14 @@ namespace Thu_Vien_MVC.Controllers
             {
                 ChiTietMuon chiTietMuon = new ChiTietMuon();
                 DauSach dauSachUpdated = db.DauSach.Find(cuonSachMuon.DauSachID);
-                db.DauSach.Attach(dauSachUpdated);   //gán biến dauSachUpdated vào db Dau Sach
+                //Cập nhật lại tình trạng cuốn sách
+                CuonSach cuonSachUpdated = db.CuonSach.Find(cuonSachMuon.ID);
+                cuonSachUpdated.TinhTrang = 1;
+                //Cập nhật lại số lượng còn lại của độc giả
+                DocGia docGiaUpdated = db.DocGia.Find(docGiaMuon.ID);
+                docGiaUpdated.SoSachConLai = docGiaUpdated.SoSachConLai - 1;
+                //gán biến dauSachUpdated vào db Dau Sach
+                db.DauSach.Attach(dauSachUpdated);  
                 dauSachUpdated.SoLuongTon = dauSachUpdated.SoLuongTon - 1;
                 db.SaveChanges();
                 //db.Entry(dauSachUpdated).State = System.Data.Entity.EntityState.Modified;
@@ -234,6 +241,7 @@ namespace Thu_Vien_MVC.Controllers
                 chiTietMuon.TinhTrang = 0;
                 db.ChiTietMuon.Add(chiTietMuon);
                 PhieuMuon.TongSoLuongMuon = PhieuMuon.TongSoLuongMuon + 1;
+                cuonSachMuon.TinhTrang = 1;
                 db.SaveChanges();
             }
             var responsePhieuMuon = db.PhieuMuon.Select(c =>

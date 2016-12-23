@@ -19,6 +19,27 @@ namespace Thu_Vien_MVC.Controllers
             return new JsonResult() { Data = dsCuonSach, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
+        // GET: dsCuonSachDaMuon
+        public JsonResult dsCuonSachDaMuon(string maTheDocGia)
+        {
+            var dsCuonSach = db.ChiTietMuon
+                .Select(x => new
+                {
+                    ID = x.ID,
+                    CuonSach = x.CuonSach,
+                    MaVach = x.CuonSach.MaVach,
+                    TenDauSach = x.CuonSach.DauSach.Ten,
+                    NgayHetHan = x.PhieuMuon.NgayHetHan,
+                    PhieuMuonID = x.PhieuMuonID,
+                    MaPhieuMuon = x.PhieuMuon.MaPhieuMuon,
+                    MaThe = x.PhieuMuon.DocGia.MaThe,
+                    TinhTrang = x.TinhTrang
+                })
+                .Where(dg => dg.MaThe == maTheDocGia && dg.CuonSach.TinhTrang == 1)
+                .ToList();
+            return new JsonResult() { Data = dsCuonSach, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
         // GET: dsChiTietMuon
         public JsonResult dsChiTietMuon(int PhieuMuonId)
         {
