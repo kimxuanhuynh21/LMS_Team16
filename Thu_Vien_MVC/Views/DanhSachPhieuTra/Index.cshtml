@@ -3,14 +3,35 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh Sách Phiếu trả";
 }
 
-<h2>Index</h2>
+    <style>
+        .btn-link:link, .btn-link:visited {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+            padding: 10px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: large;
+            font-family: monospace;
+            font-weight: bold;
+        }
 
-    <div class="col-sm-3">
-        @Html.ActionLink("Trả sách", "Index", "PhieuTra", new object { }, new { @class = "btn btn-block btn-info" })
-    </div>
+
+        .btn-link:hover, .btn-link:active {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+
+<h2>Danh Sách Phiếu trả</h2>
+
+<div class="col-sm-12 col-sm-offset-0" style="margin:10px">
+    @Html.ActionLink("Trả Sách", "Index", "PhieuTra", new object { }, new { @class = "btn-link" })
+</div>
     
 
 <div class="col-sm-12" style="margin-top:30px">

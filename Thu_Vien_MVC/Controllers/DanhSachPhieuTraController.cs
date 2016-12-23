@@ -19,7 +19,7 @@ namespace Thu_Vien_MVC.Controllers
         public ActionResult Index(int? page)
         {
             var phieuTra = db.PhieuTra.Include(p => p.DocGia).OrderBy(j => j.MaPhieuTra);
-            int pageSize = 3;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(phieuTra.ToPagedList(pageNumber, pageSize));
         }

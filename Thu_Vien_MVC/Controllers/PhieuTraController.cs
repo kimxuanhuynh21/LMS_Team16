@@ -24,6 +24,111 @@ namespace Thu_Vien_MVC.Controllers
             return View(dsChiTietTra.ToList());
         }
 
+
+        public JsonResult getDocGia(string id)
+        {
+            if (id != null)
+            {
+                var docgia = db.DocGia.Where(i => i.MaThe.Equals(id)).FirstOrDefault();
+                if (docgia != null)
+                {
+                    var list = db.PhieuMuon.Join(db.ChiTietMuon, pm => pm.ID, ctm => ctm.PhieuMuonID, (pm, ctm) => new
+                    {
+                        PhieuMuon = pm,
+                        ChiTietMuon = ctm
+                    }).Where(i => i.PhieuMuon.DocGiaID.Equals(docgia.ID) && i.ChiTietMuon.CuonSach.TinhTrang == 1).Select(i => new
+                    {
+                        MaVach = i.ChiTietMuon.CuonSach.MaVach,
+                        TenDauSach = i.ChiTietMuon.CuonSach.DauSach.Ten,
+                        TenTacGia = i.ChiTietMuon.CuonSach.DauSach.TacGia.Ten,
+                        NgayHetHan = i.PhieuMuon.NgayHetHan,
+                    }).ToList();
+
+                    return Json(list);
+                }
+                else
+                {
+                    return Json("error");
+                }
+            }
+            else
+            {
+                return Json("error");
+            }
+
+        }
+
+        public JsonResult submitTraSach(string sMaVach, string MaThe)
+        {
+            if (sMaVach != null && MaThe != null)
+            {
+                MaThe = MaThe.ToUpper();
+
+                string[] Arr_sMaVach = sMaVach.Split(',');
+
+                var docgia = db.DocGia.Where(o => o.MaThe.Equals(MaThe)).FirstOrDefault();
+                docgia.SoSachConLai = docgia.SoSachConLai + (Arr_sMaVach.Length - 1);
+
+                PhieuTra pt = new PhieuTra();
+                pt.DocGiaID = docgia.ID;
+                pt.MaPhieuTra = "PT" + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
+                pt.NgayTra = DateTime.Now.Date;
+                db.PhieuTra.Add(pt);
+
+                db.SaveChanges();
+
+                for (int i = 0; i < Arr_sMaVach.Length - 1; i++)
+                {
+                    string mavach = Arr_sMaVach[i];
+
+                    var cuonsach = db.CuonSach.Where(o => o.MaVach.Equals(mavach)).FirstOrDefault();
+                    cuonsach.TinhTrang = 2;
+
+                    var dausach = db.DauSach.Where(o => o.ID.Equals(cuonsach.DauSachID)).FirstOrDefault();
+                    dausach.SoLuongTon = dausach.SoLuongTon + 1;
+
+                    var thongkedausach = db.ThongKeDauSach.Where(o => o.DauSachID.Equals(cuonsach.DauSachID)).FirstOrDefault();
+
+                    DateTime date_thongke = thongkedausach.Ngay.Date;
+                    DateTime now = DateTime.Now.Date;
+                    if (date_thongke == now)
+                    {
+                        thongkedausach.SoLuongHienTai = thongkedausach.SoLuongHienTai + 1;
+                    }
+                    else
+                    {
+                        ThongKeDauSach tk = new ThongKeDauSach();
+                        tk.DauSachID = cuonsach.DauSachID;
+                        tk.Ngay = DateTime.Now.Date;
+                        tk.SoLuongHienTai = dausach.SoLuongTon + 1;
+                        db.ThongKeDauSach.Add(tk);
+                    }
+
+                    //0 chua tra
+                    //1 tra roi
+                    var ctphieumuon = db.ChiTietMuon.Where(o => o.CuonSach.MaVach.Equals(mavach) && o.PhieuMuon.DocGiaID.Equals(docgia.ID)).FirstOrDefault();
+                    ctphieumuon.TinhTrang = 1;
+
+
+                    //giai quyet tinh trang phieu muon
+
+                    
+                    ChiTietTra ctTra = new ChiTietTra();
+                    ctTra.CuonSachID = cuonsach.ID;
+                    ctTra.PhieuTraID = pt.ID;
+                }
+
+                db.SaveChanges();
+
+                return Json("ok");
+            }
+            else
+            {
+                return Json("error");
+            }
+            
+        }
+
         // GET: PhieuTra/Details/5
         public ActionResult Details(int? id)
         {
