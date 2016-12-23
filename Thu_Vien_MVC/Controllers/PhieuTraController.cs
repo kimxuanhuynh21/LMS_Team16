@@ -17,11 +17,12 @@ namespace Thu_Vien_MVC.Controllers
         // GET: PhieuTra
         public ActionResult Index()
         {
-            PhieuTra phieuTra = db.PhieuTra.Find(1);
-            var dsChiTietTra = db.ChiTietTra
-                .Where(ctm => ctm.PhieuTraID == phieuTra.ID)
-                .Include(p => p.CuonSach);
-            return View(dsChiTietTra.ToList());
+            //PhieuTra phieuTra = db.PhieuTra.Find(1);
+            //var dsChiTietTra = db.ChiTietTra
+            //    .Where(ctm => ctm.PhieuTraID == phieuTra.ID)
+            //    .Include(p => p.CuonSach);
+            //return View(dsChiTietTra.ToList());
+            return View();
         }
 
         // GET: PhieuTra/Details/5

@@ -43,7 +43,7 @@
                     }
                     else {
                         list_cuonsach = [];
-                        angular.forEach(result, function (value, key) {
+                        angular.forEach(result.List_SachChuaTra, function (value, key) {
                             var obj_initialize = { ID: value.MaVach, Name: value.MaVach };
                             list_cuonsach.push(obj_initialize);
                         });
@@ -86,7 +86,7 @@
                     }
                 });
                 if (d == 0) {
-                    angular.forEach($scope.listCuonSach, function (value, key) {
+                    angular.forEach($scope.listCuonSach.List_SachChuaTra, function (value, key) {
                         if (value.MaVach == mavach) {
                             $scope.listSachTra.push(value);
                         }

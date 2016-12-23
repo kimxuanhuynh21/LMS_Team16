@@ -49,7 +49,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in listSachTra | orderBy: 'MaVach'">
-                    <td></td>
+                    <td>{{$index+1}}</td>
                     <td>{{item.MaVach}}</td>
                     <td>{{item.TenDauSach}}</td>
                     <td>{{item.TenTacGia}}</td>
