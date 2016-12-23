@@ -165,11 +165,13 @@ namespace Thu_Vien_MVC.Controllers
             return new JsonResult() { Data = dsChiTietMuon, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        //GET: PhieuMuon/CuonSach/?maVach=VH1
-        public JsonResult CuonSach(string maVach)
+        //GET: PhieuMuon/CuonSach/
+        public JsonResult CuonSach()
         {
-            CuonSach cuonSach = db.CuonSach.Where(c => c.MaVach == maVach && c.TinhTrang == 2).FirstOrDefault();
-            return new JsonResult() { Data = cuonSach, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            ICollection<CuonSach> dsCuonSach = db.CuonSach
+                .Where(c => c.TinhTrang == 2)
+                .ToList();
+            return new JsonResult() { Data = dsCuonSach, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         //Thêm 1 phiếu mượn vào csdl

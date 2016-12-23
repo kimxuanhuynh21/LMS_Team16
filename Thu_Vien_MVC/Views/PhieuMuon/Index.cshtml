@@ -82,11 +82,20 @@
     <div class="borrow-book" ng-show="dsSachMuonShow">
         <div class="form-horizontal form-input">
             <div class="form-group">
-                <form ng-submit="togglePanelCuonSach($event)">
+                <form ng-submit="togglePanelCuonSach($event, dsCuonSach.selected)">
                     <label for="inputmavach" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã vạch cuốn sách</label>
                     <div class="col-xs-8 col-md-4">
                         <div class="input-group">
-                            <input class="form-control" id="inputmavach" ng-model="maVachCuonSach" type="text" placeholder="Nhập mã vạch cuốn sách" />
+                            <ui-select ng-model="dsCuonSach.selected" theme="bootstrap" title="Chọn cuốn sách">
+                                <ui-select-match placeholder="Chọn cuốn sách mượn">{{$select.selected.MaVach}}</ui-select-match>
+                                <ui-select-choices groupBy="'TenDauSach'" repeat="cuonSach in dsCuonSach | propsFilter: {MaVach: $select.search, TenDauSach: $select.search}">
+                                    Mã Vạch:  <span ng-bind-html="cuonSach.MaVach | highlight: $select.search"></span>
+                                    <small>
+                                        Đầu Sách: <span ng-bind-html="''+cuonSach.DauSach.Ten | highlight: $select.search"></span>
+                                    </small>
+                                </ui-select-choices>
+                            </ui-select>
+                            @*<input class="form-control" id="inputmavach" ng-model="maVachCuonSach" type="text" placeholder="Nhập mã vạch cuốn sách" />*@
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="submit"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
                             </span>

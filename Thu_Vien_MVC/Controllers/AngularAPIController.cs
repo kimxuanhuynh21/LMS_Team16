@@ -48,6 +48,7 @@ namespace Thu_Vien_MVC.Controllers
                 {
                     ID = x.CuonSach.ID,
                     ChiTietMuonId = x.ID,
+                    SoSachConLai = x.PhieuMuon.DocGia.SoSachConLai,
                     PhieuMuonId = x.PhieuMuonID,
                     MaVach = x.CuonSach.MaVach,
                     DauSach = x.CuonSach.DauSach,

@@ -11,6 +11,7 @@
         $scope.docGiaInfoShow = true;
         $scope.dsSachMuonShow = false;
         $scope.phieuMuonShow = false;
+        $scope.dsCuonSach = [];
 
         //Khai báo những scope mà mình sử dụng để hiển thị lên view
         $scope.maTheDocGia;
@@ -30,6 +31,8 @@
         $scope.togglePanelDocGia = togglePanelDocGia;
         $scope.displayDate = displayDate;
         $scope.submitDocGiaInfo = submitDocGiaInfo;
+
+        getDsCuonSach();
 
         function togglePanelDocGia() {
             //Gửi request có URL là '/PhieuMuon/DocGia/?maThe=' (sử dụng querystring) đến server. 
@@ -93,30 +96,34 @@
             $scope.dsSachMuonShow = true;
         }
 
+        function getDsCuonSach() {
+            $http
+                .get('/PhieuMuon/CuonSach/')
+                .then(function successCallback(response) {
+                    if (response.data != "") {
+                        $scope.dsCuonSach = response.data;
+                    }
+                }, function errorCallback(error) {
+                    console.log(error);
+                });
+        }
+
         //Thêm cuốn sách vào phiếu mượn
         //Khi click vào button có ng-click là togglePanelCuonSach()
-        function togglePanelCuonSach(e) {
+        function togglePanelCuonSach(e, cuonSachSelected) {
+            if ($scope.dsCuonSachInfo.length == $scope.docGiaInfo.SoSachConLai) {
+                alert('Độc giả đã mượn đủ số sách quy định');
+                return;
+            }
             var flag = false;
             $scope.dsCuonSachInfo.forEach(function (item) {              //Chạy vòng lập đối với javascript    
-                if (item.MaVach.toLowerCase() == $scope.maVachCuonSach.toLowerCase()) {
+                if (item.MaVach.toLowerCase() == cuonSachSelected.MaVach.toLowerCase()) {
                     flag = true;
                     return;
                 }
             });
             if (flag == false) {
-                $http
-                .get('/PhieuMuon/CuonSach/?maVach=' + $scope.maVachCuonSach)
-                .then(function successCallback(response) {
-                    if (response.data != "") {
-                        $scope.dsCuonSachInfo.push(response.data);           //push để thêm dữ liệu vào mảng
-                        
-                    }
-                    else {
-                        alert('Không tìm thấy mã vạch cuốn sách');
-                    }
-                }, function errorCallback(error) {
-                    console.log(error);
-                });
+                $scope.dsCuonSachInfo.push(cuonSachSelected);           //push để thêm dữ liệu vào mảng
             }
             else {
                 alert('Cuốn sách bạn chọn bị trùng');

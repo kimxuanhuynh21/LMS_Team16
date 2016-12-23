@@ -9,6 +9,7 @@
 
     function SuaPhieuMuonCtrl($scope, $http, $filter) {
         $scope.PhieuMuonId;
+        $scope.soLuongMuonToiDa = 0;
         $scope.dsCuonSach = [];
         $scope.dsCuonSachMuon = [];
         $scope.xoaChiTietPhieuMuon = xoaChiTietPhieuMuon;
@@ -33,13 +34,20 @@
             $http
                 .get('/AngularAPI/dsChiTietMuon?PhieuMuonId=' + PhieuMuonId)
                 .then(function successCallback(response) {
-                    $scope.dsCuonSachMuon = response.data;
+                    if (response.data !== '') {
+                        $scope.dsCuonSachMuon = response.data;
+                        $scope.soLuongMuonToiDa = $scope.dsCuonSachMuon.length + $scope.dsCuonSachMuon[0].SoSachConLai;
+                    }
                 }, function errorCallback(error) {
                     console.log(error);
                 });
         }
 
         function themCuonSachMuon(cuonSachMuon) {
+            if ($scope.dsCuonSachMuon.length === $scope.soLuongMuonToiDa) {
+                alert('Độc giả đã mượn đủ số sách quy định');
+                return;
+            }
             var flag = false;
             if (cuonSachMuon) {
                 $scope.dsCuonSachMuon.forEach(function (item) {
