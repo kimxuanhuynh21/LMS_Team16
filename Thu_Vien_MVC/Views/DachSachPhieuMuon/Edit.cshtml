@@ -6,7 +6,7 @@
 
 <h2>Phiếu mượn</h2>
 
-<div ng-controller="SuaPhieuMuonCtrl" ng-init="getDsChiTietMuon(@Html.DisplayFor(item => Model.ID))">
+<div ng-controller="SuaPhieuMuonCtrl" ng-init="getDsChiTietMuon(@Html.DisplayFor(item => Model.ID)); getDsCuonSach(@Html.DisplayFor(item => Model.ID));">
     @using (Html.BeginForm())
     {
         <form class="form-horizontal">

@@ -1,65 +1,155 @@
 ﻿@model EF_Models.Models.PhieuTra
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Sửa";
 }
 
-<h2>Edit</h2>
+<h2>Phiếu trả</h2>
+
+<div class="col-sm-12" ng-controller="EditPhieuTraCtrl">
+
+    @using (Html.BeginForm())
+    {
+        <form class="form-horizontal">
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Phiếu mượn</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+
+                <div class="form-group col-md-12 col-xs-12">
+                    <label class="text-right col-sm-2">Mã phiếu trả</label>
+                    <div class="col-md-5">
+                        <span>@Html.DisplayFor(model => model.MaPhieuTra)</span>
+
+                        @Html.HiddenFor(model => model.MaPhieuTra)
+                    </div>
+                </div>
+                <div class="form-group col-md-12 col-xs-12">
+                    <label class="text-right col-sm-2">Mã thẻ độc giả</label>
+                    <div class="col-md-5">
+                        <span>@Html.DisplayFor(model => model.DocGia.MaThe)</span>
+                        @Html.HiddenFor(model => model.DocGia.MaThe)
+                    </div>
+                </div>
+                <div class="form-group col-md-12 col-xs-12">
+                    <label class="text-right col-sm-2">Ngày trả</label>
+                    <div class="col-md-5">
+                        <span>@Html.DisplayFor(model => model.NgayTra)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-horizontal row col-md-12">
+                <h4>Chi tiết phiếu trả</h4>
+                <hr />
+            </div>
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            <p>STT</p>
+                        </th>
+                        <th>
+                            <p>Mã vạch</p>
+                        </th>
+                        <th>
+                            <p>Tên đầu sách</p>
+                        </th>
+                        <th>
+                            <p>Tên tác giả</p>
+                        </th>
+                        <th>
+                            <p>Ngày Trả</p>
+                        </th>
+                        <th>Chức năng</th>
+                    </tr>
+                    <tr ng-repeat="item in list_sachphieutra">
+                        <td></td>
+                        <td>{{item.MaVach}}</td>
+                        <td>{{item.TenDauSach}}</td>
+                        <td>{{item.TenTacGia}}</td>
+                        <td>{{displayDate(item.NgayTra)}}</td>
+                        <td><button class="btn btn-danger btn-xs" type="button" ng-click="removeChiTietTra(item.ChiTietTraID)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
+                    </tr>
+                </thead>
+            </table>
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>PhieuTra</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+            <div class="form-horizontal row col-md-12">
+                <h4>
+                    <span>Thêm cuốn sách</span>
+                    <button type="button" class="btn btn-success" ng-click="show_add()"><i class="fa fa-fw fa-plus"></i> Show</button>
+                </h4>
+                <hr />
+                <div class="form-group" ng-show="show_combobox">
+                    <label for="inputmavach" class="col-xs-12 col-md-4 control-label">Mã vạch cuốn sách</label>
+                    <div class="col-xs-8 col-md-6">
+                        <div class="input-group">
+                            <select name="" id=""
+                                    ng-options="option.Name for option in CuonSach.availableOptions track by option.ID"
+                                    ng-model="CuonSach.selectedOption"
+                                    ng-change="change_cuonsach(CuonSach.selectedOption.ID)"
+                                    class="form-control">
+                                <option ng-repeat="option in CuonSach.availableOptions" ng-value="option.value">{{option.name}}</option>
+                            </select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="themCuonSachMuon(dsCuonSach.selected)"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.MaPhieuTra, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MaPhieuTra, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MaPhieuTra, "", new { @class = "text-danger" })
+            <table class="table table-bordered table-striped" ng-show="show_tabletemp">
+                <thead>
+                    <tr>
+                        <th>
+                            <p>STT</p>
+                        </th>
+                        <th>
+                            <p>Mã vạch</p>
+                        </th>
+                        <th>
+                            <p>Tên đầu sách</p>
+                        </th>
+                        <th>
+                            <p>Tên tác giả</p>
+                        </th>
+                        <th>
+                            <p>Ngày Trả</p>
+                        </th>
+                        <th>Chức năng</th>
+                    </tr>
+                    <tr ng-repeat="item in list_sachdachon">
+                        <td></td>
+                        <td>{{item.MaVach}}</td>
+                        <td>{{item.TenDauSach}}</td>
+                        <td>{{item.TenTacGia}}</td>
+                        <td>{{displayDate(item.NgayHetHan)}}</td>
+                        <td><button class="btn btn-danger btn-xs" type="button" ng-click="removeCuonSach(item.MaVach)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
+                    </tr>
+                </thead>
+            </table>
+        </form>
+        <div class="col-sm-12" style="margin: 20px" ng-show="btn_submit">
+            <div class="col-xs-3 col-md-offset-4 col-md-3 text-right">
+                <button class="btn btn-block btn-primary btn-lg" ng-click="post_Edit()">Hoàn tất</button>
             </div>
         </div>
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PhieuMuonID, "PhieuMuonID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PhieuMuonID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PhieuMuonID, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.NgayTra, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NgayTra, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NgayTra, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DocGiaID, "DocGiaID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("DocGiaID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DocGiaID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
+    <div>
+        @Html.ActionLink("Quay lại", "Index")
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

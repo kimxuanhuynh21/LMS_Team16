@@ -32,8 +32,8 @@
 
             $http({
                 method: "post",
-                url: "/PhieuTra/getDocGia",
-                data: { ID: id },
+                url: "/DanhSachPhieuTra/getSach",
+                data: { mathe: id },
                 dataType: "json",
             })
                 .success(function (result) {

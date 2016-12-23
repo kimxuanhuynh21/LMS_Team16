@@ -64,6 +64,51 @@ namespace Thu_Vien_MVC.Controllers
             return View(phieuTra);
         }
 
+
+        public JsonResult getSach(string mathe, string maphieutra)
+        {
+            if (mathe != null && maphieutra != null)
+            {
+                var docgia = db.DocGia.Where(i => i.MaThe.Equals(mathe)).FirstOrDefault();
+                if (docgia != null)
+                {
+                    var list_sachchuatra = db.PhieuMuon.Join(db.ChiTietMuon, pm => pm.ID, ctm => ctm.PhieuMuonID, (pm, ctm) => new
+                    {
+                        PhieuMuon = pm,
+                        ChiTietMuon = ctm
+                    }).Where(i => i.PhieuMuon.DocGiaID.Equals(docgia.ID) && i.ChiTietMuon.CuonSach.TinhTrang == 1).Select(i => new
+                    {
+                        MaVach = i.ChiTietMuon.CuonSach.MaVach,
+                        TenDauSach = i.ChiTietMuon.CuonSach.DauSach.Ten,
+                        TenTacGia = i.ChiTietMuon.CuonSach.DauSach.TacGia.Ten,
+                        NgayHetHan = i.PhieuMuon.NgayHetHan,
+                    }).ToList();
+
+
+                    var list_phieutra = db.ChiTietTra.Where(i => i.PhieuTra.MaPhieuTra.Equals(maphieutra)).ToList().Select(i => new
+                    {
+                        MaVach = i.CuonSach.MaVach,
+                        TenDauSach = i.CuonSach.DauSach.Ten,
+                        TenTacGia = i.CuonSach.DauSach.TacGia.Ten,
+                        NgayTra = i.PhieuTra.NgayTra
+                    }).ToList();
+
+
+                    return Json(new { List_SachChuaTra = list_sachchuatra, List_PhieuTra = list_phieutra });
+                }
+
+                else
+                {
+                    return Json("error");
+                }
+            }
+            else
+            {
+                return Json("error");
+            }
+        }
+
+
         // GET: DanhSachPhieuTra/Edit/5
         public ActionResult Edit(int? id)
         {

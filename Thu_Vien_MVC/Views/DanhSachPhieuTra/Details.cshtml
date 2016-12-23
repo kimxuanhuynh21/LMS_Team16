@@ -31,6 +31,49 @@
         </div>
     </form>
 </div>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            <p>STT</p>
+        </th>
+        <th>
+            <p>Mã vạch</p>
+        </th>
+        <th>
+            <p>Tên đầu sách</p>
+        </th>
+        <th>
+            <p>Tên tác giả</p>
+        </th>
+        <th>
+            <p>Tên thể loại</p>
+        </th>
+    </tr>
+    @{ int i = 1;}
+    @foreach (var item in Model.dsChiTietTra)
+    {
+        <tr>
+            <td>
+                @i
+            </td>
+            @{i++;}
+            <td>
+                @Html.DisplayFor(modelItem => item.CuonSach.MaVach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CuonSach.DauSach.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CuonSach.DauSach.TacGia.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CuonSach.DauSach.TheLoai.Ten)
+            </td>
+        </tr>
+                }
+</table>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")

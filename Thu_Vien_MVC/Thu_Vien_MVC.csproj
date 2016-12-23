@@ -229,7 +229,8 @@
     <Compile Include="Controllers\PhieuTraController.cs" />
     <Compile Include="Controllers\TheLoaiController.cs" />
     <Compile Include="Controllers\ThongKeController.cs" />
-	<Content Include="Content\App\Controller\TraSach.Controller.js" />
+    <Content Include="Content\App\Controller\Edit.Controller.js" />
+    <Content Include="Content\App\Controller\TraSach.Controller.js" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +243,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\App\App.Module.js" />
+    <Content Include="Content\App\Controller\SuaPhieuMuon.Controller.js" />
     <Content Include="Content\App\Controller\ThongKeSachMuon.Controller.js" />
     <Content Include="Content\App\Controller\ThongTinNguoiMuon.Controller.js" />
     <Content Include="Content\App\Controller\ThongTinNguoiTra.Controller.js" />

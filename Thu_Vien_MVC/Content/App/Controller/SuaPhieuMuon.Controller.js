@@ -17,12 +17,11 @@
         $scope.displayDate = displayDate;
         $scope.themCuonSachMuon = themCuonSachMuon
         $scope.getDsChiTietMuon = getDsChiTietMuon;
+        $scope.getDsCuonSach = getDsCuonSach;
 
-        getDsCuonSach();
-
-        function getDsCuonSach() {
+        function getDsCuonSach(PhieuMuonId) {
             $http
-                .get('/AngularAPI/dsCuonSach')
+                .get('/AngularAPI/dsCuonSach?phieuMuonId=' + PhieuMuonId)
                 .then(function successCallback(response) {
                     $scope.dsCuonSach = response.data;
                 }, function errorCallback(error) {
@@ -77,6 +76,7 @@
         }
 
         function xoaChiTietPhieuMuon(cuonSachMuon) {
+            $scope.soLuongMuonToiDa += 1;
             cuonSachMuon.isDeleted = true;
         }
 

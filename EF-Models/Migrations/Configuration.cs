@@ -192,7 +192,7 @@ namespace EF_Models.Migrations
                 new CuonSach { ID = 117, MaVach = "VH117", DauSachID = 12, TinhTrang = 0 },
                 new CuonSach { ID = 118, MaVach = "VH118", DauSachID = 12, TinhTrang = 0 },
                 new CuonSach { ID = 119, MaVach = "VH119", DauSachID = 12, TinhTrang = 3 },
-                new CuonSach { ID = 120, MaVach = "VH120", DauSachID = 12, TinhTrang = 3 },
+                new CuonSach { ID = 120, MaVach = "VH120", DauSachID = 12, TinhTrang = 3 }
            );
 
             context.DocGia.AddOrUpdate(

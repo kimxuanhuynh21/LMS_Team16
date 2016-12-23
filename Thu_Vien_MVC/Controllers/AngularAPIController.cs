@@ -11,10 +11,19 @@ namespace Thu_Vien_MVC.Controllers
     {
         private ThuVienDbContext db = new ThuVienDbContext();
         // GET: dsCuonSach
-        public JsonResult dsCuonSach()
+        public JsonResult dsCuonSach(int? phieuMuonId)
         {
+            var dsChiTietMuon = db.PhieuMuon
+                .Where(pm => pm.ID == phieuMuonId)
+                .FirstOrDefault()
+                .dsChiTietMuon;
+            List<int> dsCuonSachMuonId = new List<int>();
+            foreach(var chiTietMuon in dsChiTietMuon)
+            {
+                dsCuonSachMuonId.Add(chiTietMuon.CuonSachID);
+            }
             var dsCuonSach = db.CuonSach
-                .Where(dg => dg.TinhTrang == 2)
+                .Where(dg => dg.TinhTrang == 2 || dsCuonSachMuonId.Contains(dg.ID))
                 .ToList();
             return new JsonResult() { Data = dsCuonSach, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
