@@ -17,11 +17,12 @@ namespace Thu_Vien_MVC.Controllers
         // GET: PhieuTra
         public ActionResult Index()
         {
-            PhieuTra phieuTra = db.PhieuTra.Find(1);
-            var dsChiTietTra = db.ChiTietTra
-                .Where(ctm => ctm.PhieuTraID == phieuTra.ID)
-                .Include(p => p.CuonSach);
-            return View(dsChiTietTra.ToList());
+            //PhieuTra phieuTra = db.PhieuTra.Find(1);
+            //var dsChiTietTra = db.ChiTietTra
+            //    .Where(ctm => ctm.PhieuTraID == phieuTra.ID)
+            //    .Include(p => p.CuonSach);
+            //return View(dsChiTietTra.ToList());
+            return View();
         }
 
         // GET: PhieuTra/Details/5
@@ -166,25 +167,38 @@ namespace Thu_Vien_MVC.Controllers
         [HttpPost]
         public JsonResult ChiTietPhieuTra(PhieuTraModel PhieuTraJSON)
         {
-            PhieuMuon phieuMuonInfo = PhieuTraJSON.PhieuMuon;
             ICollection<ChiTietMuon> dsChiTietMuon = PhieuTraJSON.dsChiTietMuon;
             PhieuTra PhieuTra = new PhieuTra();
             PhieuTra.NgayTra = DateTime.Now;
-            PhieuTra.DocGiaID = phieuMuonInfo.DocGiaID;
+            //Tìm độc giả theo mã thẻ để thêm vào phiếu trả
+            DocGia docGiaTra = db.DocGia
+                .Where(dgt => dgt.MaThe == PhieuTraJSON.MaThe)
+                .FirstOrDefault();
+            PhieuTra.DocGiaID = docGiaTra.ID;
             db.PhieuTra.Add(PhieuTra);
             db.SaveChanges();
             PhieuTra.MaPhieuTra = "PT" + PhieuTra.ID;
             db.SaveChanges();
-            foreach (ChiTietMuon chiTietMuon in dsChiTietMuon)
+            foreach (var chiTietMuonJSON in dsChiTietMuon)
             {
+                ChiTietMuon chiTietMuon = db.ChiTietMuon.Find(chiTietMuonJSON.ID);
+                //Tạo 1 chi tiết trả mới
                 ChiTietTra chiTietTra = new ChiTietTra();
+                chiTietTra.CuonSachID = chiTietMuon.CuonSach.ID;
+                chiTietTra.PhieuTraID = PhieuTra.ID;
+                //Cập nhật lại số lượng tồn của đầu sách
                 DauSach dauSachUpdated = db.DauSach.Find(chiTietMuon.CuonSach.DauSachID);
                 db.DauSach.Attach(dauSachUpdated);
                 dauSachUpdated.SoLuongTon = dauSachUpdated.SoLuongTon + 1;
-                chiTietTra.CuonSachID = chiTietMuon.CuonSach.ID;
-                chiTietTra.PhieuTraID = PhieuTra.ID;
+                //Cập nhật lại tình trạng của cuốn sách là còn trong kho
+                CuonSach cuonSachUpdated = db.CuonSach.Find(chiTietMuon.CuonSach.ID);
+                cuonSachUpdated.TinhTrang = 2;
+                //Tăng số sách còn lại của độc giả đã mượn cuốn sách này lên
+                DocGia docGiaUpdated = db.DocGia.Find(chiTietMuon.PhieuMuon.DocGiaID);
+                docGiaUpdated.SoSachConLai = docGiaUpdated.SoSachConLai + 1;
                 db.SaveChanges();
                 //db.Entry(dauSachUpdated).State = System.Data.Entity.EntityState.Modified;
+                //Tạo hoặc cập nhật thống kê đầu sách
                 ThongKeDauSach thongKeDauSach = new ThongKeDauSach();
                 DateTime today = DateTime.Now;
                 if (db.ThongKeDauSach.Any(a =>
@@ -210,11 +224,12 @@ namespace Thu_Vien_MVC.Controllers
                     db.ThongKeDauSach.Add(thongKeDauSach);
                 }
                 db.SaveChanges();
-                chiTietTra.CuonSachID = chiTietMuon.CuonSach.ID;
-                chiTietTra.PhieuTraID = PhieuTra.ID;
+                //chiTietTra.CuonSachID = chiTietMuon.CuonSach.ID;
+                //chiTietTra.PhieuTraID = PhieuTra.ID;
                 db.ChiTietTra.Add(chiTietTra);
                 db.SaveChanges();
             }
+            //Tạo response trả về cho Angular hiển thị kết quả
             var responsePhieuTra = db.PhieuTra.Select(
                 c => new
                 {
@@ -246,7 +261,7 @@ namespace Thu_Vien_MVC.Controllers
         //Tạo 1 model PhieuTraModel với 2 đối tượng PhieuMuon và dsChiTietMuon
         public class PhieuTraModel
         {
-            public PhieuMuon PhieuMuon { get; set; }
+            public string MaThe { get; set; }
             public ICollection<ChiTietMuon> dsChiTietMuon { get; set; }
         }
     }

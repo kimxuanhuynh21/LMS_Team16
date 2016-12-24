@@ -45,17 +45,6 @@
             <div class="form-horizontal row col-md-12">
                 <h4>Chi tiết phiếu trả</h4>
                 <hr />
-                <div class="form-group">
-                    <label for="inputmavach" class="col-xs-12 col-md-4 control-label">Mã vạch cuốn sách</label>
-                    <div class="col-xs-8 col-md-6">
-                        <div class="input-group">
-                            <input class="form-control" value="" placeholder="Nhập mã vạch cuốn sách" />
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" ng-click="themCuonSachMuon(dsCuonSach.selected)"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <table class="table table-bordered table-striped">
@@ -74,15 +63,83 @@
                             <p>Tên tác giả</p>
                         </th>
                         <th>
-                            <p>Tên thể loại</p>
+                            <p>Ngày Trả</p>
+                        </th>
+                        <th>Chức năng</th>
+                    </tr>
+                    <tr ng-repeat="item in list_sachphieutra">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.MaVach}}</td>
+                        <td>{{item.TenDauSach}}</td>
+                        <td>{{item.TenTacGia}}</td>
+                        <td>{{displayDate(item.NgayTra)}}</td>
+                        <td><button class="btn btn-danger btn-xs" type="button" ng-click="removeChiTietTra(item.ChiTietTraID)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
+                    </tr>
+                </thead>
+            </table>
+
+
+            <div class="form-horizontal row col-md-12">
+                <h4>
+                    <span>Thêm cuốn sách</span>
+                    <button type="button" class="btn btn-success" ng-click="show_add()"><i class="fa fa-fw fa-plus"></i> Show</button>
+                </h4>
+                <hr />
+                <div class="form-group" ng-show="show_combobox">
+                    <label for="inputmavach" class="col-xs-12 col-md-4 control-label">Mã vạch cuốn sách</label>
+                    <div class="col-xs-8 col-md-6">
+                        <div class="input-group">
+                            <select name="" id=""
+                                    ng-options="option.Name for option in CuonSach.availableOptions track by option.ID"
+                                    ng-model="CuonSach.selectedOption"
+                                    ng-change="change_cuonsach(CuonSach.selectedOption.ID)"
+                                    class="form-control">
+                                <option ng-repeat="option in CuonSach.availableOptions" ng-value="option.value">{{option.name}}</option>
+                            </select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="themCuonSachMuon(dsCuonSach.selected)"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-bordered table-striped" ng-show="show_tabletemp">
+                <thead>
+                    <tr>
+                        <th>
+                            <p>STT</p>
                         </th>
                         <th>
-                            <p>Chức năng</p>
+                            <p>Mã vạch</p>
                         </th>
+                        <th>
+                            <p>Tên đầu sách</p>
+                        </th>
+                        <th>
+                            <p>Tên tác giả</p>
+                        </th>
+                        <th>
+                            <p>Ngày hết hạn</p>
+                        </th>
+                        <th>Chức năng</th>
+                    </tr>
+                    <tr ng-repeat="item in list_sachdachon">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.MaVach}}</td>
+                        <td>{{item.TenDauSach}}</td>
+                        <td>{{item.TenTacGia}}</td>
+                        <td>{{displayDate(item.NgayHetHan)}}</td>
+                        <td><button class="btn btn-danger btn-xs" type="button" ng-click="removeCuonSach(item.MaVach)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
                     </tr>
                 </thead>
             </table>
         </form>
+        <div class="col-sm-12" style="margin: 20px" ng-show="btn_submit">
+            <div class="col-xs-3 col-md-offset-4 col-md-3 text-right">
+                <button class="btn btn-block btn-primary btn-lg" ng-click="post_Edit()">Hoàn tất</button>
+            </div>
+        </div>
     }
 
 

@@ -98,7 +98,7 @@ namespace Thu_Vien_Winform
             int d = path.LastIndexOf("\\");
             path = path.Substring(0, d);
 
-            pictureBox.Image = new Bitmap(path + @"\\EF-Models\\Images\\no-image.png");
+            pictureBox.Image = new Bitmap(path + @"\\Thu_Vien_MVC\\Content\\Image\\no-avatar.png");
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 
             list_cbb = new List<ComboboxItem> { };
@@ -171,7 +171,7 @@ namespace Thu_Vien_Winform
             int d = path.LastIndexOf("\\");
             path = path.Substring(0, d);
 
-            pictureBox.Image = new Bitmap(path + @"\\EF-Models\\Images\\no-image.png");
+            pictureBox.Image = new Bitmap(path + @"\\Thu_Vien_MVC\\Content\\Image\\no-avatar.png");
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 
             dlg = new OpenFileDialog();
@@ -337,7 +337,7 @@ namespace Thu_Vien_Winform
                     int d = path.LastIndexOf("\\");
                     path = path.Substring(0, d);
 
-                    pictureBox.Image = new Bitmap(path + @"\\EF-Models\\Images\\no-image.png");
+                    pictureBox.Image = new Bitmap(path + @"\\Thu_Vien_MVC\\Content\\Image\\no-avatar.png");
                     pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
                 catch (Exception ex)

@@ -115,6 +115,9 @@
                 alert('Độc giả đã mượn đủ số sách quy định');
                 return;
             }
+            if (!cuonSachSelected) {
+                return;
+            }
             var flag = false;
             $scope.dsCuonSachInfo.forEach(function (item) {              //Chạy vòng lập đối với javascript    
                 if (item.MaVach.toLowerCase() == cuonSachSelected.MaVach.toLowerCase()) {

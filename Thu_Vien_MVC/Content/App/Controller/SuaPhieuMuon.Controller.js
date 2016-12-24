@@ -47,6 +47,9 @@
                 alert('Độc giả đã mượn đủ số sách quy định');
                 return;
             }
+            if (!cuonSachMuon) {
+                return;
+            }
             var flag = false;
             if (cuonSachMuon) {
                 $scope.dsCuonSachMuon.forEach(function (item) {

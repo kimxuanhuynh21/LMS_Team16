@@ -180,6 +180,7 @@
                     }
                     else {
                         //...
+                        window.location.href = "/DanhSachPhieuTra/Index";
                     }
                 });
             }
