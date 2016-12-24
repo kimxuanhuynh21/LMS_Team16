@@ -31,7 +31,7 @@
                   if (result == "error") {
                       open_alert("error");
                   } else {
-
+                      $scope.data_statistic = [];
                       angular.forEach(result.Data_Statistic, function (value, key) {
 
                           var format_date = value.NgayMuon;
@@ -50,6 +50,7 @@
                           console.log(format_date.substring(begin + 1, end));
 
                           $scope.data_statistic.push(obj);
+
                       });
                       $scope.data_reader = result.Data_reader;
                   }

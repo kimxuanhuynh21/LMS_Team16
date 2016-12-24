@@ -68,7 +68,7 @@
                         <th>Chức năng</th>
                     </tr>
                     <tr ng-repeat="item in list_sachphieutra">
-                        <td></td>
+                        <td>{{$index+1}}</td>
                         <td>{{item.MaVach}}</td>
                         <td>{{item.TenDauSach}}</td>
                         <td>{{item.TenTacGia}}</td>
@@ -120,12 +120,12 @@
                             <p>Tên tác giả</p>
                         </th>
                         <th>
-                            <p>Ngày Trả</p>
+                            <p>Ngày hết hạn</p>
                         </th>
                         <th>Chức năng</th>
                     </tr>
                     <tr ng-repeat="item in list_sachdachon">
-                        <td></td>
+                        <td>{{$index+1}}</td>
                         <td>{{item.MaVach}}</td>
                         <td>{{item.TenDauSach}}</td>
                         <td>{{item.TenTacGia}}</td>
