@@ -106,42 +106,50 @@ namespace Thu_Vien_MVC.Controllers
                 {
                     //Tìm chi tiết mượn theo id để xóa
                     ChiTietMuon chiTietMuonDeleted = db.ChiTietMuon.Find(chiTietMuonRequest.ChiTietMuonId);
+                    //Chỉ cập nhật và thống kê nếu chi tiết mượn này chưa được trả, tức là tình trạng cuốn sách là đang được mượn
+                    if (chiTietMuonDeleted.CuonSach.TinhTrang == 1)
+                    {
+                        //Tiến hành cập nhật lại số lượng tồn kho và số lượng còn lại của độc giả và thống kê đầu sách
+                        //Cập nhật lại tình trạng cuốn sách là còn trong kho
+                        CuonSach cuonSachMuon = db.CuonSach.Find(chiTietMuonRequest.cuonSachMuonId);
+                        cuonSachMuon.TinhTrang = 2;
+                        //Cập nhật lại số lượng tồn của đầu sách
+                        DauSach dauSachUpdated = db.DauSach.Find(cuonSachMuon.DauSachID);
+                        dauSachUpdated.SoLuongTon = dauSachUpdated.SoLuongTon + 1;
+                        db.DauSach.Attach(dauSachUpdated);
+                        //Cập nhật lại số sách còn lại của độc giả
+                        DocGia docGiaUpdated = db.DocGia.Find(phieuMuonRequest.DocGiaID);
+                        docGiaUpdated.SoSachConLai = docGiaUpdated.SoSachConLai + 1;
+                        //gán biến dauSachUpdated vào db Dau Sach
+                        db.SaveChanges();
+                        //Thêm hoặc cập nhật thống kê
+                        ThongKeDauSach thongKeDauSach = new ThongKeDauSach();
+                        DateTime today = DateTime.Now;
+                        if (db.ThongKeDauSach.Any(a =>
+                        a.DauSachID == cuonSachMuon.DauSachID &&
+                        a.Ngay.Day == today.Day &&
+                        a.Ngay.Month == today.Month &&
+                        a.Ngay.Year == today.Year))
+                        {
+                            thongKeDauSach = db.ThongKeDauSach.Where(a =>
+                              a.DauSachID == cuonSachMuon.DauSachID &&
+                              a.Ngay.Day == today.Day &&
+                              a.Ngay.Month == today.Month &&
+                              a.Ngay.Year == today.Year).FirstOrDefault();
+                            db.ThongKeDauSach.Attach(thongKeDauSach);
+                            thongKeDauSach.SoLuongHienTai = dauSachUpdated.SoLuongTon;
+                            db.Entry(thongKeDauSach).State = System.Data.Entity.EntityState.Modified;
+                        }
+                        else
+                        {
+                            thongKeDauSach.DauSachID = cuonSachMuon.DauSachID;
+                            thongKeDauSach.Ngay = today;
+                            thongKeDauSach.SoLuongHienTai = dauSachUpdated.SoLuongTon;
+                            db.ThongKeDauSach.Add(thongKeDauSach);
+                        }
+                    }
                     db.ChiTietMuon.Remove(chiTietMuonDeleted);
-                    //Tiến hành cập nhật lại số lượng tồn kho và số lượng còn lại của độc giả và thống kê đầu sách
-                    CuonSach cuonSachMuon = db.CuonSach.Find(chiTietMuonRequest.cuonSachMuonId);
-                    DauSach dauSachUpdated = db.DauSach.Find(cuonSachMuon.DauSachID);
-                    DocGia docGiaUpdated = db.DocGia.Find(phieuMuonRequest.DocGiaID);
-                    //gán biến dauSachUpdated vào db Dau Sach
-                    db.DauSach.Attach(dauSachUpdated);   
-                    dauSachUpdated.SoLuongTon = dauSachUpdated.SoLuongTon + 1;
-                    docGiaUpdated.SoSachConLai = docGiaUpdated.SoSachConLai + 1;
-                    cuonSachMuon.TinhTrang = 2;
-                    db.SaveChanges();
-                    ThongKeDauSach thongKeDauSach = new ThongKeDauSach();
-                    DateTime today = DateTime.Now;
-                    if (db.ThongKeDauSach.Any(a =>
-                    a.DauSachID == cuonSachMuon.DauSachID &&
-                    a.Ngay.Day == today.Day &&
-                    a.Ngay.Month == today.Month &&
-                    a.Ngay.Year == today.Year))
-                    {
-                        thongKeDauSach = db.ThongKeDauSach.Where(a =>
-                          a.DauSachID == cuonSachMuon.DauSachID &&
-                          a.Ngay.Day == today.Day &&
-                          a.Ngay.Month == today.Month &&
-                          a.Ngay.Year == today.Year).FirstOrDefault();
-                        db.ThongKeDauSach.Attach(thongKeDauSach);
-                        thongKeDauSach.SoLuongHienTai = dauSachUpdated.SoLuongTon;
-                        db.Entry(thongKeDauSach).State = System.Data.Entity.EntityState.Modified;
-                    }
-                    else
-                    {
-                        thongKeDauSach.DauSachID = cuonSachMuon.DauSachID;
-                        thongKeDauSach.Ngay = today;
-                        thongKeDauSach.SoLuongHienTai = dauSachUpdated.SoLuongTon;
-                        db.ThongKeDauSach.Add(thongKeDauSach);
-                    }
-                    phieuMuonUpdate.TongSoLuongMuon = phieuMuonUpdate.TongSoLuongMuon -1;
+                    phieuMuonUpdate.TongSoLuongMuon = phieuMuonUpdate.TongSoLuongMuon - 1;
                     db.SaveChanges();
                 }
                 //Nếu chi tiết mượn là mới thì tiến hành thêm như bình thường
@@ -152,7 +160,7 @@ namespace Thu_Vien_MVC.Controllers
                     //Tiến hành cập nhật lại số lượng tồn kho và số lượng còn lại của độc giả và thống kê đầu sách
                     DauSach dauSachUpdated = db.DauSach.Find(cuonSachMuon.DauSachID);
                     DocGia docGiaUpdated = db.DocGia.Find(phieuMuonRequest.DocGiaID);
-                    db.DauSach.Attach(dauSachUpdated);   
+                    db.DauSach.Attach(dauSachUpdated);
                     //gán biến dauSachUpdated vào db Dau Sach
                     dauSachUpdated.SoLuongTon = dauSachUpdated.SoLuongTon - 1;
                     docGiaUpdated.SoSachConLai = docGiaUpdated.SoSachConLai - 1;

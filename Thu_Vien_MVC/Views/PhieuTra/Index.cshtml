@@ -1,39 +1,52 @@
-﻿@*@model IEnumerable<EF_Models.Models.ChiTietTra>*@
+﻿@model IEnumerable<EF_Models.Models.ChiTietTra>
 
 @{
     ViewBag.Title = "Quản lý trả sách";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <center><h2>Quản lý trả sách</h2></center>
-<div ng-controller="TraSachCtrl">
-    <div class="borrow-book" >
+<div ng-controller="ThongTinNguoiTraCtrl">
+
+
+    <div class="borrow-book" ng-show="dsSachTraShow">
         <form class="form-horizontal form-input">
             <div class="form-group">
+
                 <label for="inputmavach" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã thẻ độc giả</label>
                 <div class="col-xs-8 col-md-4">
                     <div class="input-group">
                         <input ng-model="maTheDocGia" class="form-control" />
                         <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button" ng-click="nhapDocGia(maTheDocGia)">Kiểm tra</button>
+                            <button class="btn btn-default" type="button" ng-click="nhapDocGia(maTheDocGia)">Kiểm tra</button>
                         </span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
+
                 <label for="inputmavach" class="col-xs-12 col-md-offset-1 col-md-4 control-label">Mã vạch cuốn sách</label>
-                <div class="col-xs-8 col-md-4">
-                    <select name="" id=""
-                            ng-options="option.Name for option in CuonSach.availableOptions track by option.ID"
-                            ng-model="CuonSach.selectedOption"
-                            ng-change="change_cuonsach(CuonSach.selectedOption.ID)"
-                            class="form-control"
-                            style="width:200px">
-                        <option ng-repeat="option in CuonSach.availableOptions" ng-value="option.value">{{option.name}}</option>
-                    </select>
+                <div class="col-xs-8 col-md-5">
+                    <div class="input-group">
+                        @*<input class="form-control" id="inputmavach" type="text" ng-model="maVachSachTra" placeholder="Nhập mã vạch cuốn sách" />*@
+                        <ui-select ng-model="dsCuonSach.selected" theme="bootstrap" title="Chọn cuốn sách">
+                            <ui-select-match placeholder="Chọn cuốn sách trả">{{$select.selected.MaVach}}</ui-select-match>
+                            <ui-select-choices groupBy="'TenDauSach'" repeat="cuonSach in dsCuonSach | propsFilter: {MaVach: $select.search, TenDauSach: $select.search}">
+                                Mã Vạch:  <span ng-bind-html="cuonSach.MaVach | highlight: $select.search"></span>
+                                <small>
+                                    Đầu Sách: <span ng-bind-html="''+cuonSach.TenDauSach | highlight: $select.search"></span>
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="themCuonSachTra(dsCuonSach.selected)"><i class="fa fa-plus" aria-hidden="true"></i>Thêm</button>
+                        </span>
+                    </div>
                 </div>
+
+                <div class="col-xs-3 col-md-2 text-right">
+                    <a class="btn btn-primary" ng-click="detailPhieuTra()"><i class="fa fa-check" aria-hidden="true"></i>Hoàn tất</a>
                 </div>
+            </div>
         </form>
 
         <table class="table table-bordered table-striped">
@@ -48,23 +61,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in listSachTra | orderBy: 'MaVach'">
-                    <td>{{$index+1}}</td>
-                    <td>{{item.MaVach}}</td>
-                    <td>{{item.TenDauSach}}</td>
-                    <td>{{item.TenTacGia}}</td>
-                    <td>{{displayDate(item.NgayHetHan);}}</td>
-                    <td><button class="btn btn-danger btn-xs" type="button" ng-click="removeCuonSach(item.MaVach)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
+                <tr ng-repeat="item in dsSachTra | orderBy: 'MaVach'">
+                    <td>{{$index + 1}}</td>
+                    <td>{{item.CuonSach.MaVach}}</td>
+                    <td>{{item.CuonSach.DauSach.Ten}}</td>
+                    <td>{{item.CuonSach.DauSach.TacGia.Ten}}</td>
+                    <td>{{displayDate(item.NgayHetHan)}}</td>
+                    <td><button class="btn btn-default btn-xs" type="button" ng-click="removeCuonSach(item.CuonSach.MaVach)"><i class="fa fa-times" aria-hidden="true"></i></button></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <div class="col-sm-12" style="margin: 20px">
-        <div class="col-xs-3 col-md-offset-4 col-md-3 text-right">
-            <button class="btn btn-block btn-primary btn-lg" ng-click="detailPhieuTra(maTheDocGia)"><i class="fa fa-check" aria-hidden="true"></i>Hoàn tất</button>
-        </div>
-    </div>
 
     <div ng-show="phieuTraShow">
         <div class="text-right btn-inphieu">
@@ -75,7 +83,6 @@
                 <div class="info-docgia">
                     <div class="detail-docgia col-md-4">
                         <h4>Mã phiếu trả: {{phieuTra.MaPhieuTra}}</h4>
-                        <h4>Mã phiếu mượn: {{phieuTra.MaPhieuMuon}}</h4>
                         <h4>Mã thẻ: {{phieuTra.DocGia.MaThe}}</h4>
                         <h4>Tên độc giả: {{phieuTra.DocGia.Ten}}</h4>
                         <h4>Số điện thoại:{{phieuTra.DocGia.DienThoai}}</h4>

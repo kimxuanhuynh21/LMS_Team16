@@ -8,57 +8,25 @@
     ThongTinNguoiTraCtrl.$inject = ['$scope', '$http'];
 
     function ThongTinNguoiTraCtrl($scope, $http) {
-        $scope.maPhieuMuon;
-        $scope.phieuMuonInfo;
         $scope.panelPhieuTraShow = false;
-        var phieuMuonFlag = false;
         $scope.dsSachTraShow = true;
-        $scope.phieuMuonShow = false;
         $scope.dsSachTra = [];
         $scope.dsCuonSach = [];
         $scope.phieuTraShow = false;
         $scope.maTheDocGia;
 
         //function
-        $scope.togglePanelPhieuMuon = togglePanelPhieuMuon;
         $scope.displayDate = displayDate;
-        $scope.submitPhieuMuonInfo = submitPhieuMuonInfo;
         $scope.themCuonSachTra = themCuonSachTra;
         $scope.removeCuonSach = removeCuonSach;
         $scope.detailPhieuTra = detailPhieuTra;
         $scope.getDsCuonSach = getDsCuonSach;
         $scope.nhapDocGia = nhapDocGia;
 
-        function togglePanelPhieuMuon() {
-            $http
-                .get('/PhieuTra/PhieuMuon/?maPhieuMuon=' + $scope.maPhieuMuon)
-                .then(function successCallback(response) {
-                    if (response.data != "") {
-                        $scope.panelPhieuTraShow = true;
-                        $scope.phieuMuonInfo = response.data;
-                        phieuMuonFlag = true;
-                    }
-                    else {
-                        alert('Không tìm thấy phiếu mượn');
-                        phieuMuonFlag = false;
-                    }
-                },
-                function errorCallback(error) {
-                    console.log(error);
-                });
-        }
-
-        function submitPhieuMuonInfo() {
-            if (phieuMuonFlag == false) {
-                alert('Bạn chưa chọn phiếu mượn');
-            }
-            else {
-                $scope.phieuMuonShow = false;
-                $scope.dsSachTraShow = true;
-            }
-        }
-
         function themCuonSachTra(cuonSachTra) {
+            if (!cuonSachTra) {
+                return;
+            }
             var flag = false;
             if (cuonSachTra) {
                 $scope.dsSachTra.forEach(function (item) {
@@ -88,7 +56,7 @@
 
         function detailPhieuTra() {
             var requestData = {
-                phieuMuon: $scope.phieuMuonInfo,
+                MaThe: $scope.maTheDocGia,
                 dsChiTietMuon: $scope.dsSachTra
             };
             $http
@@ -111,7 +79,7 @@
                 var dateInMilisecond = parseInt(date.replace("/Date(", "").replace(")/", ""));
                 var convertedDate = new Date(dateInMilisecond);
                 var month = convertedDate.getMonth() + 1;
-                date = convertedDate.getDate();
+                var date = convertedDate.getDate();
                 if (month < 10) {
                     month = '0' + month;
                 }
